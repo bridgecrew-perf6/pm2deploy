@@ -1,0 +1,112 @@
+@import 'variables/_index.scss';
+
+//component-type-prop-state
+//Style for default
+$slider-default-width: 48px;
+$slider-default-height: 22px;
+$slider-default-bgColor: $color-heather;
+$slider-default-borderColor: $color-heather;
+$slider-default-borderRadius: 15px;
+
+$dot-default-pad: 2px;
+$dot-default-width: $slider-default-height - 2 * $dot-default-pad;
+$dot-default-height: $dot-default-width;
+$dot-default-transition: .2s;
+$dot-default-bgColor: $color-white;
+$dot-default-boxShadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 2px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+
+//Style for focus
+$slider-default-outline-focus: 1px dashed $color-dodger-blue-2;
+
+//Style for selected
+$slider-default-bgColor-selected: $color-emerald;
+$slider-default-borderColor-selected: $color-emerald;
+
+//Style for disabled
+$slider-default-borderColor-disabled: $color-catskill-white;
+$slider-default-bgColor-disabled: $color-white;
+$dot-default-bgColor-disabled: $color-catskill-white;
+$dot-default-boxShadow-disabled: none;
+
+.toggle__wrapper{
+  position: relative;
+  display: inline-block;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: $slider-default-width;
+  height: $slider-default-height;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+
+    &:checked + .toggle__slider {
+      background-color: $slider-default-bgColor-selected;
+      border-color: $slider-default-borderColor-selected;
+
+      &:before {
+        transform: translateX($slider-default-width - $dot-default-width - 2 * $dot-default-pad);
+      }
+    }
+
+    &:focus + .toggle__slider {
+      outline: $slider-default-outline-focus;
+      outline-offset: 1px;
+    }
+
+    &:disabled + .toggle__slider,
+    &:disabled:focus + .toggle__slider,
+    &:disabled:hover + .toggle__slider,
+    &:disabled:active + .toggle__slider{
+      cursor: not-allowed;
+      background-color: $slider-default-bgColor-disabled;
+      border-color: $slider-default-borderColor-disabled;
+
+      &:before{
+        background-color: $dot-default-bgColor-disabled;
+        box-shadow: $dot-default-boxShadow-disabled;
+      }
+    }
+
+    &:checked:disabled + .toggle__slider,
+    &:checked:disabled:focus + .toggle__slider,
+    &:checked:disabled:hover + .toggle__slider,
+    &:checked:disabled:active + .toggle__slider{
+      border-color: $slider-default-bgColor-disabled;
+      background-color: $slider-default-borderColor-disabled;
+
+      &:before{
+        background-color: $dot-default-bgColor;
+      }
+    }
+  }
+}
+
+.toggle__slider {
+  width: 100%;
+  height: 100%;
+  background-color: $slider-default-bgColor;
+  border-radius: $slider-default-borderRadius;
+  border: 1px solid $slider-default-borderColor;
+  display: inline-block;
+  cursor: pointer;
+
+  //Dot component 
+  &:before{
+    content: "";
+    position: absolute;
+    top: $dot-default-pad;
+    left: $dot-default-pad;
+    width: $dot-default-width;
+    height: $dot-default-height;
+    border-radius: 50%;
+    background-color: $dot-default-bgColor;
+    transition: $dot-default-transition;
+    box-shadow: $dot-default-boxShadow;
+  }
+}

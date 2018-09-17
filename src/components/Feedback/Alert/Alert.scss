@@ -1,0 +1,62 @@
+@import 'variables/_index.scss';
+
+//component-type-prop-state
+//Style for success
+$alert-success-bgColor: #e6fff9;
+
+//Style for info
+$alert-info-bgColor: #dcecff;
+
+//Style for error
+$alert-error-bgColor: #ffe3e3;
+
+//Style for warning
+$alert-warning-bgColor: #fffde8;
+
+.alert__wrapper + .alert__wrapper{
+  margin-top: 5px;
+}
+
+.alert{
+  display: inline-flex;
+  min-width: 228px;
+  padding: 12px 13px 12px 8px;
+  line-height: 0;
+  border-radius: 3px;
+  color: $color-black;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+}
+
+.alert--success{
+  background-color: $alert-success-bgColor;
+}
+
+.alert--info{
+  background-color: $alert-info-bgColor;
+}
+
+.alert--error{
+  background-color: $alert-error-bgColor;
+}
+
+.alert--warning{
+  background-color: $alert-warning-bgColor;
+}
+
+.alert__content{
+  flex: 1;
+  font: $font-h4-r;
+  margin-top: 1px;
+}
+
+.alert__close{
+  color: #7e8893;
+  cursor: pointer;
+}
+
+.alert--show{
+  opacity: 1;
+  visibility: visible;
+}

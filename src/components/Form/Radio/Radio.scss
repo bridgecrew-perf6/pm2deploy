@@ -1,0 +1,113 @@
+@import 'variables/_index.scss';
+
+//component-type-prop-state
+//Style for default
+$radio-default-width: 16px;
+$radio-default-height: 16px;
+$radio-default-bgColor: transparent;
+$radio-default-border: 2px solid $color-heather;
+$radio-default-transition: .15s;
+$radioBullet-default-bgColor: $color-white;
+$radioBullet-default-width: $radio-default-width / 2;
+$radioBullet-default-height: $radio-default-height / 2;
+$radioBullet-default-transition: .15s;
+$radioBullet-default-outline-focus: 1px dashed $color-dodger-blue-2;
+
+$radio-default-borderColor-hover: $color-dodger-blue;
+
+$radio-default-borderColor-selected: $color-dodger-blue;
+$radioBullet-default-bgColor-selected: $color-dodger-blue;
+
+$radio-default-borderColor-disabled: $color-catskill-white;
+$radioBullet-default-bgColor-disabled: $color-catskill-white;
+$radioLabel-default-color-disabled: $color-catskill-white;
+
+.radio__wrapper{
+  display: inline-block;
+}
+
+.radio {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+
+    &:checked ~ .radio__bullet {
+      border-color: $radio-default-borderColor-hover;
+      &:after {
+        background-color: $radioBullet-default-bgColor-selected;
+      }
+    }
+
+    &:focus ~ .radio__bullet{
+      outline: $radioBullet-default-outline-focus;
+      outline-offset: 1px;
+    }
+
+    &:disabled ~ .radio__bullet,
+    &:disabled:focus ~ .radio__bullet,
+    &:disabled:hover ~ .radio__bullet,
+    &:disabled:active ~ .radio__bullet,{
+      cursor: not-allowed;
+      border-color: $radio-default-borderColor-disabled;
+    }
+
+    &:disabled ~ .radio__label{
+      color: $radioLabel-default-color-disabled;
+    }
+
+    &:checked:disabled ~ .radio__bullet,
+    &:checked:disabled:focus ~ .radio__bullet,
+    &:checked:disabled:hover ~ .radio__bullet,
+    &:checked:disabled:active ~ .radio__bullet,{
+      &:after {
+        background-color: $radioBullet-default-bgColor-disabled;
+      }
+    }
+  }
+
+  &:hover input ~ .radio__bullet {
+    border-color: $radio-default-borderColor-hover;
+  }
+}
+
+.radio__bullet {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  height: $radio-default-width;
+  width: $radio-default-height;
+  border: $radio-default-border;
+  border-radius: 50%;
+  box-sizing: border-box;
+  transition: all $radio-default-transition;
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: $radioBullet-default-width;
+    height: $radioBullet-default-height;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    background-color: transparent;
+    transform: translate(-50%, -50%);
+    transition: all $radio-default-transition;
+  }
+}
+
+// Styling for Label
+$radioLabel-default-font: $font-h3-r;
+$radioLabel-default-color: $color-black;
+
+.radio__label{
+  display: inline-block;
+  padding-left: 8px;
+  font: $radioLabel-default-font;
+  color: $radioLabel-default-color;
+}

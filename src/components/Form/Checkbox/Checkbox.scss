@@ -1,0 +1,121 @@
+@import 'variables/_index.scss';
+
+//component-type-prop-state
+//Style for default
+$checkbox-default-width: 14px;
+$checkbox-default-height: 14px;
+$checkbox-default-bgColor: transparent;
+$checkbox-default-border: 2px solid $color-heather;
+$checkbox-default-transition: .15s;
+
+$checkboxCheck-default-borderColor: $color-white;
+$checkboxCheck-default-width: $checkbox-default-width / 2;
+$checkboxCheck-default-height: $checkbox-default-height / 2;
+$checkboxCheck-default-transition: .15s;
+$checkboxCheck-default-outline-focus: 1px dashed $color-dodger-blue-2;
+
+//Style for hover
+$checkbox-default-borderColor-hover: $color-dodger-blue;
+
+//Style for selected
+$checkbox-default-borderColor-selected: $color-dodger-blue;
+$checkbox-default-bgColor-selected: $color-dodger-blue;
+$checkboxCheck-default-borderColor-selected: $color-white;
+
+//Style for disabled
+$checkbox-default-borderColor-disabled: $color-catskill-white;
+$checkbox-default-color-disabled: $color-catskill-white;
+$checkboxCheck-default-bgColor-disabled: $color-catskill-white;
+
+.checkbox {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+
+  /* Hide the browser's default checkbox */
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+
+    /* Show the check when checked */
+    &:checked ~ .checkbox__check {
+      border-color: $checkbox-default-borderColor-selected;
+      background-color: $checkbox-default-bgColor-selected;
+      &:after {
+        display: block;
+        border-color: $checkboxCheck-default-borderColor-selected;
+      }
+    }
+
+    &:focus ~ .checkbox__check{
+      outline: $checkboxCheck-default-outline-focus;
+      outline-offset: 1px;
+    }
+
+    &:disabled ~ .checkbox__check,
+    &:disabled:focus ~ .checkbox__check,
+    &:disabled:hover ~ .checkbox__check,
+    &:disabled:active ~ .checkbox__check,{
+      cursor: not-allowed;
+      border-color: $checkbox-default-borderColor-disabled;
+    }
+
+    &:disabled ~ .checkbox__label{
+      color: $checkbox-default-color-disabled;
+    }
+
+    &:checked:disabled ~ .checkbox__check,
+    &:checked:disabled:focus ~ .checkbox__check,
+    &:checked:disabled:hover ~ .checkbox__check,
+    &:checked:disabled:active ~ .checkbox__check,{
+      background-color: $checkboxCheck-default-bgColor-disabled;
+    }
+  }
+
+  &:hover input ~ .checkbox__check {
+    border-color: $checkbox-default-borderColor-hover;
+  }
+}
+
+/* Create a custom checkbox */
+.checkbox__check {
+  box-sizing: border-box;
+  vertical-align: middle;
+  position: relative;
+  display: inline-block;
+  height: $checkbox-default-width;
+  width: $checkbox-default-height;
+  border: $checkbox-default-border;
+  border-radius: 3px;
+  color: transparent;
+  line-height: 0;
+  transition: all $checkbox-default-transition;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: -1px;
+    width: $checkboxCheck-default-width / 2;
+    height: $checkboxCheck-default-height;
+    border: solid transparent;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transform-origin: center;
+    transition: all $checkbox-default-transition;
+  }
+}
+
+// Styling for Label
+$checkboxLabel-default-font: $font-h3-r;
+$checkboxLabel-default-color: $color-black;
+
+.checkbox__label{
+  vertical-align: middle;
+  display: inline-block;
+  padding-left: 8px;
+  font: $checkboxLabel-default-font;
+  color: $checkboxLabel-default-color;
+}
