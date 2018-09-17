@@ -1,4 +1,5 @@
 import React from 'react';
+import './components/index.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div></div>
+      <div>asd</div>
     );
   }
 }
