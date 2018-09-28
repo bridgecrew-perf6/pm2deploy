@@ -1,12 +1,12 @@
-import React from 'react';
-import './Button.css';
+import React from "react";
+import "./Button.css";
 
-const getClass = (background) => {
-  let list = ["button"];
+const getClass = background => {
+  const list = ["button"];
   list[list.length] = `button--${background}`;
 
   return list.join(" ");
-}
+};
 
 /** Button component description */
 const Button = ({
@@ -14,23 +14,24 @@ const Button = ({
   disabled,
   children,
   onClick,
+  type,
   ...props
-}) => {
-  return (
-    <button
-      className={getClass(background)}
-      disabled={disabled}
-      onClick={onClick}
-      {...props}
-    >
-      {children}
-    </button>
-  )
-}
+}) => (
+  <button
+    type="button"
+    className={getClass(background)}
+    disabled={disabled}
+    onClick={onClick}
+    {...props}
+  >
+    {children}
+  </button>
+);
 
 Button.defaultProps = {
+  type: "button",
   background: "default",
   disabled: false
-}
+};
 
 export default Button;

@@ -1,16 +1,6 @@
-import React from 'react';
-import './components/index.css';
+import React from "react";
+import "./components/index.css";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div>asd</div>
-    );
-  }
-}
+const App = () => <div>{process.env.REACT_APP_SECRET_CODE}</div>;
 
 export default App;

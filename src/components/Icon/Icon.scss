@@ -3,7 +3,7 @@ $icon-size-s: 16px;
 $icon-size-m: 24px;
 $icon-size-l: 32px;
 
-.icon{
+.icon {
   box-sizing: border-box;
   display: inline-block;
   fill: currentColor;
@@ -11,45 +11,45 @@ $icon-size-l: 32px;
   line-height: 0;
 }
 
-.icon--xs{
+.icon--xs {
   width: $icon-size-xs;
   height: $icon-size-xs;
   font-size: $icon-size-xs;
 }
 
-.icon--s{
+.icon--s {
   width: $icon-size-s;
   height: $icon-size-s;
   font-size: $icon-size-s;
 }
 
-.icon--m{
+.icon--m {
   width: $icon-size-m;
   height: $icon-size-m;
   font-size: $icon-size-m;
 }
 
-.icon--l{
+.icon--l {
   width: $icon-size-l;
   height: $icon-size-l;
   font-size: $icon-size-l;
 }
 
-.icon--mr{
+.icon--mr {
   margin-right: 8px;
 }
 
-.icon--ml{
+.icon--ml {
   margin-left: 8px;
 }
 
-.icon--not-found{
+.icon--not-found {
   position: relative;
   border: 1px dashed #f00;
   border-radius: 50%;
-  animation: blinking .5s linear .2s infinite alternate;
+  animation: blinking 0.5s linear 0.2s infinite alternate;
 
-  &:before{
+  &::before {
     content: "";
     display: block;
     width: 80%;
@@ -63,6 +63,11 @@ $icon-size-l: 32px;
 }
 
 @keyframes blinking {
-  from {opacity: 1;}
-  to {opacity: .2;}
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.2;
+  }
 }
