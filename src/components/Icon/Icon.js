@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./Icon.css";
+import "./Icon.scss";
 
 const getClass = (icon, size) => {
   const list = ["icon"];
