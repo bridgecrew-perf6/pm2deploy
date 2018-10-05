@@ -5,7 +5,7 @@ const getClass = background => {
   const list = [style.button];
   list[list.length] = style[`button--${background}`];
 
-  return list.join(" ");
+  return list.join(" ").trim();
 };
 
 /** Button component description */
