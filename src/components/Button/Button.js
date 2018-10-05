@@ -18,7 +18,7 @@ const Button = ({
   ...props
 }) => (
   <button
-    type="button"
+    type={type}
     className={getClass(background)}
     disabled={disabled}
     onClick={onClick}
