@@ -1,36 +1,24 @@
 import React from "react";
 import "./scss/global.scss";
-import { getMasterCity } from "./api";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import Button from "./components/Button/Button";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Error404 from "./pages/Error404";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      masterCity: []
-    };
-  }
+import Header from "./components/Header/Header";
 
-  async componentDidMount() {
-    const { data, error } = await getMasterCity();
-
-    console.log(data);
-    console.log(error);
-  }
-
-  render() {
-    const { masterCity } = this.state;
-    return (
-      <div>
-        <Button>asdasd</Button>
-        <p>asdasdasd</p>
-        {masterCity.map(item => (
-          <div key={item.id}>{item.city_name}</div>
-        ))}
-      </div>
-    );
-  }
-}
+const App = () => (
+  <BrowserRouter>
+    <>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/login" component={Login} />
+        <Route component={Error404} />
+      </Switch>
+    </>
+  </BrowserRouter>
+);
 
 export default App;
