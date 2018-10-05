@@ -1,6 +1,8 @@
 import React from "react";
-import "./components/index.css";
+import "./scss/global.scss";
 import { getMasterCity } from "./api";
+
+import Button from "./components/Button/Button";
 
 class App extends React.Component {
   constructor(props) {
@@ -21,6 +23,8 @@ class App extends React.Component {
     const { masterCity } = this.state;
     return (
       <div>
+        <Button>asdasd</Button>
+        <p>asdasdasd</p>
         {masterCity.map(item => (
           <div key={item.id}>{item.city_name}</div>
         ))}
