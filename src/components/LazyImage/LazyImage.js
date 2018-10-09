@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import LazyLoad from "react-lazyload";
-
 import style from "./LazyImage.module.scss";
 
 const LazyImage = ({ alt, title, src }) => (
