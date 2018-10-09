@@ -19,6 +19,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-lazyload": "^2.3.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1"
   },
@@ -39,14 +40,15 @@
     "react-scripts": "2.0.3",
     "stylelint": "^9.6.0",
     "stylelint-config-airbnb": "0.0.0",
-    "stylelint-config-standard": "^18.2.0"
+    "stylelint-config-standard": "^18.2.0",
+    "webpack-bundle-analyzer": "^3.0.2"
   },
   "scripts": {
     "lint:js": "eslint src",
     "lint:scss": "stylelint '**/*.scss' --config=.stylelintrc.json",
-    "linter": "stylelint '**/*.scss'",
+    "lint": "npm-run-all lint:*",
     "build-icon": "svgr --icon --replace-attr-values '#231f20=currentColor' --out-dir src/components/Icon/assets/build/ src/components/Icon/assets/src/",
-    "build-js": "react-scripts build",
+    "build-js": "node build.js",
     "start-js": "react-scripts start",
     "start": "npm run start-js",
     "build": "npm run build-icon && npm run build-js",
