@@ -11,6 +11,7 @@
         "extensions": [".js", ".jsx"]
       }
     ],
-    "react/button-has-type": ["off"]
+    "react/button-has-type": ["off"],
+    "react/prop-types": ["off"]
   }
 }
