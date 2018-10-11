@@ -21,6 +21,7 @@ const navigationList = [
 
 const Header = () => (
   <div>
+    {process.env.REACT_APP_NAME}
     {navigationList.map(item => (
       <Link key={item.index} to={item.to}>
         {item.name}
