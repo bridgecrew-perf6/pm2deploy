@@ -1,8 +1,11 @@
 import React from "react";
+import { getMasterCity } from "../api";
 
-const Dashboard = props => {
-  const handleClick = () => {
-    props.history.push("/login");
+const Dashboard = () => {
+  const handleClick = async () => {
+    const { data, error } = await getMasterCity();
+    console.log(data);
+    console.log(error);
   };
 
   return (

@@ -1,4 +1,4 @@
-const list = [
+const apiList = [
   {
     url: "master",
     children: [
@@ -51,4 +51,4 @@ const list = [
   }
 ];
 
-export default list;
+export default apiList;
