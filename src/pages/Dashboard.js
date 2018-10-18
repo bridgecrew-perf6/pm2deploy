@@ -10,6 +10,7 @@ const Dashboard = () => {
 
   return (
     <div>
+      {/* <img src="/a.png" /> */}
       <button onClick={() => handleClick()}>Dashboard</button>
     </div>
   );

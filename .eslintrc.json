@@ -4,6 +4,7 @@
     "jest": true
   },
   "extends": ["airbnb", "plugin:prettier/recommended"],
+  "parser": "babel-eslint",
   "rules": {
     "react/jsx-filename-extension": [
       "error",

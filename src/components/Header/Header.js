@@ -16,6 +16,11 @@ const navigationList = [
     index: 3,
     name: "Cart",
     to: "/cart"
+  },
+  {
+    index: 4,
+    name: "Product",
+    to: "/product"
   }
 ];
 

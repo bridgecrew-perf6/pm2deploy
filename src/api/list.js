@@ -25,6 +25,31 @@ const apiList = [
     ]
   },
   {
+    url: "property",
+    children: [
+      {
+        name: "getListing",
+        url: "primary/listing",
+        method: "POST"
+      },
+      {
+        name: "getMasterPersona",
+        url: "persona",
+        method: "POST"
+      },
+      {
+        name: "getMasterBrandPreferences",
+        url: "brand_preferences",
+        method: "POST"
+      },
+      {
+        name: "getMasterMeetingPurposes",
+        url: "meeting_purpose",
+        method: "POST"
+      }
+    ]
+  },
+  {
     url: "auth",
     children: [
       {

@@ -145,10 +145,9 @@ const MainService = new ApiTree(RootService, [
           [process.env.REACT_APP_TOKEN_HEADER]: token
         };
         retry(newPayload);
-        return true;
       },
       async done({ result, fail, next }) {
-        if (result.body.error.code !== 402) return next(result);
+        // if (result.body.error.code !== 402) return next(result);
         const errorMessage = result.body.error.message;
         if (errorMessage === "Please provide correct token!") {
           const {
@@ -163,6 +162,7 @@ const MainService = new ApiTree(RootService, [
           } = await RefreshTokenService.doSingleRequest();
           if (success) fail(tokenResult);
         }
+        next(result);
         return true;
       }
     }
