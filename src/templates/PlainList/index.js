@@ -38,8 +38,6 @@ class PlainList extends React.Component {
     retrieveData(dataSource, storeKey);
   }
 
-  handleClick = () => console.log("asd");
-
   render() {
     const { list, itemComponent, loadingComponent, currentState } = this.props;
 
@@ -51,6 +49,7 @@ class PlainList extends React.Component {
           }
           return <span />;
         })()}
+
         {list.map(item => itemComponent(item))}
       </>
     );

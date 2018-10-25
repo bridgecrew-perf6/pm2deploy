@@ -1,105 +1,105 @@
-// import React from "react";
+import React from "react";
+// import PropType from "prop-types";
 
-// const Pagination = props => {
-//   const generatePagination = (c, m, d) => {
-//     const current = c * 1;
-//     const last = m * 1;
-//     const delta = d * 1;
-//     const left = current - delta;
-//     const right = current + delta + 1;
-//     const range = [];
-//     const rangeWithDots = [];
-//     let l;
-//     const paginationNumber = [];
+const paginationNumberLogic = (
+  current,
+  last,
+  numberButton,
+  prevArrowButton,
+  nextArrowButton,
+  dotComponent
+) => {
+  const delta = 2;
+  const left = current - delta;
+  const right = current + delta + 1;
+  const range = [];
+  const rangeWithDots = [];
+  let l = 0;
 
-//     // Prev
-//     paginationNumber.push(<div />);
+  for (let i = 1; i <= last; i += 1) {
+    if (i === 1 || i === last || (i >= left && i < right)) {
+      range.push(i);
+    }
+  }
 
-//     for (let i = 1; i <= last; i += 1) {
-//       if (i === 1 || i === last || (i >= left && i < right)) {
-//         range.push(i);
-//       }
-//     }
+  if (current > 1)
+    rangeWithDots.push({
+      key: "prev",
+      el: prevArrowButton.normal()
+    });
+  else
+    rangeWithDots.push({
+      key: "prev",
+      el: prevArrowButton.disabled()
+    });
 
-//     for (const i of range) {
-//       if (l) {
-//         if (i - l === 2) {
-//           const x = l + 1;
-//           rangeWithDots.push(x);
-//           paginationNumber.push(<div />);
-//         } else if (i - l !== 1) {
-//           let misc;
-//           if (i < current) {
-//             misc = <div />;
-//           } else {
-//             misc = <div />;
-//           }
-//           rangeWithDots.push("...");
-//           paginationNumber.push(misc);
-//         }
-//       }
-//       rangeWithDots.push(i);
-//       paginationNumber.push(<div />);
-//       l = i;
-//     }
+  for (let i = 0; i < range.length; i += 1) {
+    if (l) {
+      if (range[i] - l === 2)
+        rangeWithDots.push({
+          key: 1,
+          el: l + 1
+        });
+      else if (range[i] - l !== 1)
+        rangeWithDots.push({
+          key: `dot${range[i]}`,
+          el: dotComponent()
+        });
+    }
+    if (current === range[i])
+      rangeWithDots.push({
+        key: range[i],
+        el: numberButton.active(range[i])
+      });
+    else
+      rangeWithDots.push({
+        key: range[i],
+        el: numberButton.normal(range[i])
+      });
+    l = range[i];
+  }
 
-//     // Next
-//     paginationNumber.push(<div />);
+  if (current < last)
+    rangeWithDots.push({
+      key: "next",
+      el: nextArrowButton.normal()
+    });
+  else
+    rangeWithDots.push({
+      key: "next",
+      el: nextArrowButton.disabled()
+    });
 
-//     return paginationNumber;
-//   };
+  return rangeWithDots;
+};
 
-//   const clickPage = i => {
-//     props.onClick(i);
-//   };
+const Pagination = ({
+  currentPage,
+  totalPage,
+  numberButton,
+  prevArrowButton,
+  nextArrowButton,
+  dotComponent
+}) => {
+  let current = 0;
+  if (typeof currentPage === "number" && currentPage > 0) current = currentPage;
 
-//   const prevPage = () => {
-//     const { currentPage } = props;
-//     if (currentPage > 1) {
-//       props.onClick(currentPage * 1 - 1);
-//     }
-//   };
+  return (
+    <>
+      {paginationNumberLogic(
+        current,
+        totalPage,
+        numberButton,
+        prevArrowButton,
+        nextArrowButton,
+        dotComponent
+      ).map(item => (
+        <React.Fragment key={item.key}>{item.el}</React.Fragment>
+      ))}
+    </>
+  );
+};
 
-//   const nextPage = () => {
-//     const { currentPage, totalPage } = props;
-//     if (currentPage < totalPage) {
-//       props.onClick(currentPage * 1 + 1);
-//     }
-//   };
+// Pagination.PropType;
 
-//   const prevFivePages = () => {
-//     const { currentPage } = props;
-//     const x = currentPage - 5 || 1;
-//     props.onClick(x);
-//   };
-
-//   const nextFivePages = () => {
-//     const { currentPage, totalPage } = props;
-//     let x = currentPage + 5;
-//     x = x > totalPage ? totalPage : x;
-//     props.onClick(x);
-//   };
-
-//   const renderPagination = () => {
-//     const { currentPage, totalPage, delta } = props;
-//     const generatedPagination = generatePagination(
-//       currentPage,
-//       totalPage,
-//       delta
-//     );
-//     const pagination = (
-//       <ul className="pagination">{generatedPagination.map(data => data)}</ul>
-//     );
-
-//     return pagination;
-//   };
-
-//   return renderPagination();
-// };
-
-// Pagination.defaultProps = {
-//   currentPage: 1,
-//   delta: 1
-// };
-
-// export default Pagination;
+export default Pagination;

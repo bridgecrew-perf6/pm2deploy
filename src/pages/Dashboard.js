@@ -1,19 +1,12 @@
 import React from "react";
-import { getMasterCity } from "../api";
+import Tooltip from "../templates/Tooltip";
 
-const Dashboard = () => {
-  const handleClick = async () => {
-    const { data, error } = await getMasterCity();
-    console.log(data);
-    console.log(error);
-  };
-
-  return (
-    <div>
-      {/* <img src="/a.png" /> */}
-      <button onClick={() => handleClick()}>Dashboard</button>
-    </div>
-  );
-};
+const Dashboard = () => (
+  <div style={{ marginTop: "50px" }}>
+    <Tooltip content="this is a dashboard">
+      <button>Dashboard</button>
+    </Tooltip>
+  </div>
+);
 
 export default Dashboard;
