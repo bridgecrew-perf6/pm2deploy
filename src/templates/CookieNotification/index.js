@@ -22,8 +22,8 @@ class CookieNotification extends React.Component {
   }
 
   handleClose = () => {
-    const { cookieKey } = this.props;
-    Cookies.set(cookieKey, 1, { expires: 7, path: "/" });
+    const { cookieKey, expiredDuration } = this.props;
+    Cookies.set(cookieKey, 1, { expires: expiredDuration, path: "/" });
     this.setState({
       isOpen: false
     });
