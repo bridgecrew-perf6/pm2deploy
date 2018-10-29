@@ -19,10 +19,14 @@ const ProductList = () => (
     {/* PAGINATION */}
     <Pagination
       currentPage={1}
-      totalPage={20}
+      totalPage={5}
       numberButton={{
-        normal: number => <div>{number}</div>,
-        active: number => <div className="active">{number}</div>
+        normal: number => <span style={{ color: "blue" }}>{number}</span>,
+        active: number => (
+          <span style={{ color: "blue" }} className="active">
+            {number}
+          </span>
+        )
       }}
       prevArrowButton={{
         normal: () => <div>{"<"}</div>,

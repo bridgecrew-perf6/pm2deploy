@@ -37,8 +37,8 @@ const paginationNumberLogic = (
     if (l) {
       if (range[i] - l === 2)
         rangeWithDots.push({
-          key: 1,
-          el: l + 1
+          key: `dots${range[i]}`,
+          el: dotComponent()
         });
       else if (range[i] - l !== 1)
         rangeWithDots.push({
