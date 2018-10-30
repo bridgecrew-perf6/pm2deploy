@@ -1,10 +1,68 @@
 import React from "react";
-import Tooltip from "../templates/Tooltip";
-import CookieNotification from "../templates/CookieNotification";
+// import Tooltip from "../templates/Tooltip";
+// import CookieNotification from "../templates/CookieNotification";
+import Accordion from "../templates/Accordion";
+
+const data = [
+  {
+    header: "lorem",
+    content:
+      "asdasdasdqjwdehrjbhjgjshgsknksjnfkvsnfjkvsfvnskjnvjsfngbjslgjbns;gn;nankvsjgnjkbnksgb",
+    isOpen: false
+  },
+  {
+    header: "lorem",
+    content:
+      "asdasdasdqjwdehrjbhjgjshgsknksjnfkvsnfjkvsfvnskjnvjsfngbjslgjbns;gn;nankvsjgnjkbnksgb",
+    isOpen: false
+  },
+  {
+    header: "lorem",
+    content:
+      "asdasdasdqjwdehrjbhjgjshgsknksjnfkvsnfjkvsfvnskjnvjsfngbjslgjbns;gn;nankvsjgnjkbnksgb",
+    isOpen: false
+  },
+  {
+    header: "lorem",
+    content:
+      "asdasdasdqjwdehrjbhjgjshgsknksjnfkvsnfjkvsfvnskjnvjsfngbjslgjbns;gn;nankvsjgnjkbnksgb",
+    isOpen: false
+  },
+  {
+    header: "lorem",
+    content:
+      "asdasdasdqjwdehrjbhjgjshgsknksjnfkvsnfjkvsfvnskjnvjsfngbjslgjbns;gn;nankvsjgnjkbnksgb",
+    isOpen: false
+  },
+  {
+    header: "lorem",
+    content:
+      "asdasdasdqjwdehrjbhjgjshgsknksjnfkvsnfjkvsfvnskjnvjsfngbjslgjbns;gn;nankvsjgnjkbnksgb",
+    isOpen: false
+  }
+];
 
 const Dashboard = () => (
   <div style={{ marginTop: "50px" }}>
-    <Tooltip content="this is a dashboard">
+    {data.map(item => (
+      <Accordion isOpen={item.isOpen}>
+        {({ toggle, isOpen }) => (
+          <div>
+            <button onClick={toggle}>
+              {!isOpen ? "+" : "-"}
+              {item.header}
+            </button>
+            {isOpen && (
+              <div style={isOpen ? { color: "blue" } : { color: "red" }}>
+                {item.content}
+              </div>
+            )}
+          </div>
+        )}
+      </Accordion>
+    ))}
+
+    {/* <Tooltip content="this is a dashboard">
       <button>Dashboard</button>
     </Tooltip>
 
@@ -26,7 +84,7 @@ const Dashboard = () => (
           </div>
         </div>
       )}
-    </CookieNotification>
+    </CookieNotification> */}
   </div>
 );
 
