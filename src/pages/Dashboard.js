@@ -1,12 +1,12 @@
 import React from "react";
-// import Tooltip from "../templates/Tooltip";
+import Tooltip from "../templates/Tooltip";
 import CookieNotification from "../templates/CookieNotification";
 
 const Dashboard = () => (
   <div style={{ marginTop: "50px" }}>
-    {/* <Tooltip content="this is a dashboard">
+    <Tooltip content="this is a dashboard">
       <button>Dashboard</button>
-    </Tooltip> */}
+    </Tooltip>
 
     <CookieNotification>
       {({ close, isOpen }) => (
