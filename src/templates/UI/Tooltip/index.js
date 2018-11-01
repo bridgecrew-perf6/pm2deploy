@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 
@@ -20,13 +21,23 @@ const Tooltip = ({ content, children, setting }) => (
   </Tippy>
 );
 
+Tooltip.propTypes = {
+  setting: PropTypes.shape({
+    animation: PropTypes.string,
+    arrow: PropTypes.bool,
+    size: PropTypes.string,
+    duration: PropTypes.number,
+    theme: PropTypes.string
+  })
+};
+
 Tooltip.defaultProps = {
   setting: {
     animation: "shift-toward",
     arrow: true,
     size: "large",
     duration: 150,
-    theme: "translucent"
+    theme: "black"
     // theme: "custom"
   }
 };

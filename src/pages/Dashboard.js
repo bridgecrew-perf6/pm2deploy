@@ -48,7 +48,7 @@ const Dashboard = () => (
       <Accordion isOpen={item.isOpen}>
         {({ toggle, isOpen }) => (
           <div>
-            <button onClick={toggle}>
+            <button onClick={toggle} role="tablist">
               {!isOpen ? "+" : "-"}
               {item.header}
             </button>

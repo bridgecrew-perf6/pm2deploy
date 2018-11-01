@@ -1,27 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const paginationNumberLogic = (
+const paginationSimpleLogic = (
   current,
   last,
-  numberButton,
+  indicatorComponent,
   prevArrowButton,
-  nextArrowButton,
-  dotComponent
+  nextArrowButton
 ) => {
-  const delta = 2;
-  const left = current - delta;
-  const right = current + delta + 1;
-  const range = [];
   const pageElement = [];
-  let l = 0;
-
-  for (let i = 1; i <= last; i += 1) {
-    if (i === 1 || i === last || (i >= left && i < right)) {
-      range.push(i);
-    }
-  }
-
   if (current > 1)
     pageElement.push({
       key: "prev",
@@ -33,31 +20,10 @@ const paginationNumberLogic = (
       el: prevArrowButton.disabled()
     });
 
-  for (let i = 0; i < range.length; i += 1) {
-    if (l) {
-      if (range[i] - l === 2)
-        pageElement.push({
-          key: `dots${range[i]}`,
-          el: dotComponent()
-        });
-      else if (range[i] - l !== 1)
-        pageElement.push({
-          key: `dot${range[i]}`,
-          el: dotComponent()
-        });
-    }
-    if (current === range[i])
-      pageElement.push({
-        key: range[i],
-        el: numberButton.active(range[i])
-      });
-    else
-      pageElement.push({
-        key: range[i],
-        el: numberButton.normal(range[i])
-      });
-    l = range[i];
-  }
+  pageElement.push({
+    key: "indicator",
+    el: indicatorComponent(current, last)
+  });
 
   if (current < last)
     pageElement.push({
@@ -76,23 +42,21 @@ const paginationNumberLogic = (
 const Pagination = ({
   currentPage,
   totalPage,
-  numberButton,
+  indicatorComponent,
   prevArrowButton,
-  nextArrowButton,
-  dotComponent
+  nextArrowButton
 }) => {
   let current = 1;
   if (currentPage > 0) current = currentPage;
 
   return (
     <>
-      {paginationNumberLogic(
+      {paginationSimpleLogic(
         current,
         totalPage,
-        numberButton,
+        indicatorComponent,
         prevArrowButton,
-        nextArrowButton,
-        dotComponent
+        nextArrowButton
       ).map(item => (
         <React.Fragment key={item.key}>{item.el}</React.Fragment>
       ))}

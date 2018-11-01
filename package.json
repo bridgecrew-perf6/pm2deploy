@@ -7,9 +7,9 @@
     "@apicase/adapter-fetch": "^0.15.1",
     "@apicase/core": "^0.17.0",
     "@apicase/services": "^0.8.1",
-    "@storybook/addon-actions": "^3.4.11",
-    "@storybook/addon-info": "^3.4.11",
-    "@storybook/react": "^3.4.11",
+    "@storybook/addon-actions": "^4.0.0",
+    "@storybook/addon-info": "^4.0.0",
+    "@storybook/react": "^4.0.0",
     "@tippy.js/react": "^1.0.1",
     "connected-react-router": "^4.5.0",
     "dotenv": "^6.1.0",
@@ -34,6 +34,7 @@
     "xstate": "^3.3.3"
   },
   "devDependencies": {
+    "@storybook/addon-viewport": "^4.0.2",
     "@svgr/cli": "^2.4.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
