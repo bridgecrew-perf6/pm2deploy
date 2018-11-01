@@ -6,5 +6,9 @@ const req = require.context("../src", true, /.stories.js$/);
 function loadStories() {
   req.keys().forEach(filename => req(filename));
 }
-addDecorator(withInfo());
+addDecorator(
+  withInfo({
+    inline: true
+  })
+);
 configure(loadStories, module);

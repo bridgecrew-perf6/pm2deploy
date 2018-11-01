@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Cookies from "js-cookie";
 
 class CookieNotification extends React.Component {
@@ -35,6 +36,13 @@ class CookieNotification extends React.Component {
     return children({ close: this.handleClose, isOpen });
   }
 }
+
+CookieNotification.propTypes = {
+  notify: PropTypes.bool,
+  notifyDelay: PropTypes.number,
+  cookieKey: PropTypes.string,
+  expiredDuration: PropTypes.number
+};
 
 CookieNotification.defaultProps = {
   notify: true,
