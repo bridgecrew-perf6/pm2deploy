@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import "./scss/global.scss";
-import { Switch, Route } from "react-router-dom";
+import { AnimatedSwitch } from "react-router-transition";
+import { Route, Redirect } from "react-router-dom";
 
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -14,13 +15,21 @@ const App = () => (
   <>
     <Header />
     <Suspense fallback={<div>Loading...</div>}>
-      <Switch>
+      <AnimatedSwitch
+        atEnter={{ opacity: 0 }}
+        atLeave={{ opacity: 0 }}
+        atActive={{ opacity: 1 }}
+        className="router__wrapper"
+      >
+        {/* <Switch> */}
         <Route exact path="/" component={Dashboard} />
-        <Route path="/product" component={ProductList} />
+        <Route path="/product" render={() => <ProductList />} />
         <Route path="/login" component={Login} />
         <Route path="/list" component={Login} />
-        <Route component={Error404} />
-      </Switch>
+        <Route path="/404" component={Error404} />
+        <Route render={() => <Redirect to="/404" />} />
+        {/* </Switch> */}
+      </AnimatedSwitch>
     </Suspense>
   </>
 );

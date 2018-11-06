@@ -7,3 +7,11 @@
 .none {
   display: none;
 }
+
+.router__wrapper {
+  position: relative;
+}
+
+.router__wrapper > div {
+  position: absolute;
+}

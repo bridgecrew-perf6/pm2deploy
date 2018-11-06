@@ -41,7 +41,7 @@ const data = [
 ];
 
 const Dashboard = () => (
-  <div style={{ marginTop: "50px" }}>
+  <div>
     {data.map(item => (
       <Accordion isOpen={item.isOpen}>
         {({ toggle, isOpen }) => (
