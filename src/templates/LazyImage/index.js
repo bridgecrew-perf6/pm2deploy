@@ -5,6 +5,7 @@ import style from "./LazyImage.module.scss";
 
 const LazyImage = ({ alt, title, src, placeholder }) => (
   <div className={style.lazy}>
+    {/* {placeholder} */}
     <LazyLoad offset={150} placeholder={placeholder}>
       <img alt={alt} title={title} src={src} />
     </LazyLoad>
