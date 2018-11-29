@@ -18,9 +18,8 @@ app.use((req, res, next) => {
   } catch (e) {
     err = e;
   }
-  if (err) {
-    return res.redirect("/404");
-  }
+  if (err) return res.redirect("/404");
+
   next();
   return true;
 });
