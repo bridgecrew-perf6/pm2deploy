@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="%REACT_APP_THEME_COLOR%" />
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="theme-color" content="#000000">
+    <meta property="og:description" content="%REACT_APP_META_DESC%" />
+    <meta property="og:title" content="%REACT_APP_META_TITLE%" />
+    <meta property="og:url" content="%REACT_APP_META_URL%" />
+    <meta property="og:image" content="%PUBLIC_URL%/%REACT_APP_META_IMG%" />
+    <meta property="og:type" content="website" />
 
-  <meta property="og:description" content="%REACT_APP_META_DESC%" />
-  <meta property="og:title" content="%REACT_APP_META_TITLE%" />
-  <meta property="og:url" content="%REACT_APP_META_URL%" />
-  <meta property="og:image" content="%PUBLIC_URL%/%REACT_APP_META_IMG%" />
-  <meta property="og:type" content="website" />
+    <meta name="twitter:description" content="%REACT_APP_META_DESC%" />
+    <meta name="twitter:title" content="%REACT_APP_META_TITLE%" />
+    <meta name="twitter:url" content="%REACT_APP_META_URL%" />
+    <meta name="twitter:image" content="%PUBLIC_URL%/%REACT_APP_META_IMG%" />
 
-  <meta name="twitter:description" content="%REACT_APP_META_DESC%" />
-  <meta name="twitter:title" content="%REACT_APP_META_TITLE%" />
-  <meta name="twitter:url" content="%REACT_APP_META_URL%" />
-  <meta name="twitter:image" content="%PUBLIC_URL%/%REACT_APP_META_IMG%" />
+    <meta name="keywords" content="%REACT_APP_META_KEYWORDS%" />
+    <meta
+      name="description"
+      content="%REACT_APP_META_DESC%"
+      key="description"
+    />
+    <meta name="robots" content="%REACT_APP_ROBOTS%" />
 
-  <meta name="keywords" content="%REACT_APP_META_KEYWORDS%" />
-  <meta name="description" content="%REACT_APP_META_DESC%" key="description" />
-  <meta name="robots" content="index, follow" />
+    <title>%REACT_APP_META_TITLE%</title>
 
-  <title>%REACT_APP_META_TITLE%</title>
-
-  <!--
+    <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
 
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
 
-  <!--
+    <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -40,22 +46,25 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-</head>
+  </head>
 
-<body>
-  <noscript>
-    You need to enable JavaScript to run this app.
-  </noscript>
-  <div id="root"></div>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=%REACT_APP_GOOGLE_ANALYTIC%"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+  <body>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+    <div id="root"></div>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=%REACT_APP_GOOGLE_ANALYTIC%"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag('config', '%REACT_APP_GOOGLE_ANALYTIC%');
-  </script>
-  <!--
+      gtag("config", "%REACT_APP_GOOGLE_ANALYTIC%");
+    </script>
+    <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -65,6 +74,5 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-</body>
-
+  </body>
 </html>

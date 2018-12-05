@@ -6,7 +6,7 @@ class ACS extends React.Component {
     super(props);
     this.state = {
       imagePreview: ""
-    }
+    };
   }
 
   setRef = webcam => {
@@ -36,7 +36,7 @@ class ACS extends React.Component {
           height={350}
           ref={this.setRef}
           screenshotFormat="image/jpeg"
-        // videoConstraints={videoConstraints}
+          // videoConstraints={videoConstraints}
         />
         <button onClick={this.capture}>Capture photo</button>
       </div>

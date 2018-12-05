@@ -1,7 +1,7 @@
 {
   "name": "react-starter",
   "author": "Aditya Pratama Nur - Weekend",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@apicase/adapter-fetch": "^0.15.1",
