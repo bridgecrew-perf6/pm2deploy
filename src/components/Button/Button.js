@@ -1,11 +1,11 @@
 import React from "react";
-import "./Button.css";
+import style from "./Button.module.scss";
 
 const getClass = background => {
-  const list = ["button"];
-  list[list.length] = `button--${background}`;
+  const list = [style.button];
+  list[list.length] = style[`button--${background}`];
 
-  return list.join(" ");
+  return list.join(" ").trim();
 };
 
 /** Button component description */
@@ -18,7 +18,7 @@ const Button = ({
   ...props
 }) => (
   <button
-    type="button"
+    type={type}
     className={getClass(background)}
     disabled={disabled}
     onClick={onClick}

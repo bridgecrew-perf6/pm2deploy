@@ -1,10 +1,35 @@
-const list = [
+const apiList = [
   {
     url: "master",
     children: [
       {
         name: "getMasterCity",
         url: "city",
+        method: "POST"
+      },
+      {
+        name: "getMasterPersona",
+        url: "persona",
+        method: "POST"
+      },
+      {
+        name: "getMasterBrandPreferences",
+        url: "brand_preferences",
+        method: "POST"
+      },
+      {
+        name: "getMasterMeetingPurposes",
+        url: "meeting_purpose",
+        method: "POST"
+      }
+    ]
+  },
+  {
+    url: "property",
+    children: [
+      {
+        name: "getListing",
+        url: "primary/listing",
         method: "POST"
       },
       {
@@ -51,4 +76,4 @@ const list = [
   }
 ];
 
-export default list;
+export default apiList;

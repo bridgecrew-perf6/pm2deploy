@@ -4,12 +4,15 @@
     "jest": true
   },
   "extends": ["airbnb", "plugin:prettier/recommended"],
+  "parser": "babel-eslint",
   "rules": {
     "react/jsx-filename-extension": [
       "error",
       {
         "extensions": [".js", ".jsx"]
       }
-    ]
+    ],
+    "react/button-has-type": ["off"],
+    "react/prop-types": ["off"]
   }
 }

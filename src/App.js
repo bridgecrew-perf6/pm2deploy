@@ -1,32 +1,39 @@
-import React from "react";
-import "./components/index.css";
-import { getMasterCity } from "./api";
+import React, { Suspense, lazy } from "react";
+import "./scss/global.scss";
+import { AnimatedSwitch } from "react-router-transition";
+import { Route, Redirect } from "react-router-dom";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      masterCity: []
-    };
-  }
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Error404 from "./pages/Error404";
+// import ProductList from "./pages/ProductList";
+import Header from "./components/Header/Header";
+import ACS from "./templates/ACS/ACS";
 
-  async componentDidMount() {
-    const { data, error } = await getMasterCity();
+const ProductList = lazy(() => import("./pages/ProductList"));
 
-    console.log(data);
-    console.log(error);
-  }
-
-  render() {
-    const { masterCity } = this.state;
-    return (
-      <div>
-        {masterCity.map(item => (
-          <div key={item.id}>{item.city_name}</div>
-        ))}
-      </div>
-    );
-  }
-}
+const App = () => (
+  <>
+    <Header />
+    <Suspense fallback={<div>Loading...</div>}>
+      <AnimatedSwitch
+        atEnter={{ opacity: 0 }}
+        atLeave={{ opacity: 0 }}
+        atActive={{ opacity: 1 }}
+        className="router__wrapper"
+      >
+        {/* <Switch> */}
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/acs" component={ACS} />
+        <Route path="/product" render={() => <ProductList />} />
+        <Route path="/login" component={Login} />
+        <Route path="/list" component={Login} />
+        <Route path="/404" component={Error404} />
+        <Route render={() => <Redirect to="/404" />} />
+        {/* </Switch> */}
+      </AnimatedSwitch>
+    </Suspense>
+  </>
+);
 
 export default App;

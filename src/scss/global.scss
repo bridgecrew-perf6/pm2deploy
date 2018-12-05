@@ -1,0 +1,17 @@
+@import "~normalize.css/normalize";
+
+* {
+  box-sizing: border-box;
+}
+
+.none {
+  display: none;
+}
+
+.router__wrapper {
+  position: relative;
+}
+
+.router__wrapper > div {
+  position: absolute;
+}
