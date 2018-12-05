@@ -1,6 +1,6 @@
 import React from "react";
 
-function withTracker(WrappedComponent) {
+function withSizmekTracker(WrappedComponent) {
   return class extends React.Component {
     componentDidMount() {
       if (process.env.REACT_APP_ENVIRONMENT === "production") {
@@ -10,8 +10,9 @@ function withTracker(WrappedComponent) {
         const oldVersa = document.getElementById("ebOneTagUrlIdVersa");
         if (oldVersa) oldVersa.parentNode.removeChild(oldVersa);
 
+        // EDIT THIS PART TO CURRENT VERSA TAG
         const versaScriptContent = `var versaTag = {}; 
-                  versaTag.id = "9863"; 
+                  versaTag.id = ""; 
                   versaTag.sync = 0;
                   versaTag.dispType = "js"; 
                   versaTag.ptcl = "HTTPS";
@@ -41,4 +42,4 @@ function withTracker(WrappedComponent) {
   };
 }
 
-export default withTracker;
+export default withSizmekTracker;
