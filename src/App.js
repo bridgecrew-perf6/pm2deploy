@@ -11,6 +11,7 @@ import Header from "./components/Header/Header";
 import ACS from "./templates/ACS/ACS";
 
 const ProductList = lazy(() => import("./pages/ProductList"));
+const ProductList2 = lazy(() => import("./pages/ProductList2"));
 
 const App = () => (
   <>
@@ -26,6 +27,7 @@ const App = () => (
         <Route exact path="/" component={Dashboard} />
         <Route path="/acs" component={ACS} />
         <Route path="/product" render={() => <ProductList />} />
+        <Route path="/product2" render={() => <ProductList2 />} />
         <Route path="/login" component={Login} />
         <Route path="/list" component={Login} />
         <Route path="/404" component={Error404} />

@@ -10,7 +10,7 @@ function withSizmekTracker(WrappedComponent) {
         const oldVersa = document.getElementById("ebOneTagUrlIdVersa");
         if (oldVersa) oldVersa.parentNode.removeChild(oldVersa);
 
-        // EDIT THIS PART TO CURRENT VERSA TAG
+        // EDIT THIS PART TO YOUR VERSA TAG
         const versaScriptContent = `var versaTag = {}; 
                   versaTag.id = ""; 
                   versaTag.sync = 0;
