@@ -14,9 +14,10 @@ const GHW = ({ secondaryStyle }) => (
       <br />
       <div className={style.ghw__textin}>
         KARENA MEROKOK, SAYA TERKENA KANKER TENGGOROKAN.
-      </div>{" "}
+      </div>
       <div className={style.ghw__textin}>
-        LAYANAN BERHENTI MEROKOK (0800-177-6565)
+        LAYANAN BERHENTI MEROKOK
+        <span className={style.ghw__nostyle}>(0800-177-6565)</span>
       </div>
     </div>
     <div className={style.ghw__18} />

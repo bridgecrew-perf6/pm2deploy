@@ -4,7 +4,7 @@ import GHW from "../templates/GHW";
 const Login = () => (
   <div>
     Login
-    <GHW secondaryStyle={true} />
+    <GHW secondaryStyle />
   </div>
 );
 

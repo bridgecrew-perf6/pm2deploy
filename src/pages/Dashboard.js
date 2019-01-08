@@ -106,9 +106,9 @@ const soManyDataSoMuchSky = [
 
 const Dashboard = () => (
   <div>
-    {soManyDataSoMuchSky.map(item => (
-      <LazyImage alt="Testing Lazy" title="Testing Lazy" src={item} />
-    ))}
+    {soManyDataSoMuchSky.map(item => 
+       <LazyImage alt="Testing Lazy" title="Testing Lazy" src={item} />;
+    )}
     {/* {data.map(item => (
       <Accordion isOpen={item.isOpen}>
         {({ toggle, isOpen }) => (
