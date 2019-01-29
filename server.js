@@ -9,7 +9,8 @@ const app = express();
 
 const targetFolder = "build_deploy";
 
-app.use(helmet());
+app.use(helmet({ hsts: { maxAge: 31536000 } }));
+
 app.use(express.static(path.join(__dirname, targetFolder)));
 app.use((req, res, next) => {
   let err = null;
