@@ -49,8 +49,16 @@ import style from "./LazyImage.module.scss";
 //   }
 // }
 
-const LazyImage = ({ alt, title, src, placeholder }) => (
+/* eslint-disable declaration-block-trailing-semicolon */
+
+const LazyImage = ({ alt, title, src, placeholder, imageRatio }) => (
   <div className={style.lazy}>
+    {imageRatio !== 0 ? (
+      <div
+        className={style.dummy}
+        style={{ paddingTop: `${imageRatio * 100}%` }}
+      />
+    ) : null}
     <LazyLoad offset={150} placeholder={placeholder}>
       <img alt={alt} title={title} src={src} />
     </LazyLoad>
@@ -61,10 +69,12 @@ LazyImage.propTypes = {
   alt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
+  imageRatio: PropTypes.number,
   placeholder: PropTypes.element
 };
 
 LazyImage.defaultProps = {
+  imageRatio: 0,
   placeholder: <div className={style.lazy__loading}> Loading...</div>
 };
 
