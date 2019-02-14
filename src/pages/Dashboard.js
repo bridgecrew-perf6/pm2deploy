@@ -1,6 +1,7 @@
 import React from "react";
 import Accordion from "../templates/Accordion";
 import LazyImage from "../templates/LazyImage";
+import { setTimeout } from "timers";
 
 const data = [
   {
@@ -104,37 +105,58 @@ const soManyDataSoMuchSky = [
   "https://images.pexels.com/photos/540518/pexels-photo-540518.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
 ];
 
-const Dashboard = () => (
-  <div style={{ display: "flex", flexWrap: "wrap" }}>
-    {soManyDataSoMuchSky.map(item => (
-      <div style={{ width: "200px", background: "salmon" }}>
-        <LazyImage
-          alt="Testing Lazy"
-          title="Testing Lazy"
-          src={item}
-          imageRatio={9 / 16}
-          placeholder={<span>Loading...</span>}
-        />
-      </div>
-    ))}
-    {/* {data.map(item => (
-      <Accordion isOpen={item.isOpen}>
-        {({ toggle, isOpen }) => (
-          <div>
-            <button onClick={toggle} role="tablist">
-              {!isOpen ? "+" : "-"}
-              {item.header}
-            </button>
-            {isOpen && (
-              <div style={isOpen ? { color: "blue" } : { color: "red" }}>
-                {item.content}
-              </div>
-            )}
+const soManyDataSoMuchSky2 = soManyDataSoMuchSky.slice().reverse();
+
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: soManyDataSoMuchSky
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      console.log("asdasd");
+      this.setState({ data: soManyDataSoMuchSky2 });
+    }, 5000);
+  }
+
+  render() {
+    const { data } = this.state;
+    return (
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {data.map(item => (
+          <div style={{ width: "200px" }}>
+            <LazyImage
+              alt={item}
+              title="Testing Lazy"
+              src={item}
+              imageRatio={1 / 1}
+              onLoad={() => console.log("fired load on" + item)}
+            />
           </div>
-        )}
-      </Accordion>
-    ))} */}
-  </div>
-);
+        ))}
+        {/* {data.map(item => (
+        <Accordion isOpen={item.isOpen}>
+          {({ toggle, isOpen }) => (
+            <div>
+              <button onClick={toggle} role="tablist">
+                {!isOpen ? "+" : "-"}
+                {item.header}
+              </button>
+              {isOpen && (
+                <div style={isOpen ? { color: "blue" } : { color: "red" }}>
+                  {item.content}
+                </div>
+              )}
+            </div>
+          )}
+        </Accordion>
+      ))} */}
+      </div>
+    );
+  }
+}
 
 export default Dashboard;
