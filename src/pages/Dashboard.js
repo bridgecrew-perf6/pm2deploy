@@ -1,7 +1,7 @@
 import React from "react";
+import { setTimeout } from "timers";
 import Accordion from "../templates/Accordion";
 import LazyImage from "../templates/LazyImage";
-import { setTimeout } from "timers";
 
 const data = [
   {
@@ -105,21 +105,12 @@ const soManyDataSoMuchSky = [
   "https://images.pexels.com/photos/540518/pexels-photo-540518.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
 ];
 
-const soManyDataSoMuchSky2 = soManyDataSoMuchSky.slice().reverse();
-
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       data: soManyDataSoMuchSky
     };
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      console.log("asdasd");
-      this.setState({ data: soManyDataSoMuchSky2 });
-    }, 5000);
   }
 
   render() {
@@ -132,8 +123,8 @@ class Dashboard extends React.Component {
               alt={item}
               title="Testing Lazy"
               src={item}
-              imageRatio={1 / 1}
-              onLoad={() => console.log("fired load on" + item)}
+              imageRatioWidth={16}
+              imageRatioHeight={9}
             />
           </div>
         ))}

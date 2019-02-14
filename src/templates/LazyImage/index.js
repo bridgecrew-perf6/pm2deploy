@@ -1,24 +1,32 @@
+/* eslint-disable declaration-block-trailing-semicolon */
+
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import LazyLoad from "react-lazyload";
 import style from "./LazyImage.module.scss";
 
-/* eslint-disable declaration-block-trailing-semicolon */
-
-const LazyImageInside = ({ alt, title, src, onLoad, placeholder }) => {
+const LazyImageInside = ({
+  alt,
+  title,
+  src,
+  onLoad,
+  imageRatioWidth,
+  imageRatioHeight,
+  placeholder
+}) => {
   const placeholderSrc = img => {
     const { width, height } = img;
     return `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}"%3E%3C/svg%3E`;
   };
 
   const [loadState, setLoadState] = useState({
-    src: placeholderSrc({ width: 2, height: 1 }),
+    src: placeholderSrc({ width: imageRatioWidth, height: imageRatioHeight }),
     loaded: false
   });
 
   useEffect(() => {
     setLoadState({
-      src: placeholderSrc({ width: 2, height: 1 }),
+      src: placeholderSrc({ width: imageRatioWidth, height: imageRatioHeight }),
       loaded: false
     });
   }, [src]);
@@ -48,13 +56,21 @@ const LazyImageInside = ({ alt, title, src, onLoad, placeholder }) => {
   );
 };
 
-const LazyImage = ({ alt, title, src, placeholder, imageRatio, onLoad }) => {
+const LazyImage = ({
+  alt,
+  title,
+  src,
+  placeholder,
+  imageRatioWidth,
+  imageRatioHeight,
+  onLoad
+}) => {
   const paddingStyle = {
-    paddingTop: `${imageRatio * 100}%`
+    paddingTop: `${(imageRatioHeight / imageRatioWidth) * 100}%`
   };
   return (
     <div className={style.lazy}>
-      {imageRatio !== 0 ? (
+      {imageRatioHeight / imageRatioWidth !== 0 ? (
         <div className={style.dummy} style={paddingStyle} />
       ) : null}
       <LazyLoad offset={150} placeholder={placeholder}>
@@ -63,7 +79,8 @@ const LazyImage = ({ alt, title, src, placeholder, imageRatio, onLoad }) => {
           title={title}
           src={src}
           onLoad={onLoad}
-          imageRatio={imageRatio}
+          imageRatioWidth={imageRatioWidth}
+          imageRatioHeight={imageRatioHeight}
           placeholder={placeholder}
         />
       </LazyLoad>
@@ -75,13 +92,15 @@ LazyImage.propTypes = {
   alt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
-  imageRatio: PropTypes.number,
+  imageRatioWidth: PropTypes.number,
+  imageRatioHeight: PropTypes.number,
   placeholder: PropTypes.element,
   onLoad: PropTypes.func
 };
 
 LazyImage.defaultProps = {
-  imageRatio: 0,
+  imageRatioWidth: 0,
+  imageRatioHeight: 0,
   placeholder: <div className={style.lazy__loading}> Loading...</div>,
   onLoad: () => {}
 };
