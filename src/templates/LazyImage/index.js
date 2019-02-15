@@ -1,4 +1,4 @@
-/* eslint-disable declaration-block-trailing-semicolon */
+/* stylelint-disable declaration-block-trailing-semicolon */
 
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";

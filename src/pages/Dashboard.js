@@ -2,6 +2,7 @@ import React from "react";
 import { setTimeout } from "timers";
 import Accordion from "../templates/Accordion";
 import LazyImage from "../templates/LazyImage";
+import useOnlineStatus from "../templates/CustomHook/useOnlineStatus";
 
 const data = [
   {
@@ -105,19 +106,20 @@ const soManyDataSoMuchSky = [
   "https://images.pexels.com/photos/540518/pexels-photo-540518.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
 ];
 
-class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: soManyDataSoMuchSky
-    };
-  }
-
-  render() {
-    const { data } = this.state;
-    return (
+function Dashboard() {
+  const onlineStatus = useOnlineStatus({
+    onOnline: () => {
+      console.log("I'm Online");
+    },
+    onOffline: () => {
+      console.log("I'm Offline");
+    }
+  });
+  return (
+    <>
+      <div>You Are Currently {JSON.stringify(onlineStatus)}</div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {data.map(item => (
+        {soManyDataSoMuchSky.map(item => (
           <div style={{ width: "200px" }}>
             <LazyImage
               alt={item}
@@ -146,8 +148,8 @@ class Dashboard extends React.Component {
         </Accordion>
       ))} */}
       </div>
-    );
-  }
+    </>
+  );
 }
 
 export default Dashboard;

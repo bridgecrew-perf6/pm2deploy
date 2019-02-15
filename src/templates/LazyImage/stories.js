@@ -68,9 +68,17 @@ const soManyDataSoMuchSky = [
 ];
 
 storiesOf("LazyImage", module).add("default", () => (
-  <>
+  <div style={{ display: "flex", flexWrap: "wrap" }}>
     {soManyDataSoMuchSky.map(item => (
-      <LazyImage alt="Testing Lazy" title="Testing Lazy" src={item} />
+      <div style={{ width: "200px" }}>
+        <LazyImage
+          alt={item}
+          title="Testing Lazy"
+          src={item}
+          imageRatioWidth={16}
+          imageRatioHeight={9}
+        />
+      </div>
     ))}
-  </>
+  </div>
 ));
