@@ -3,6 +3,7 @@ import { setTimeout } from "timers";
 import Accordion from "../templates/Accordion";
 import LazyImage from "../templates/LazyImage";
 import useOnlineStatus from "../templates/CustomHook/useOnlineStatus";
+import usePageTracker from "../templates/CustomHook/usePageTracker";
 
 const data = [
   {
@@ -107,6 +108,7 @@ const soManyDataSoMuchSky = [
 ];
 
 function Dashboard() {
+  usePageTracker();
   const onlineStatus = useOnlineStatus({
     onOnline: () => {
       console.log("I'm Online");

@@ -12,7 +12,7 @@ function withSizmekTracker(WrappedComponent) {
 
         // EDIT THIS PART TO YOUR VERSA TAG
         const versaScriptContent = `var versaTag = {}; 
-                  versaTag.id = ""; 
+                  versaTag.id = "${process.env.REACT_APP_SIZMEKID}"; 
                   versaTag.sync = 0;
                   versaTag.dispType = "js"; 
                   versaTag.ptcl = "HTTPS";

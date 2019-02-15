@@ -3,4 +3,6 @@ import { storiesOf } from "@storybook/react";
 
 import GHW from "./index";
 
-storiesOf("GHW", module).add("default", () => <GHW />);
+storiesOf("GHW", module)
+  .add("default", () => <GHW />)
+  .add("secondary", () => <GHW secondaryStyle />);
