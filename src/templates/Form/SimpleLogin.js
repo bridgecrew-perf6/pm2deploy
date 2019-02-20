@@ -1,4 +1,11 @@
 import { withFormik } from "formik";
+import PropTypes from "prop-types";
+
+const defaultMessage = {
+  loginEmailRequired: "E-mail Must Be Filled",
+  loginEmailFormat: "Wrong email format",
+  loginPasswordRequired: "Must be filled"
+};
 
 const SimpleLogin = withFormik({
   mapPropsToValues: ({ email = "", password = "" }) => ({
@@ -6,16 +13,28 @@ const SimpleLogin = withFormik({
     password
   }),
 
-  validate: (values, props) => props.validate(values, props),
+  validate: (values, props) => {
+    if (props.validate === "function") return props.validate(values);
+
+    const errorMessage = { ...defaultMessage, ...props.errorMessage };
+    const errors = {};
+
+    if (!values.email) errors.email = errorMessage.loginEmailRequired;
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))
+      errors.email = errorMessage.loginEmailFormat;
+
+    if (!values.password) errors.password = errorMessage.loginPasswordRequired;
+
+    return errors;
+  },
+
   handleSubmit: async (
     values,
-    {
-      setSubmitting,
-      setStatus,
-      setError,
-      props: { loginControl, onSuccess, onError }
-    }
+    { setSubmitting, setStatus, props: { loginControl, onSuccess, onError } }
   ) => {
+    // Set the status to empty
+    setStatus({});
+
     const { data, error } = await loginControl({
       email: values.email,
       password: values.password
@@ -23,13 +42,26 @@ const SimpleLogin = withFormik({
 
     if (error) {
       onError(error);
+      // Set the status to show error
+      setStatus(error);
       setSubmitting(false);
     } else {
+      // Set the status to empty
       onSuccess(data);
+      // Set the status to show error
+      setStatus(error);
       setSubmitting(false);
     }
-  },
-  displayName: "SimpleLogin"
+  }
+  // displayName: props.formName
 });
+
+SimpleLogin.propTypes = {
+  formName: PropTypes.string.isRequired,
+  validate: PropTypes.func,
+  loginControl: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func.isRequired,
+  onError: PropTypes.func.isRequired
+};
 
 export default SimpleLogin;

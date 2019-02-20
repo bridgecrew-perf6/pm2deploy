@@ -4,7 +4,7 @@ import SimpleLogin from "../templates/Form/SimpleLogin";
 
 const Login = props => (
   <div>
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={props.handleSubmit} style={{ color: "blue" }}>
       <Field type="email" name="email" placeholder="Email" />
       {props.errors.email}
       <Field type="password" name="password" placeholder="Password" />
@@ -17,16 +17,10 @@ const LoginLogic = SimpleLogin(Login);
 
 const LoginPage = () => (
   <LoginLogic
-    validate={values => {
-      const errors = {};
-
-      if (!values.email) errors.email = "E-mail lo harus diisi";
-      else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))
-        errors.email = "Format e-mail salah";
-
-      if (!values.password) errors.password = "Kata sandi lo harus diisi";
-
-      return errors;
+    errorMessage={{
+      loginEmailRequired: "E-mail Mesti diisi",
+      loginEmailFormat: "email salah format",
+      loginPasswordRequired: "Password mesti diisi"
     }}
     loginControl={({ email, password }) => ({
       data: "success",
