@@ -119,7 +119,10 @@ function Dashboard() {
   });
   return (
     <>
-      <div>You Are Currently {JSON.stringify(onlineStatus)}</div>
+      <div>
+        You Are Currently
+        {JSON.stringify(onlineStatus)}
+      </div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {soManyDataSoMuchSky.map(item => (
           <div style={{ width: "200px" }}>

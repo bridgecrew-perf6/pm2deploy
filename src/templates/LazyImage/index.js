@@ -41,6 +41,10 @@ const LazyImageInside = ({
       onLoad();
     };
     img.src = src;
+
+    return () => {
+      img.onload = null;
+    };
   }, [src]);
 
   return (

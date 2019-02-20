@@ -7,54 +7,56 @@ const defaultMessage = {
   loginPasswordRequired: "Must be filled"
 };
 
-const SimpleLogin = withFormik({
-  mapPropsToValues: ({ email = "", password = "" }) => ({
-    email,
-    password
-  }),
+const SimpleLogin = props =>
+  withFormik({
+    mapPropsToValues: ({ email = "", password = "" }) => ({
+      email,
+      password
+    }),
 
-  validate: (values, props) => {
-    if (props.validate === "function") return props.validate(values);
+    validate: values => {
+      if (props.validate === "function") return props.validate(values);
 
-    const errorMessage = { ...defaultMessage, ...props.errorMessage };
-    const errors = {};
+      const errorMessage = { ...defaultMessage, ...props.errorMessage };
+      const errors = {};
 
-    if (!values.email) errors.email = errorMessage.loginEmailRequired;
-    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))
-      errors.email = errorMessage.loginEmailFormat;
+      if (!values.email) errors.email = errorMessage.loginEmailRequired;
+      else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))
+        errors.email = errorMessage.loginEmailFormat;
 
-    if (!values.password) errors.password = errorMessage.loginPasswordRequired;
+      if (!values.password)
+        errors.password = errorMessage.loginPasswordRequired;
 
-    return errors;
-  },
+      return errors;
+    },
 
-  handleSubmit: async (
-    values,
-    { setSubmitting, setStatus, props: { loginControl, onSuccess, onError } }
-  ) => {
-    // Set the status to empty
-    setStatus({});
-
-    const { data, error } = await loginControl({
-      email: values.email,
-      password: values.password
-    });
-
-    if (error) {
-      onError(error);
-      // Set the status to show error
-      setStatus(error);
-      setSubmitting(false);
-    } else {
+    handleSubmit: async (
+      values,
+      { setSubmitting, setStatus, props: { loginControl, onSuccess, onError } }
+    ) => {
       // Set the status to empty
-      onSuccess(data);
-      // Set the status to show error
-      setStatus(error);
-      setSubmitting(false);
-    }
-  }
-  // displayName: props.formName
-});
+      setStatus({});
+
+      const { data, error } = await loginControl({
+        email: values.email,
+        password: values.password
+      });
+
+      if (error) {
+        onError(error);
+        // Set the status to show error
+        setStatus(error);
+        setSubmitting(false);
+      } else {
+        // Set the status to empty
+        onSuccess(data);
+        // Set the status to show error
+        setStatus(error);
+        setSubmitting(false);
+      }
+    },
+    displayName: props.formName
+  });
 
 SimpleLogin.propTypes = {
   formName: PropTypes.string.isRequired,
