@@ -1,9 +1,10 @@
 import React from "react";
-import { setTimeout } from "timers";
+import { useSpring, animated } from "react-spring";
 import Accordion from "../templates/Accordion";
 import LazyImage from "../templates/LazyImage";
 import useOnlineStatus from "../templates/CustomHook/useOnlineStatus";
 import usePageTracker from "../templates/CustomHook/usePageTracker";
+import useDeviceOrientation from "../templates/CustomHook/useOrientation";
 
 const data = [
   {
@@ -107,8 +108,16 @@ const soManyDataSoMuchSky = [
   "https://images.pexels.com/photos/540518/pexels-photo-540518.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
 ];
 
+// const calc = (x, y) => [
+//   -(y - window.innerHeight / 2) / 20,
+//   (x - window.innerWidth / 2) / 20,
+//   1.1
+// ];
+
 function Dashboard() {
-  usePageTracker();
+  // usePageTracker();
+  const value = useDeviceOrientation();
+
   const onlineStatus = useOnlineStatus({
     onOnline: () => {
       console.log("I'm Online");
@@ -117,12 +126,29 @@ function Dashboard() {
       console.log("I'm Offline");
     }
   });
+  const props = useSpring({
+    xys: [0, 0, 1],
+    mass: 500,
+    tension: 350,
+    friction: 40
+  });
+  const trans = (x, y) => {
+    return `perspective(300px) rotateX(${-value.beta /
+      3}deg) rotateY(${-value.gamma / 3}deg)`;
+  };
+
   return (
     <>
       <div>
         You Are Currently
-        {JSON.stringify(onlineStatus)}
+        {trans(10, 10)}
       </div>
+      <animated.div
+        className="card"
+        // onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
+        // onMouseLeave={() => set({ xys: [0, 0, 1] })}
+        style={{ transform: props.xys.interpolate(trans) }}
+      />
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {soManyDataSoMuchSky.map(item => (
           <div style={{ width: "200px" }}>

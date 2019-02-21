@@ -4,66 +4,67 @@ import PropTypes from "prop-types";
 const defaultMessage = {
   loginEmailRequired: "E-mail Must Be Filled",
   loginEmailFormat: "Wrong email format",
-  loginPasswordRequired: "Must be filled"
+  loginPasswordRequired: "Must be filled",
+  loginCaptchaEmpty: "Captcha must be filled"
 };
 
-const SimpleLogin = props =>
-  withFormik({
-    mapPropsToValues: ({ email = "", password = "" }) => ({
-      email,
-      password
-    }),
+const SimpleLoginLogic = withFormik({
+  mapPropsToValues: ({ email = "", password = "" }) => ({
+    email,
+    password
+  }),
 
-    validate: values => {
-      if (props.validate === "function") return props.validate(values);
+  validate: (values, props) => {
+    if (props.validate === "function") return props.validate(values);
 
-      const errorMessage = { ...defaultMessage, ...props.errorMessage };
-      const errors = {};
+    const errorMessage = { ...defaultMessage, ...props.errorMessage };
+    const errors = {};
 
-      if (!values.email) errors.email = errorMessage.loginEmailRequired;
-      else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))
-        errors.email = errorMessage.loginEmailFormat;
+    if (!values.email) errors.email = errorMessage.loginEmailRequired;
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))
+      errors.email = errorMessage.loginEmailFormat;
 
-      if (!values.password)
-        errors.password = errorMessage.loginPasswordRequired;
+    if (!values.password) errors.password = errorMessage.loginPasswordRequired;
 
-      return errors;
-    },
+    if (!props.enableRecaptcha && values["g-recaptcha"])
+      errors.captcha = errorMessage.loginPasswordRequired;
 
-    handleSubmit: async (
-      values,
-      { setSubmitting, setStatus, props: { loginControl, onSuccess, onError } }
-    ) => {
+    return errors;
+  },
+
+  handleSubmit: async (
+    values,
+    { setSubmitting, setStatus, props: { loginControl, onSuccess, onError } }
+  ) => {
+    // Set the status to empty
+    setStatus({});
+
+    const { data, error } = await loginControl({
+      email: values.email,
+      password: values.password
+    });
+
+    if (error) {
+      onError(error);
+      // Set the status to show error
+      setStatus(error);
+      setSubmitting(false);
+    } else {
       // Set the status to empty
-      setStatus({});
+      onSuccess(data);
+      // Set the status to show error
+      setStatus(error);
+      setSubmitting(false);
+    }
+  }
+});
 
-      const { data, error } = await loginControl({
-        email: values.email,
-        password: values.password
-      });
-
-      if (error) {
-        onError(error);
-        // Set the status to show error
-        setStatus(error);
-        setSubmitting(false);
-      } else {
-        // Set the status to empty
-        onSuccess(data);
-        // Set the status to show error
-        setStatus(error);
-        setSubmitting(false);
-      }
-    },
-    displayName: props.formName
-  });
-
-SimpleLogin.propTypes = {
-  formName: PropTypes.string.isRequired,
+SimpleLoginLogic.propTypes = {
   validate: PropTypes.func,
+  enableRecaptcha: PropTypes.bool,
   loginControl: PropTypes.func.isRequired,
   onSuccess: PropTypes.func.isRequired,
   onError: PropTypes.func.isRequired
 };
 
-export default SimpleLogin;
+export default SimpleLoginLogic;
