@@ -2,12 +2,13 @@ import React from "react";
 import { Field } from "formik";
 import SimpleLogin from "../templates/Form/SimpleLogin";
 
-const Login = ({ handleSubmit, errors }) => (
+const Login = ({ handleSubmit, errors, isSubmitting }) => (
   <form onSubmit={handleSubmit} style={{ color: "blue" }}>
     <Field type="email" name="email" placeholder="Email" />
     {errors.email}
     <Field type="password" name="password" placeholder="Password" />
     {errors.password}
+    {isSubmitting}
     <button type="submit">Submit</button>
   </form>
 );
@@ -22,10 +23,17 @@ const LoginPage = () => (
       loginEmailFormat: "email salah format",
       loginPasswordRequired: "Password mesti diisi"
     }}
-    loginControl={({ email, password }) => ({
-      data: `success with ${email} ${password}`,
-      error: "error"
-    })}
+    loginControl={({ email, password }) =>
+      new Promise((resolve, reject) =>
+        setTimeout(
+          resolve({
+            data: `success with ${email} ${password}`,
+            error: ""
+          }),
+          5000
+        )
+      )
+    }
     onSuccess={data => console.log(data)}
     onError={error => console.log(error)}
     component={props => <Login {...props} />}

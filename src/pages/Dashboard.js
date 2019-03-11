@@ -132,10 +132,9 @@ function Dashboard() {
     tension: 350,
     friction: 40
   });
-  const trans = (x, y) => {
-    return `perspective(300px) rotateX(${-value.beta /
-      3}deg) rotateY(${-value.gamma / 3}deg)`;
-  };
+  const trans = (x, y) =>
+    `perspective(300px) rotateX(${-value.beta / 3}deg) rotateY(${-value.gamma /
+      3}deg)`;
 
   return (
     <>

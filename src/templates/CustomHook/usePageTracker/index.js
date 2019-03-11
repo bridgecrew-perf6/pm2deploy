@@ -2,10 +2,9 @@ import { useEffect } from "react";
 
 function usePageTracker() {
   useEffect(() => {
-    const id = process.env.REACT_APP_SIZMEKID;
-    if (!id) {
-      return;
-    }
+    const sizmekId = process.env.REACT_APP_SIZMEKID;
+    if (!sizmekId) throw Error("Sizmek ID is not defined");
+
     const oldSizmek = document.getElementById("ebOneTagUrlId");
     if (oldSizmek) oldSizmek.parentNode.removeChild(oldSizmek);
 
@@ -14,7 +13,7 @@ function usePageTracker() {
 
     // EDIT THIS PART TO YOUR VERSA TAG
     const versaScriptContent = `var versaTag = {}; 
-                  versaTag.id = "${process.env.REACT_APP_SIZMEKID}"; 
+                  versaTag.id = "${sizmekId}"; 
                   versaTag.sync = 0;
                   versaTag.dispType = "js"; 
                   versaTag.ptcl = "HTTPS";

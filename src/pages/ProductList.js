@@ -1,7 +1,7 @@
 import React from "react";
 import PlainList from "../templates/PlainList";
 import Pagination from "../templates/Pagination";
-import { getAllListing } from "../api";
+import { getAllListing, getListing } from "../api";
 
 const ProductList = () => (
   <>

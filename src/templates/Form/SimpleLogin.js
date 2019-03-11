@@ -1,5 +1,7 @@
+import React from "react";
 import { withFormik } from "formik";
 import PropTypes from "prop-types";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const defaultMessage = {
   loginEmailRequired: "E-mail Must Be Filled",
@@ -7,6 +9,8 @@ const defaultMessage = {
   loginPasswordRequired: "Must be filled",
   loginCaptchaEmpty: "Captcha must be filled"
 };
+
+const recaptchaRef = React.createRef();
 
 const SimpleLoginLogic = withFormik({
   mapPropsToValues: ({ email = "", password = "" }) => ({
