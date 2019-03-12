@@ -26,7 +26,6 @@ const App = () => (
       >
         {/* <Switch> */}
         <Route exact path="/" component={withSizmekTracker(Dashboard)} />
-        <Route path="/acs" component={ACS} />
         <Route path="/product" render={() => <ProductList />} />
         <Route path="/product2" render={() => <ProductList2 />} />
         <Route path="/login" component={Login} />

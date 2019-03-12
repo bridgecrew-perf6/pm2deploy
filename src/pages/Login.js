@@ -1,42 +1,45 @@
 import React from "react";
 import { Field } from "formik";
-import SimpleLogin from "../templates/Form/SimpleLogin";
+import withSimpleLogin, {
+  withRecaptcha
+} from "../templates/Form/withSimpleLogin";
 
-const Login = ({ handleSubmit, errors, isSubmitting }) => (
-  <form onSubmit={handleSubmit} style={{ color: "blue" }}>
-    <Field type="email" name="email" placeholder="Email" />
-    {errors.email}
-    <Field type="password" name="password" placeholder="Password" />
-    {errors.password}
-    {isSubmitting}
-    <button type="submit">Submit</button>
-  </form>
+const LoginView = withSimpleLogin(
+  withRecaptcha(({ handleSubmit, values, errors, touched, isSubmitting }) => (
+    <form onSubmit={handleSubmit}>
+      {JSON.stringify(values)}
+      <Field type="email" name="email" placeholder="Email" />
+      {touched.email && errors.email}
+      <Field type="password" name="password" placeholder="Password" />
+      {touched.password && errors.password}
+      <button type="submit">Submit</button>
+    </form>
+  ))
 );
 
-const LoginLogic = SimpleLogin(Login);
-
 const LoginPage = () => (
-  <LoginLogic
-    enableRecaptcha
+  <LoginView
     errorMessage={{
       loginEmailRequired: "E-mail Mesti diisi",
       loginEmailFormat: "email salah format",
       loginPasswordRequired: "Password mesti diisi"
     }}
-    loginControl={({ email, password }) =>
-      new Promise((resolve, reject) =>
+    loginControl={formData => {
+      return new Promise((resolve, reject) =>
         setTimeout(
           resolve({
-            data: `success with ${email} ${password}`,
+            data: `success with ${formData.email} ${formData.password}, ${
+              formData["g-recaptcha"]
+            }`,
             error: ""
           }),
           5000
         )
-      )
-    }
+      );
+    }}
     onSuccess={data => console.log(data)}
     onError={error => console.log(error)}
-    component={props => <Login {...props} />}
+    onErrorJS={error => console.log(error)}
   />
 );
 export default LoginPage;

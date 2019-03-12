@@ -12,7 +12,7 @@ const ProductList = () => (
         itemComponent={({ id, name }) => <li key={id}>{`${id}, ${name}`}</li>}
         // skeletonComponent={() => <li>asd</li>}
         loadingComponent={() => <div>Loading...</div>}
-        dataSource={() => getAllListing()}
+        dataSource={() => getListing({ start: 20, length: 20 })}
       />
     </ul>
 

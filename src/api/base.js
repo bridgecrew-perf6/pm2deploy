@@ -27,7 +27,8 @@ const RootService = new ApiService({
   mode: "cors",
   headers: {
     "Content-Type": "application/json; charset=utf-8"
-  }
+  },
+  options: { timeout: 1000 }
 });
 
 // On request success

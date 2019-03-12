@@ -10,9 +10,7 @@ const defaultMessage = {
   loginCaptchaEmpty: "Captcha must be filled"
 };
 
-const recaptchaRef = React.createRef();
-
-const SimpleLoginLogic = withFormik({
+const withSimpleLogin = withFormik({
   mapPropsToValues: ({ email = "", password = "" }) => ({
     email,
     password
@@ -30,25 +28,34 @@ const SimpleLoginLogic = withFormik({
 
     if (!values.password) errors.password = errorMessage.loginPasswordRequired;
 
-    if (!props.enableRecaptcha && values["g-recaptcha"])
-      errors.captcha = errorMessage.loginPasswordRequired;
+    // if (!props.enableRecaptcha && !values["g-recaptcha"])
+    //   errors.captcha = errorMessage.loginPasswordRequired;
 
     return errors;
   },
 
   handleSubmit: async (
     values,
-    { setSubmitting, setStatus, props: { loginControl, onSuccess, onError } }
+    {
+      setSubmitting,
+      setStatus,
+      props: { loginControl, onSuccess, onError, onErrorJS }
+    }
   ) => {
     // Set the status to empty
     setStatus({});
 
-    const { data, error } = await loginControl({
+    const formData = {
       email: values.email,
-      password: values.password
-    });
+      password: values.password,
+      "g-recaptcha": values["g-recaptcha"]
+    };
 
-    if (error) {
+    const { data, error, errorJS } = await loginControl({ ...formData });
+
+    if (errorJS) {
+      onErrorJS(errorJS);
+    } else if (error) {
       onError(error);
       // Set the status to show error
       setStatus(error);
@@ -63,12 +70,47 @@ const SimpleLoginLogic = withFormik({
   }
 });
 
-SimpleLoginLogic.propTypes = {
+withSimpleLogin.propTypes = {
   validate: PropTypes.func,
   enableRecaptcha: PropTypes.bool,
   loginControl: PropTypes.func.isRequired,
   onSuccess: PropTypes.func.isRequired,
-  onError: PropTypes.func.isRequired
+  onError: PropTypes.func.isRequired,
+  onErrorJS: PropTypes.func.isRequired
 };
 
-export default SimpleLoginLogic;
+export const withRecaptcha = WrappedComponent =>
+  class extends React.Component {
+    constructor(props) {
+      super(props);
+      this.recaptchaRef = React.createRef();
+    }
+
+    render() {
+      const { handleSubmit, setFieldValue } = this.props;
+      const newProps = {
+        ...this.props,
+        handleSubmit: e => {
+          e.preventDefault();
+          this.recaptchaRef.current.execute();
+          handleSubmit(e);
+        }
+      };
+
+      return (
+        <>
+          <WrappedComponent {...newProps} enableRecaptcha />
+          <ReCAPTCHA
+            ref={this.recaptchaRef}
+            sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_SITE_KEY}
+            size="invisible"
+            onChange={value => {
+              setFieldValue("g-recaptcha", value);
+            }}
+          />
+        </>
+      );
+    }
+  };
+
+export default withSimpleLogin;

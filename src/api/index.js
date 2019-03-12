@@ -2,7 +2,8 @@
 /* eslint-disable guard-for-in */
 import MainService from "./base";
 
-const handleGeneralError = error => console.log("General Error");
+const handleGeneralError = error => console.log("General Error", error);
+
 const handleGETRequest = async (api, { ...body }) => {
   const {
     result: {
@@ -43,7 +44,16 @@ const handlePOSTRequest = async (api, body, asFormData = false) => {
       body: { data, error }
     }
   } = await MainService(api)
-    .doRequest({ body: actualBody })
+    .doRequest({
+      body: actualBody,
+      hooks: {
+        before({ payload, next }) {
+          const newPayload = { ...payload };
+          if (asFormData) delete newPayload.headers["Content-Type"];
+          next(newPayload);
+        }
+      }
+    })
     .then(result => result)
     .catch(errorGeneral => {
       handleGeneralError(errorGeneral);
