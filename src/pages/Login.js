@@ -5,9 +5,11 @@ import withSimpleLogin, {
 } from "../templates/Form/withSimpleLogin";
 
 const LoginView = withSimpleLogin(
-  withRecaptcha(({ handleSubmit, values, errors, touched, isSubmitting }) => (
+  withRecaptcha(({ handleSubmit, values, errors, touched }) => (
     <form onSubmit={handleSubmit}>
       {JSON.stringify(values)}
+      {JSON.stringify(touched)}
+      {JSON.stringify(errors)}
       <Field type="email" name="email" placeholder="Email" />
       {touched.email && errors.email}
       <Field type="password" name="password" placeholder="Password" />

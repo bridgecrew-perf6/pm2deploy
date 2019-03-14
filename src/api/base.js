@@ -98,6 +98,7 @@ const RefreshTokenService = RootService.extend({
   body: {
     name: process.env.REACT_APP_NAME,
     device_type: process.env.REACT_APP_DEVICE_TYPE,
+    secret_key: process.env.REACT_APP_SECRET_KEY,
     token: Cookies.get("token"),
     refresh_token: Cookies.get("refresh-token")
   },

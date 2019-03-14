@@ -28,9 +28,6 @@ const withSimpleLogin = withFormik({
 
     if (!values.password) errors.password = errorMessage.loginPasswordRequired;
 
-    // if (!props.enableRecaptcha && !values["g-recaptcha"])
-    //   errors.captcha = errorMessage.loginPasswordRequired;
-
     return errors;
   },
 
@@ -72,7 +69,6 @@ const withSimpleLogin = withFormik({
 
 withSimpleLogin.propTypes = {
   validate: PropTypes.func,
-  enableRecaptcha: PropTypes.bool,
   loginControl: PropTypes.func.isRequired,
   onSuccess: PropTypes.func.isRequired,
   onError: PropTypes.func.isRequired,
@@ -87,13 +83,24 @@ export const withRecaptcha = WrappedComponent =>
     }
 
     render() {
-      const { handleSubmit, setFieldValue } = this.props;
+      const {
+        validateForm,
+        submitForm,
+        handleSubmit,
+        setFieldValue,
+        isValid,
+        values
+      } = this.props;
+
+      console.log(this.props);
       const newProps = {
         ...this.props,
         handleSubmit: e => {
           e.preventDefault();
-          this.recaptchaRef.current.execute();
-          handleSubmit(e);
+          validateForm(values);
+          // submitForm();
+          if (isValid) this.recaptchaRef.current.execute();
+          if (values["g-recaptcha"] !== undefined) handleSubmit(e);
         }
       };
 
@@ -106,6 +113,7 @@ export const withRecaptcha = WrappedComponent =>
             size="invisible"
             onChange={value => {
               setFieldValue("g-recaptcha", value);
+              handleSubmit();
             }}
           />
         </>
