@@ -1,7 +1,7 @@
 import React from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 
-export const withRecaptcha = WrappedComponent =>
+const withRecaptcha = WrappedComponent =>
   class extends React.Component {
     constructor(props) {
       super(props);
@@ -11,9 +11,9 @@ export const withRecaptcha = WrappedComponent =>
     render() {
       const {
         validateForm,
-        submitForm,
         handleSubmit,
         setFieldValue,
+        setFieldTouched,
         isValid,
         values
       } = this.props;
@@ -23,9 +23,9 @@ export const withRecaptcha = WrappedComponent =>
         handleSubmit: e => {
           e.preventDefault();
           validateForm(values);
-          submitForm();
           if (isValid) this.recaptchaRef.current.execute();
-          // if (values["g-recaptcha"] !== undefined) handleSubmit(e);
+          else if (values["g-recaptcha"] !== undefined) handleSubmit(e);
+          else Object.keys(values).map(key => setFieldTouched(key, true));
         }
       };
 
