@@ -87,10 +87,7 @@ Pagination.propTypes = {
   nextArrowButton: PropTypes.shape({
     normal: PropTypes.func,
     disabled: PropTypes.func
-  }),
-
-  /** Function for Dot Component */
-  dotComponent: PropTypes.func
+  })
 };
 
 Pagination.defaultProps = {
@@ -107,8 +104,7 @@ Pagination.defaultProps = {
   nextArrowButton: {
     normal: () => <span>{">"}</span>,
     disabled: () => <span>{">dis"}</span>
-  },
-  dotComponent: () => <span>...</span>
+  }
 };
 
 export default Pagination;

@@ -85,24 +85,25 @@ export const withRecaptcha = WrappedComponent =>
     render() {
       const {
         validateForm,
-        submitForm,
         handleSubmit,
         setFieldValue,
+        setFieldTouched,
         isValid,
         values
       } = this.props;
 
-      console.log(this.props);
       const newProps = {
         ...this.props,
         handleSubmit: e => {
           e.preventDefault();
           validateForm(values);
-          // submitForm();
           if (isValid) this.recaptchaRef.current.execute();
-          if (values["g-recaptcha"] !== undefined) handleSubmit(e);
+          else if (values["g-recaptcha"] !== undefined) handleSubmit(e);
+          else Object.keys(values).map(key => setFieldTouched(key, true));
         }
       };
+
+      // console.log(newProps.handleSubmit);
 
       return (
         <>

@@ -5,16 +5,19 @@ import withSimpleLogin, {
 } from "../templates/Form/withSimpleLogin";
 
 const LoginView = withSimpleLogin(
-  withRecaptcha(({ handleSubmit, values, errors, touched }) => (
+  withRecaptcha(({ handleSubmit, handleReset, values, errors, touched }) => (
     <form onSubmit={handleSubmit}>
-      {JSON.stringify(values)}
-      {JSON.stringify(touched)}
-      {JSON.stringify(errors)}
+      <div>{JSON.stringify(values)}</div>
+      <div>{JSON.stringify(touched)}</div>
+      <div>{JSON.stringify(errors)}</div>
       <Field type="email" name="email" placeholder="Email" />
       {touched.email && errors.email}
       <Field type="password" name="password" placeholder="Password" />
       {touched.password && errors.password}
       <button type="submit">Submit</button>
+      <button type="button" onClick={handleReset}>
+        Reset
+      </button>
     </form>
   ))
 );
@@ -26,8 +29,8 @@ const LoginPage = () => (
       loginEmailFormat: "email salah format",
       loginPasswordRequired: "Password mesti diisi"
     }}
-    loginControl={formData => {
-      return new Promise((resolve, reject) =>
+    loginControl={formData =>
+      new Promise((resolve, reject) =>
         setTimeout(
           resolve({
             data: `success with ${formData.email} ${formData.password}, ${
@@ -37,8 +40,8 @@ const LoginPage = () => (
           }),
           5000
         )
-      );
-    }}
+      )
+    }
     onSuccess={data => console.log(data)}
     onError={error => console.log(error)}
     onErrorJS={error => console.log(error)}
