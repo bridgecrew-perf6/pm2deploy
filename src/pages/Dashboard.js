@@ -3,7 +3,7 @@ import { useSpring, animated } from "react-spring";
 import Accordion from "../templates/Accordion";
 import LazyImage from "../templates/LazyImage";
 import useOnlineStatus from "../templates/CustomHook/useOnlineStatus";
-import usePageTracker from "../templates/CustomHook/usePageTracker";
+import useSizmekTracker from "../templates/CustomHook/useSizmekTracker";
 import useDeviceOrientation from "../templates/CustomHook/useOrientation";
 
 const data = [
@@ -115,7 +115,7 @@ const soManyDataSoMuchSky = [
 // ];
 
 function Dashboard() {
-  // usePageTracker();
+  // useSizmekTracker();
   const value = useDeviceOrientation();
 
   const onlineStatus = useOnlineStatus({

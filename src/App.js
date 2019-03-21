@@ -8,7 +8,6 @@ import Dashboard from "./pages/Dashboard";
 import Error404 from "./pages/Error404";
 import ProductList from "./pages/ProductList";
 import Header from "./components/Header/Header";
-import ACS from "./templates/ACS/ACS";
 import withSizmekTracker from "./templates/Tracker/SizmekTracker";
 
 // const ProductList = lazy(() => import("./pages/ProductList"));

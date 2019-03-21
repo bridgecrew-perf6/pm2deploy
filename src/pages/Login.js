@@ -1,15 +1,11 @@
 import React from "react";
 import { Field } from "formik";
-import withSimpleLogin, {
-  withRecaptcha
-} from "../templates/Form/withSimpleLogin";
+import withSimpleLogin from "../templates/Form/withSimpleLogin";
+import withRecaptcha from "../templates/Form/withRecaptcha";
 
 const LoginView = withSimpleLogin(
-  withRecaptcha(({ handleSubmit, handleReset, values, errors, touched }) => (
+  withRecaptcha(({ handleSubmit, handleReset, errors, touched }) => (
     <form onSubmit={handleSubmit}>
-      <div>{JSON.stringify(values)}</div>
-      <div>{JSON.stringify(touched)}</div>
-      <div>{JSON.stringify(errors)}</div>
       <Field type="email" name="email" placeholder="Email" />
       {touched.email && errors.email}
       <Field type="password" name="password" placeholder="Password" />
