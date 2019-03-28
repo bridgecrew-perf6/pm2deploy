@@ -7,6 +7,7 @@
     "@apicase/adapter-fetch": "^0.15.1",
     "@apicase/core": "^0.17.0",
     "@apicase/services": "^0.8.1",
+    "@storybook/react": "^5.0.3",
     "@tippy.js/react": "^1.1.1",
     "connected-react-router": "^4.5.0",
     "dotenv": "^6.2.0",
@@ -31,6 +32,7 @@
     "react-webcam": "^1.1.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "source-map-explorer": "^1.8.0",
     "tippy.js": "^3.4.1",
     "xstate": "^4.3.3"
   },
@@ -38,7 +40,6 @@
     "@storybook/addon-actions": "^5.0.3",
     "@storybook/addon-info": "^5.0.3",
     "@storybook/addon-viewport": "^5.0.3",
-    "@storybook/react": "^5.0.3",
     "@storybook/theming": "^5.0.3",
     "@svgr/cli": "^2.4.1",
     "babel-cli": "^6.26.0",
@@ -55,8 +56,7 @@
     "prettier": "^1.16.4",
     "react-scripts": "^2.1.8",
     "stylelint": "^9.10.1",
-    "stylelint-config-standard": "^18.2.0",
-    "webpack-bundle-analyzer": "^3.1.0"
+    "stylelint-config-standard": "^18.2.0"
   },
   "scripts": {
     "lint:js": "eslint src",
@@ -66,8 +66,10 @@
     "build-js": "react-scripts build",
     "backup-build-js": "node build.js",
     "copy-to-deploy": "cpx 'build/**/*' build_deploy -C",
+    "analyze": "source-map-explorer 'build_deploy/static/js/*.js'",
     "start-js": "react-scripts start",
     "start": "npm run start-js",
+    "start-secure": "HTTPS=true npm run start-js",
     "build": "npm run build-icon && npm run build-js && npm run copy-to-deploy",
     "deploy": "node server.js",
     "storybook": "start-storybook -p 9001 -c .storybook -s ./public",
