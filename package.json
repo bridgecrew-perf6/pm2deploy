@@ -3,11 +3,13 @@
   "author": "Aditya Pratama Nur - Weekend",
   "version": "1.0.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@apicase/adapter-fetch": "^0.15.1",
     "@apicase/core": "^0.17.0",
     "@apicase/services": "^0.8.1",
     "@storybook/react": "^5.0.3",
+    "@storybook/addon-actions": "^5.0.3",
     "@tippy.js/react": "^1.1.1",
     "connected-react-router": "^4.5.0",
     "dotenv": "^6.2.0",
@@ -37,7 +39,6 @@
     "xstate": "^4.3.3"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.0.3",
     "@storybook/addon-info": "^5.0.3",
     "@storybook/addon-viewport": "^5.0.3",
     "@storybook/theming": "^5.0.3",
