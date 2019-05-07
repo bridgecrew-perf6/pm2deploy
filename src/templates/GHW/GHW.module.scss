@@ -85,6 +85,13 @@ $ghw-bg-secondary: #fff;
   }
 }
 
+.ghw--fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 .ghw__nostyle {
   color: inherit;
   text-decoration: none;

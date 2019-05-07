@@ -8,7 +8,6 @@ import Dashboard from "./pages/Dashboard";
 import Error404 from "./pages/Error404";
 import ProductList from "./pages/ProductList";
 import Header from "./components/Header/Header";
-import withSizmekTracker from "./templates/Tracker/SizmekTracker";
 
 // const ProductList = lazy(() => import("./pages/ProductList"));
 const ProductList2 = lazy(() => import("./pages/ProductList2"));
@@ -24,7 +23,7 @@ const App = () => (
         className="router__wrapper"
       >
         {/* <Switch> */}
-        <Route exact path="/" component={withSizmekTracker(Dashboard)} />
+        <Route exact path="/" component={Dashboard} />
         <Route path="/product" render={() => <ProductList />} />
         <Route path="/product2" render={() => <ProductList2 />} />
         <Route path="/login" component={Login} />

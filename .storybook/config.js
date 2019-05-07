@@ -1,4 +1,5 @@
 import { configure, addDecorator } from "@storybook/react";
+import "../src/scss/global.scss";
 import { withInfo } from "@storybook/addon-info";
 
 const req = require.context("../src", true, /.stories.js$/);
