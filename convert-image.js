@@ -3,18 +3,16 @@ const input = "build_deploy/assets/**/*.{jpg,JPG,jpeg,JPEG,png}";
 const output = "build_deploy/assets/";
 
 const imagemin = require("imagemin");
-const mozJpeg = require("imagemin-mozjpeg");
-const optiPNG = require("imagemin-optipng");
+const webp = require("imagemin-webp");
 
 imagemin([input], output, {
   use: [
-    mozJpeg({
-      quality: 82
-    }),
-    optiPNG({ optimizationLevel: 4 })
+    webp({
+      quality: 75
+    })
   ]
-}).then(function(a) {
-  console.log("Public images have been compressed!");
+}).then(function() {
+  console.log("Public images has been converted to WebP!");
 });
 
 const inputStatic = "build_deploy/static/media/**/*.{jpg,JPG,jpeg,JPEG,png}";
@@ -22,11 +20,10 @@ const outputStatic = "build_deploy/static/media/";
 
 imagemin([inputStatic], outputStatic, {
   use: [
-    mozJpeg({
-      quality: 82
-    }),
-    optiPNG({ optimizationLevel: 4 })
+    webp({
+      quality: 75
+    })
   ]
-}).then(function(a) {
-  console.log("Static images have been compressed!");
+}).then(function() {
+  console.log("Static images has been converted to WebP!");
 });
