@@ -23,3 +23,13 @@
   - [npm test](#npm-test)
   - [npm run build](#npm-run-build)
   - [npm run eject](#npm-run-eject)
+
+## Image
+
+Change how Image Compression works
+
+1. Automatically compress (.jpg, .png, .gif, .svg) when run build
+2. Automatically convert (.jpg, .png) to (.webp) when run build
+3. Allow <Image> component to use props for (.webp) src and normal (.jpg, .png, etc) src
+4. Make <Image> component to use (.webp) format automatically from provided normal (.jpg, .png, etc) src filename (if .webp not available during development)
+5. Make <Image> component to automatically fallback to normal (.jpg, .png, etc) if (.webp) is not exist (if .webp not available during development)
