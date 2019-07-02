@@ -1,57 +1,46 @@
 /* stylelint-disable declaration-block-trailing-semicolon */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-class Image extends React.PureComponent {
-  state = {
-    webpSrc: ""
-  };
+const generateWebP = src => {
+  if (typeof src === "string")
+    return `
+      ${src
+        .split(".")
+        .slice(0, -1)
+        .join(".")}.webp
+    `;
 
-  componentDidMount() {
-    const { src } = this.props;
+  return "";
+};
 
-    this.setState({
-      webpSrc: this.generateWebP(src)
-    });
-  }
+const Image = ({ alt, title, webpSrc, src, ...props }) => {
+  const imageWebp = webpSrc !== undefined ? webpSrc : generateWebP(src);
+  const [errorWebp, setErrorWebp] = useState(false);
 
-  generateWebP = src => {
-    if (typeof src === "string")
-      return `
-        ${src
-          .split(".")
-          .slice(0, -1)
-          .join(".")}.webp
-      `;
+  useEffect(() => {
+    setErrorWebp(false);
+  }, [src, webpSrc]);
 
-    return "";
-  };
-
-  render() {
-    const { alt, title, src } = this.props;
-    const { webpSrc } = this.state;
-    let imageWebp;
-    return (
-      <picture onError={() => imageWebp.remove()}>
-        <source
-          srcSet={webpSrc}
-          type="image/webp"
-          ref={el => {
-            imageWebp = el;
-          }}
-        />
-        <source srcSet={src} />
-        <img src={src} title={title} alt={alt} />
-      </picture>
-    );
-  }
-}
+  return (
+    <picture onError={() => setErrorWebp(true)} {...props}>
+      {errorWebp || <source srcSet={imageWebp} type="image/webp" />}
+      <source srcSet={src} />
+      <img src={src} title={title} alt={alt} {...props} />
+    </picture>
+  );
+};
 
 Image.propTypes = {
   alt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired
+  src: PropTypes.string.isRequired,
+  webpSrc: PropTypes.string
+};
+
+Image.defaultProps = {
+  webpSrc: undefined
 };
 
 export default Image;
