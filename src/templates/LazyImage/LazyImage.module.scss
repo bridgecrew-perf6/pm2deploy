@@ -12,7 +12,8 @@
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 0.35s ease-in-out;
+    transition: opacity 0.3s linear;
+    will-change: opacity;
   }
 
   .isloaded {

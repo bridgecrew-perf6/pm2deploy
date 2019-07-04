@@ -36,27 +36,27 @@ const LazyImageInside = ({
 }) => {
   const imageWebp = webpSrc !== undefined ? webpSrc : generateWebP(src);
   const [errorWebp, setErrorWebp] = useState(false);
-
-  const [loadState, setLoadState] = useState({
-    src: placeholderSrc({ width: imageRatioWidth, height: imageRatioHeight }),
-    loaded: false
-  });
+  const [loadState, setLoadState] = useState(false);
+  const [srcState, setSrcState] = useState(
+    placeholderSrc({ width: imageRatioWidth, height: imageRatioHeight })
+  );
 
   useEffect(() => {
-    setLoadState({
-      src: placeholderSrc({ width: imageRatioWidth, height: imageRatioHeight }),
-      loaded: false
-    });
+    setSrcState(
+      placeholderSrc({ width: imageRatioWidth, height: imageRatioHeight })
+    );
+    setLoadState(false);
     setErrorWebp(false);
   }, [src, webpSrc]);
 
   useEffect(() => {
+    setTimeout(() => setLoadState(true), 300);
+  }, [srcState]);
+
+  useEffect(() => {
     const img = new Image();
     img.onload = () => {
-      setLoadState({
-        src: !errorWebp ? imageWebp : src,
-        loaded: true
-      });
+      setSrcState(!errorWebp ? imageWebp : src);
       onLoad();
     };
     img.onerror = () => {
@@ -78,8 +78,8 @@ const LazyImageInside = ({
         <img
           alt={alt}
           title={title}
-          src={loadState.src}
-          className={`${className} ${loadState.loaded ? style.isloaded : ""}`}
+          src={srcState}
+          className={`${className} ${loadState ? style.isloaded : ""}`}
           {...props}
         />
       </picture>
@@ -131,6 +131,7 @@ LazyImage.propTypes = {
   imageRatioWidth: PropTypes.number,
   imageRatioHeight: PropTypes.number,
   placeholder: PropTypes.element,
+  className: PropTypes.string,
   onLoad: PropTypes.func
 };
 
@@ -139,6 +140,7 @@ LazyImage.defaultProps = {
   imageRatioHeight: 0,
   placeholder: <div className={style.lazy__loading}> Loading...</div>,
   webpSrc: undefined,
+  className: "",
   onLoad: () => {}
 };
 
