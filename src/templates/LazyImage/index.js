@@ -72,6 +72,8 @@ const LazyImageInside = ({
 
   return (
     <>
+      {/* {!loadState.loaded ? placeholder : null} */}
+      {placeholder}
       <picture {...props}>
         <img
           alt={alt}
@@ -81,7 +83,6 @@ const LazyImageInside = ({
           {...props}
         />
       </picture>
-      {!loadState.loaded ? placeholder : null}
     </>
   );
 };
