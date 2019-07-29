@@ -1,0 +1,23 @@
+@import "../../scss/variables/_fonts.scss";
+
+$color-red: #c91212;
+$color-dark-red: #6f0505;
+
+.Heading {
+  font-family: $font-barlow;
+  font-weight: $font-black;
+  color: $color-red;
+  line-height: 1.15;
+  text-shadow: 1px 1px 0.5px $color-dark-red, 1.2px 1.2px 0.5px $color-dark-red,
+    1.4px 1.4px 0.5px $color-dark-red, 1.6px 1.6px 0.5px $color-dark-red,
+    1.8px 1.8px 0.5px $color-dark-red, 2px 2px 0.5px $color-dark-red;
+}
+
+.Heading.large {
+  font-size: 64px;
+}
+
+.Heading.center {
+  text-align: center;
+  margin: 0 auto;
+}

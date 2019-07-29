@@ -1,0 +1,58 @@
+.Header {
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.Header.gap {
+  margin: 40px;
+}
+
+.Header__wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  background: #fff;
+}
+
+.Header__logo {
+  max-width: 160px;
+  padding: 15px 20px;
+  height: 100%;
+
+  img {
+    max-width: 100%;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.025);
+  }
+}
+
+.Header__login {
+  padding: 15px 20px;
+  height: 100%;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .HL__text,
+  .HL__icon {
+    height: 100%;
+    margin: 0 10px;
+  }
+
+  .HL__icon {
+    width: 40px;
+    height: 40px;
+    background: red;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.025);
+  }
+}

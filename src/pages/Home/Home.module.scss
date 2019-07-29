@@ -1,0 +1,25 @@
+@import "../../scss/global.scss";
+
+.Home__challenge {
+  text-align: center;
+
+  .subtitle {
+    font-size: 24px;
+    line-height: 1.2;
+    color: #830000;
+    font-family: $font-barlow;
+    font-weight: $font-medium;
+    font-style: italic;
+  }
+}
+
+.heading {
+  text-align: center;
+  padding: 12px 0;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.Home__inspirasi {
+  background: #efefef;
+}

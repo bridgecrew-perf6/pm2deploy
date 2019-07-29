@@ -1,4 +1,5 @@
 @import "~normalize.css/normalize";
+@import "./variables/fonts";
 
 * {
   box-sizing: border-box;
@@ -8,27 +9,25 @@
   display: none;
 }
 
-.router__wrapper {
-  position: relative;
+body {
+  font-family: $font-montserrat;
 }
 
-.router__wrapper > div {
-  position: absolute;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.card {
-  width: 20ch;
-  height: 20ch;
-  background: grey;
-  border-radius: 5px;
-  background-image: url(https://drscdn.500px.org/photo/435236/q%3D80_m%3D1500/v2?webp=true&sig=67031bdff6f582f3e027311e2074be452203ab637c0bd21d89128844becf8e40);
-  background-size: cover;
-  background-position: center center;
-  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
-  transition: box-shadow 0.5s;
-  will-change: transform;
+button {
+  appearance: none;
+  -webkit-appearance: none;
 }
 
-.card:hover {
-  box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.4);
+.G__content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.G__content.full {
+  max-width: 100%;
 }
