@@ -1,6 +1,6 @@
 /* eslint-disable */
 const input = "build_deploy/assets/**/*.{jpg,JPG,jpeg,JPEG,png,svg,gif}";
-const output = "build_deploy/assets/";
+const output = "build_deploy/assets/**/*";
 
 const imagemin = require("imagemin");
 const mozJpeg = require("imagemin-mozjpeg");
@@ -22,7 +22,7 @@ imagemin([input], output, {
 });
 
 const inputStatic = "build_deploy/static/media/**/*.{jpg,JPG,jpeg,JPEG,png}";
-const outputStatic = "build_deploy/static/media/";
+const outputStatic = "build_deploy/static/media/**/*";
 
 imagemin([inputStatic], outputStatic, {
   use: [

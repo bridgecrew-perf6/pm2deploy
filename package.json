@@ -65,7 +65,7 @@
     "lint:scss": "stylelint '**/*.scss' --config=.stylelintrc.json",
     "lint": "npm-run-all lint:*",
     "build-icon": "svgr --icon --replace-attr-values '#231f20=currentColor' --out-dir src/components/Icon/assets/build/ src/components/Icon/assets/src/",
-    "build-js": "GENERATE_SOURCEMAP=true react-scripts build",
+    "build-js": "GENERATE_SOURCEMAP=false react-scripts build",
     "backup-build-js": "node build.js",
     "compress-image": "node compress-image.js",
     "convert-image": "node convert-image.js",
