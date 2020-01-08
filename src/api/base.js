@@ -1,18 +1,32 @@
 import { ApiService, ApiTree } from "@apicase/services";
 import fetch from "@apicase/adapter-fetch";
-import Fingerprint2 from "fingerprintjs2";
+// import Fingerprint2 from "fingerprintjs2";
 import Cookies from "js-cookie";
 import apiList from "./list";
 
+const generateRandomString = length => {
+  let text = "";
+  const character =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (let i = 0; i < length; i += 1)
+    text += character.charAt(Math.floor(Math.random() * character.length));
+
+  return text;
+};
+
 const getDeviceId = new Promise(resolve => {
+  const deviceId = generateRandomString(36);
   if (window.requestIdleCallback) {
     requestIdleCallback(() => {
-      new Fingerprint2().get(result => resolve(result));
+      resolve(deviceId);
+      // new Fingerprint2().get(result => resolve(result));
     });
   } else {
-    setTimeout(() => {
-      new Fingerprint2().get(result => resolve(result));
-    }, 500);
+    resolve(deviceId);
+    // setTimeout(() => {
+    // new Fingerprint2().get(result => resolve(result));
+    // }, 500);
   }
 });
 
@@ -27,7 +41,8 @@ const RootService = new ApiService({
   mode: "cors",
   headers: {
     "Content-Type": "application/json; charset=utf-8"
-  }
+  },
+  options: { timeout: 1000 }
 });
 
 // On request success
@@ -97,6 +112,7 @@ const RefreshTokenService = RootService.extend({
   body: {
     name: process.env.REACT_APP_NAME,
     device_type: process.env.REACT_APP_DEVICE_TYPE,
+    secret_key: process.env.REACT_APP_SECRET_KEY,
     token: Cookies.get("token"),
     refresh_token: Cookies.get("refresh-token")
   },
@@ -147,7 +163,8 @@ const MainService = new ApiTree(RootService, [
         retry(newPayload);
       },
       async done({ result, fail, next }) {
-        // if (result.body.error.code !== 402) return next(result);
+        if (result.body.error.code !== 402 && result.body.error.code !== 406)
+          return next(result);
         const errorMessage = result.body.error.message;
         if (errorMessage === "Please provide correct token!") {
           const {
@@ -155,7 +172,7 @@ const MainService = new ApiTree(RootService, [
             result: tokenResult
           } = await GetTokenService.doSingleRequest();
           if (success) fail(tokenResult);
-        } else if (errorMessage === "Please provide correct token!") {
+        } else if (errorMessage === "Token already expired!") {
           const {
             success,
             result: tokenResult

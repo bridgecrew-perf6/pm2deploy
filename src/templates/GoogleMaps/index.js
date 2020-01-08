@@ -1,11 +1,12 @@
 // https://cuneyt.aliustaoglu.biz/en/using-google-maps-in-react-without-custom-libraries/
-import React, { Component } from "react";
+import React from "react";
 
-class Map extends Component {
+class Map extends React.Component {
   componentDidMount() {
-    const mapSrc = `https://maps.google.com/maps/api/js?key=${
-      process.env.REACT_APP_GOOGLE_MAP_KEY
-    }`;
+    const googleMapKey = process.env.REACT_APP_GOOGLE_MAP_KEY;
+    if (!googleMapKey) throw Error("Google Map Site Key is not defined");
+
+    const mapSrc = `https://maps.google.com/maps/api/js?key=${googleMapKey}`;
 
     if (!window.google) {
       let mapScript = this.getExistingMapScript(mapSrc);

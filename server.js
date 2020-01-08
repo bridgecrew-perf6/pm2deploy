@@ -9,7 +9,14 @@ const app = express();
 
 const targetFolder = "build_deploy";
 
-app.use(helmet());
+app.use(
+  helmet.hsts({
+    maxAge: 3153600,
+    includeSubDomains: true,
+    preload: true
+  })
+);
+
 app.use(express.static(path.join(__dirname, targetFolder)));
 app.use((req, res, next) => {
   let err = null;
@@ -28,3 +35,4 @@ app.get("/*", (req, res) => {
 });
 
 app.listen(port);
+console.log(`Running on PORT: ${port}`);
