@@ -50,6 +50,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^2.7.0",
     "eslint-plugin-react": "^7.14.2",
+    "husky": "^4.0.1",
     "imagemin": "^6.1.0",
     "imagemin-gifsicle": "^6.0.1",
     "imagemin-mozjpeg": "^8.0.0",
@@ -82,6 +83,11 @@
     "eject": "react-scripts eject",
     "compile-js-unused": "react-scripts build",
     "build-storybook": "build-storybook -s public"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,md}": [
