@@ -101,7 +101,7 @@ class List extends React.Component {
       </>
     );
     // const { list, itemComponent, loadingComponent, currentState } = this.props;
-    return <>{listData.map(item => itemComponent(item))}</>;
+    // return <>{listData.map(item => itemComponent(item))}</>;
   }
 }
 

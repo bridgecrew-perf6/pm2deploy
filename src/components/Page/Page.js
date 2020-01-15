@@ -16,7 +16,9 @@ class Page extends React.PureComponent {
 
   getContent = () => {
     const { children: element } = this.props;
-    return <section className={this.getCls("content__inner")}>{element}</section>;
+    return (
+      <section className={this.getCls("content__inner")}>{element}</section>
+    );
   };
 
   getHeader = () => {
