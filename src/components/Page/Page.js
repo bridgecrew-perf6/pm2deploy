@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
 import Style from "./Page.module.scss";
-import Header from "../Header/Header";
 
 class Page extends React.PureComponent {
   getCls = (def, mod) => {
@@ -16,7 +15,9 @@ class Page extends React.PureComponent {
 
   getContent = () => {
     const { children: element } = this.props;
-    return <section className={this.getCls("content__inner")}>{element}</section>;
+    return (
+      <section className={this.getCls("content__inner")}>{element}</section>
+    );
   };
 
   getHeader = () => {

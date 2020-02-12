@@ -1,5 +1,9 @@
 @import "~normalize.css/normalize";
+@import "./variables/colors";
 @import "./variables/fonts";
+@import "./variables/index";
+@import "./variables/transition";
+@import "./variables/zindex";
 
 * {
   box-sizing: border-box;
@@ -9,25 +13,7 @@
   display: none;
 }
 
-body {
-  font-family: $font-montserrat;
-}
-
 a {
   color: inherit;
   text-decoration: none;
-}
-
-button {
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.G__content {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.G__content.full {
-  max-width: 100%;
 }
