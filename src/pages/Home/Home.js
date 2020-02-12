@@ -1,14 +1,9 @@
 import React from "react";
-import Page from "../../components/Page/Page";
-import Style from "./Home.module.scss";
-import Heading from "../../components/Heading/Heading";
+import Icon from "../../components/Icon/Icon";
 
-const propsHome = { setHeader: { setClass: "gap" } };
-
-class Home extends React.Component {
-  render() {
-    return <Page {...propsHome}></Page>;
-  }
-}
-
+const Home = () => (
+  <>
+    <Icon type="Clock" />
+  </>
+);
 export default Home;
