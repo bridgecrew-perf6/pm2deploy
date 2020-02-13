@@ -1,5 +1,9 @@
+
 # base image
 FROM node:12.16.0 as build
+
+# set env using default
+ARG env=dev
 
 # set working directory
 WORKDIR /app
@@ -13,7 +17,7 @@ COPY package-lock.json /app/package-lock.json
 RUN npm install --silent
 COPY . /app
 
-RUN cp .env.dev.example .env
+RUN cp .env.${env}.example .env
 RUN npm run build
 
 # deploy on nginx 
