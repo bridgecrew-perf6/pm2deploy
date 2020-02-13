@@ -29,9 +29,9 @@ Icon.defaultProps = {
 };
 
 Icon.propTypes = {
-  /** Position to set margin */
+  /** Type of the Icon based on the svg name */
   type: PropTypes.string,
-  /** Position to set margin */
+  /** Size for the icon defined from the css, such as s, m, l, xl */
   size: PropTypes.string,
   /** Position to set margin */
   position: PropTypes.string
