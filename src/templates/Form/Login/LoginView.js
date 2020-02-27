@@ -37,8 +37,8 @@ class LoginView extends React.Component {
           value={password}
           onChange={handleChange}
         />
-        {touPassword && errPassword}
         <br />
+        {touPassword && errPassword}
         <br />
         <br />
         {action}
