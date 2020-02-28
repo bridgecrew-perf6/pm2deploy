@@ -14,8 +14,6 @@ const LoginForm = withFormik({
     const { username, password } = values;
     const err = { ...messageLogin, ...message };
 
-    console.log(message);
-
     const formatEmail = username && validateInput("email", username);
 
     if (!username || username.length < 1) errors.username = err.usernameEmpty;

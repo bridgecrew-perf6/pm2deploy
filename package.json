@@ -9,6 +9,7 @@
     "@apicase/core": "^0.17.0",
     "@apicase/services": "^0.8.1",
     "@storybook/addon-docs": "^5.3.14",
+    "@storybook/addon-notes": "^5.3.14",
     "@tippy.js/react": "^3.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
