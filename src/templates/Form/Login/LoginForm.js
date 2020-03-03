@@ -9,10 +9,10 @@ import validateInput from "../validateInput";
 const LoginForm = withFormik({
   mapPropsToValues: () => ({ username: "", password: "" }),
 
-  validate: (values, { message }) => {
+  validate: (values, { errorMessage }) => {
     const errors = {};
     const { username, password } = values;
-    const err = { ...messageLogin, ...message };
+    const err = { ...messageLogin, ...errorMessage };
 
     const formatEmail = username && validateInput("email", username);
 

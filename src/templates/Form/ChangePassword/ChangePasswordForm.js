@@ -16,10 +16,10 @@ const ChangePasswordForm = withFormik({
     confirmPassword: ""
   }),
 
-  validate: (values, { message }) => {
+  validate: (values, { errorMessage }) => {
     const errors = {};
     const { loginName, newPassword, confirmPassword } = values;
-    const err = { ...messageChangePassword, ...message };
+    const err = { ...messageChangePassword, ...errorMessage };
 
     const formatEmail = loginName && validateInput("email", loginName);
 

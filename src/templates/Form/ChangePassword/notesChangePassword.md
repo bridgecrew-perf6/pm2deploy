@@ -1,9 +1,10 @@
 <p>
-<b>Props Actions: </b>
+<b>Props: </b>
 <ul>
-<li>onSubmit</li>
+<li>onSubmit, returning form values</li>
 <li>onSuccess</li>
 <li>onError</li>
+<li>errorMessage, object type</li>
 </ul>
 </p>
 <p>

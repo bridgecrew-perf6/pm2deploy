@@ -15,11 +15,11 @@ const ForgotEmailStep1Form = withFormik({
     ktpNumber: ""
   }),
 
-  validate: (values, { message }) => {
+  validate: (values, { errorMessage }) => {
     const errors = {};
     const { name, dob, ktpNumber } = values;
 
-    const err = { ...messageForgotEmailStep1, ...message };
+    const err = { ...messageForgotEmailStep1, ...errorMessage };
 
     const formatKtpNumber = validateInput("ktp", ktpNumber);
 

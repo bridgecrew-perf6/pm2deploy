@@ -13,11 +13,11 @@ const ForgotEmailStep2Form = withFormik({
     answer: ""
   }),
 
-  validate: (values, { message }) => {
+  validate: (values, { errorMessage }) => {
     const errors = {};
     const { question, answer } = values;
 
-    const err = { ...messageForgotEmailStep2, message };
+    const err = { ...messageForgotEmailStep2, ...errorMessage };
 
     const emptyQuestion = !question || question === "empty";
 

@@ -13,10 +13,10 @@ const ForgotPasswordForm = withFormik({
     email: ""
   }),
 
-  validate: (values, { message }) => {
+  validate: (values, { errorMessage }) => {
     const errors = {};
     const { email } = values;
-    const err = { ...messageForgotPassword, ...message };
+    const err = { ...messageForgotPassword, ...errorMessage };
 
     const formatEmail = validateInput("email", email);
 

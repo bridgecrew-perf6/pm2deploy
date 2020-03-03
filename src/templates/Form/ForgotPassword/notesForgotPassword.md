@@ -6,12 +6,10 @@
 <li>onError</li>
 <li>errorMessage, object type</li>
 </ul>
-</p>
 <hr />
-<p>
-<b>How to use: </b>
+<b>How to use:</b>
 <ul>
-<li>import <u>ChangeEmailForm</u></li>
-<li>export as <u>ChangeEmailForm(ViewComponent)</u></li>
+<li>import <u>ForgotPasswordForm</u></li>
+<li>export as <u>ForgotPasswordForm(ViewComponent)</u></li>
 </ul>
 </p>

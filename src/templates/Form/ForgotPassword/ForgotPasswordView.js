@@ -18,11 +18,12 @@ class ForgotPasswordView extends React.Component {
     const { touched, values, errors } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <h3>View</h3>
         Email:
         <br />
         <input name="email" onChange={handleChange} value={values.email} />
-        {touched.email && errors.email && <p>{errors.email}</p>}
+        <br />
+        {touched.email && errors.email}
+        <br />
         <br />
         {this.getAction()}
         <br />

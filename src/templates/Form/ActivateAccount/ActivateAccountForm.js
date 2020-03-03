@@ -12,9 +12,9 @@ const ActivateAccountForm = withFormik({
     password: ""
   }),
 
-  validate: (values, { message }) => {
+  validate: (values, { errorMessage }) => {
     const { email, password } = values;
-    const err = { ...messageActivateAccount, ...message };
+    const err = { ...messageActivateAccount, ...errorMessage };
 
     const errors = {};
     const formatEmail = validateInput("email", email);
