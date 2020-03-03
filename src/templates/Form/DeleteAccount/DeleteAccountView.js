@@ -2,7 +2,6 @@
 
 import React from "react";
 import DeleteAccountForm from "./DeleteAccountForm";
-import Field from "../../../components/Field/Field";
 import Loading from "../../../components/Loading/Loading";
 
 class DeleteAccountView extends React.Component {
@@ -21,7 +20,7 @@ class DeleteAccountView extends React.Component {
     const { email, password, unsubscribe, permanentdelete } = values;
     return (
       <form onSubmit={handleSubmit}>
-        <Field error={touched.email && errors.email}>
+        <p>
           Email
           <br />
           <input
@@ -30,8 +29,10 @@ class DeleteAccountView extends React.Component {
             name="email"
             value={email}
           />
-        </Field>
-        <Field error={touched.password && errors.password}>
+          <br />
+          {touched.email && errors.email}
+        </p>
+        <p>
           Password
           <br />
           <input
@@ -40,8 +41,10 @@ class DeleteAccountView extends React.Component {
             name="password"
             value={password}
           />
-        </Field>
-        <Field error={touched.unsubscribe && errors.unsubscribe}>
+          <br />
+          {touched.password && errors.password}
+        </p>
+        <p>
           <label htmlFor="unsubscribe">
             <input
               type="checkbox"
@@ -52,8 +55,10 @@ class DeleteAccountView extends React.Component {
             />
             <span>{unsubscribeText}</span>
           </label>
-        </Field>
-        <Field error={touched.permanentdelete && errors.permanentdelete}>
+          <br />
+          {touched.unsubscribe && errors.unsubscribe}
+        </p>
+        <p>
           <label htmlFor="permanentdelete">
             <input
               type="checkbox"
@@ -64,7 +69,9 @@ class DeleteAccountView extends React.Component {
             />
             <span>{permanentDeleteText}</span>
           </label>
-        </Field>
+          <br />
+          {touched.permanentdelete && errors.permanentdelete}
+        </p>
         <br />
         {this.getAction()}
       </form>
