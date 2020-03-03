@@ -9,7 +9,5 @@ const act = values => console.log("form data", values);
 storiesOf("Form Change Password", module).add(
   "default",
   () => <ChangePasswordView onSubmit={action("eventSubmitted", act)} />,
-  {
-    notes
-  }
+  { notes }
 );

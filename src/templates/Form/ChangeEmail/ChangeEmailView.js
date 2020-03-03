@@ -11,7 +11,7 @@ class ChangeEmailView extends React.Component {
     return (
       <form onSubmit={handleSubmit}>
         <p>
-          Now Email:
+          Current Email:
           <br />
           <input
             type="text"
