@@ -27,8 +27,8 @@ class EditProfileView extends React.Component {
   state = {};
 
   getAction = () => {
-    const { isSubmitting, profileData } = this.props;
-    if (isSubmitting || !profileData) return <Loading align="left" />;
+    const { isSubmitting } = this.props;
+    if (isSubmitting) return <Loading align="left" />;
     return <button type="submit">Update Profile</button>;
   };
 
@@ -112,7 +112,7 @@ class EditProfileView extends React.Component {
           Name:
           <br />
           <input value={name} disabled />
-          {touched.name && errors.name}
+          {/* {touched.name && errors.name} */}
         </p>
         <p>
           KTP:

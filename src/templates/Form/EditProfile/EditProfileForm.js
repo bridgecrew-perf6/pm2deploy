@@ -7,21 +7,21 @@ import messageEditProfile from "./messageEditProfile";
 const EditProfileForm = withFormik({
   enableReinitialize: true,
 
-  mapPropsToValues: ({ profileData }) => ({
-    name: profileData.name || "",
-    ktp: profileData.ktp || "",
-    email: profileData.email || "",
-    dob: profileData.dob || "",
-    phone: profileData.phone || "",
-    gender: profileData.gender || "",
-    city: profileData.city || "",
-    address: profileData.address || "",
-    securityQuestion: profileData.securityQuestion || "",
-    securityAnswer: profileData.securityAnswer || "",
-    favBrand1: profileData.favBrand1 || false,
-    favBrand2: profileData.favBrand2 || false,
-    interest: profileData.interest || false,
-    emailPromo: profileData.emailPromo || ""
+  mapPropsToValues: ({ profileData: data }) => ({
+    name: (data && data.name) || "",
+    ktp: (data && data.ktp) || "",
+    email: (data && data.email) || "",
+    dob: (data && data.dob) || "",
+    phone: (data && data.phone) || "",
+    gender: (data && data.gender) || "",
+    city: (data && data.city) || "",
+    address: (data && data.address) || "",
+    securityQuestion: (data && data.securityQuestion) || "",
+    securityAnswer: (data && data.securityAnswer) || "",
+    favBrand1: (data && data.favBrand1) || false,
+    favBrand2: (data && data.favBrand2) || false,
+    interest: (data && data.interest) || false,
+    emailPromo: (data && data.emailPromo) || ""
   }),
 
   validate: (values, { message }) => {
