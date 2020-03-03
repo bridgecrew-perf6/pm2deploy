@@ -10,10 +10,8 @@
 <p>
 <hr />
 <b>How to use</b>
-<p>
 <ul>
 <li>import <u>LoginForm</u></li>
 <li>export as <u>LoginForm(ViewComponent)</u></li>
 </ul>
-</p>
 </p>
