@@ -5,6 +5,28 @@
 <li>onSuccess</li>
 <li>onError</li>
 <li>errorMessage, object type</li>
+<li>
+<b>profileData</b>
+object type,
+<br />For user profile data,
+<br />Pass on higher level &lt;ViewComponent&gt;,
+<br />Key list:
+<ul>
+<li>name</li>
+<li>ktp</li>
+<li>email</li>
+<li>dob, (date of birth)</li>
+<li>phone</li>
+<li>gender</li>
+<li>address</li>
+<li>securityQuestion</li>
+<li>securityAnswer</li>
+<li>favBrand1</li>
+<li>favBrand2</li>
+<li>interest</li>
+<li>emailPromo</li>
+</ul>
+</li>
 </ul>
 </p>
 <hr />

@@ -36,6 +36,10 @@ const EditProfileForm = withFormik({
 
     if (err.cityEmpty && !city) errors.city = err.cityEmpty;
 
+    if (err.address && !address) errors.address = err.addressEmpty;
+
+    if (!interest || interest.length) errors.interest = err.interest;
+
     return errors;
   },
 
