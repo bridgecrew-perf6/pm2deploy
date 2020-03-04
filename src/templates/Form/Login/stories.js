@@ -1,12 +1,15 @@
 import React from "react";
-import { Meta, Story, Props } from "@storybook/addon-docs/blocks";
 import { action } from "@storybook/addon-actions";
 import LoginView from "./LoginView";
 
 export default {
-  title: "Login Form",
-  id: "Foo/Bar",
-  component: LoginView
+  title: "Form Login Test",
+  component: LoginView,
+  includeStories: [] // or don't load this file at all
 };
 
-export const Regular = () => <LoginView onSubmit={action("eventSubmit")} />;
+export const basic = () => <LoginView onSubmit={action("eventSubmit")} />;
+
+basic.story = {
+  parameters: { foo: "bar" }
+};
