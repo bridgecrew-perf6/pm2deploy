@@ -6,8 +6,8 @@ import notes from "./notesMergeAccount.md";
 
 const act = values => console.log("Submitted", values);
 
-storiesOf("Form Merge Account", module).add(
-  "default",
+storiesOf("Form", module).add(
+  "Merge Account",
   () => <MergeAccountView onSubmit={action("eventSubmit", act)} />,
   { notes }
 );

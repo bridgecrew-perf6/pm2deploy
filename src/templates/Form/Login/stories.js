@@ -1,19 +1,12 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
+import { Meta, Story, Props } from "@storybook/addon-docs/blocks";
 import { action } from "@storybook/addon-actions";
 import LoginView from "./LoginView";
 
-import notes from "./notesLoginForm.md";
-
-const Element = () => {
-  const act = values => {
-    console.log("eventSubmitted", values);
-    return { data: { status: "200", message: "Success" }, error: {} };
-  };
-
-  return <LoginView onSubmit={action("onSubmitted", act)} />;
+export default {
+  title: "Login Form",
+  id: "Foo/Bar",
+  component: LoginView
 };
 
-storiesOf("Form Login", module).add("default", () => <Element />, {
-  notes
-});
+export const Regular = () => <LoginView onSubmit={action("eventSubmit")} />;

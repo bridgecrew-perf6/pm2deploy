@@ -11,14 +11,14 @@ const act = values => console.log("form data", values);
 
 const acts = values => console.log("form data", values);
 
-storiesOf("Form Forgot Email", module)
+storiesOf("Form", module)
   .add(
-    "Step1",
+    "Forgot Email Step 1",
     () => <ForgotEmailStep1View onSubmit={action("eventSubmit", act)} />,
     { notes: notesStep1 }
   )
   .add(
-    "Step2",
+    "Forgot Email Step 2",
     () => <ForgotEmailStep2View onSubmit={action("eventSubmit", acts)} />,
     { notes: notesStep2 }
   );

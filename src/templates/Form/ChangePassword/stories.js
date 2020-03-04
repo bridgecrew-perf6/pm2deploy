@@ -6,8 +6,8 @@ import notes from "./notesChangePassword.md";
 
 const act = values => console.log("form data", values);
 
-storiesOf("Form Change Password", module).add(
-  "default",
+storiesOf("Form", module).add(
+  "Change Password",
   () => <ChangePasswordView onSubmit={action("eventSubmitted", act)} />,
   { notes }
 );

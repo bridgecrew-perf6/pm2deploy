@@ -6,8 +6,8 @@ import notes from "./notesChangeEmail.md";
 
 const act = values => console.log("form data", values);
 
-storiesOf("Form Change Email", module).add(
-  "default",
+storiesOf("Form", module).add(
+  "Change Email",
   () => <ChangeEmailView onSubmit={action("eventSubmitted", act)} />,
   {
     notes

@@ -7,8 +7,8 @@ import notes from "./notesDeleteAccount.md";
 
 const act = values => console.log("submitted", values);
 
-storiesOf("Form Delete Account", module).add(
-  "default",
+storiesOf("Form", module).add(
+  "Delete Account",
   () => <DeleteAccountView onSubmit={action("eventSubmit", act)} />,
   { notes }
 );

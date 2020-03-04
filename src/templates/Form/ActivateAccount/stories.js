@@ -7,8 +7,8 @@ import notes from "./notesActivateAccount.md";
 
 const act = values => console.log("submitted", values);
 
-storiesOf("Form Activate Account", module).add(
-  "default",
+storiesOf("Form", module).add(
+  "Activate Account",
   () => <ActivateAccountView onSubmit={action("eventSubmit", act)} />,
   { notes }
 );
