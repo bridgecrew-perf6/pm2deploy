@@ -9,6 +9,8 @@ import notesStep2 from "./notesForgotEmailStep2.md";
 
 const act = values => console.log("form data", values);
 
+const acts = values => console.log("form data", values);
+
 storiesOf("Form Forgot Email", module)
   .add(
     "Step1",
@@ -17,6 +19,6 @@ storiesOf("Form Forgot Email", module)
   )
   .add(
     "Step2",
-    () => <ForgotEmailStep2View onSubmit={action("eventSubmit", act)} />,
+    () => <ForgotEmailStep2View onSubmit={action("eventSubmit", acts)} />,
     { notes: notesStep2 }
   );

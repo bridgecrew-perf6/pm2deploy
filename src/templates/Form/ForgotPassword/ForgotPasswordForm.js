@@ -21,7 +21,7 @@ const ForgotPasswordForm = withFormik({
     const formatEmail = validateInput("email", email);
 
     if (!email) errors.email = err.emailEmpty;
-    else if (!formatEmail) errors.email = err.emailWrongFormat;
+    else if (!formatEmail) errors.email = err.emailwrongFormat;
 
     return errors;
   },

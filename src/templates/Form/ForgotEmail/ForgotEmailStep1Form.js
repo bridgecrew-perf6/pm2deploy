@@ -21,11 +21,15 @@ const ForgotEmailStep1Form = withFormik({
 
     const err = { ...messageForgotEmailStep1, ...errorMessage };
 
+    const formatName = validateInput("name", name);
+    const formatDob = validateInput("date", dob);
     const formatKtpNumber = validateInput("ktp", ktpNumber);
 
     if (!name) errors.name = err.nameEmpty;
+    else if (!formatName) errors.name = err.nameWrongFormat;
 
     if (!dob) errors.dob = err.dobEmpty;
+    else if (!formatDob) errors.dob = err.dobWrongFormat;
 
     if (!ktpNumber) errors.ktpNumber = err.ktpEmpty;
     else if (!formatKtpNumber) errors.ktpNumber = err.ktpWrongFormat;

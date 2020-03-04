@@ -15,7 +15,7 @@ const ForgotEmailStep2Form = withFormik({
 
   validate: (values, { errorMessage }) => {
     const errors = {};
-    const { question, answer } = values;
+    const { question, answer, uniqueKey } = values;
 
     const err = { ...messageForgotEmailStep2, ...errorMessage };
 
@@ -23,18 +23,17 @@ const ForgotEmailStep2Form = withFormik({
 
     if (emptyQuestion) errors.question = err.questionEmpty;
     if (!answer) errors.answer = err.answerEmpty;
+    // if (!uniqueKey) errors.uniqueKey = err.uniqueKeyEmpty;
 
     return errors;
   },
 
   handleSubmit: async (
     values,
-    { setSubmitting, props: { uniqueKey, onSubmit, onSuccess, onError } }
+    { setSubmitting, props: { onSubmit, onSuccess, onError } }
   ) => {
-    if (uniqueKey) {
-      const response = await formAction.submit(values, onSubmit);
-      formAction.action(response, onSuccess, onError);
-    } else console.log("NO UNIQUE KEY FOUND");
+    const response = await formAction.submit(values, onSubmit);
+    formAction.action(response, onSuccess, onError);
 
     setSubmitting(false);
   }

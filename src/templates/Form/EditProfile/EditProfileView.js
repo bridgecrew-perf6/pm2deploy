@@ -140,11 +140,14 @@ class EditProfileView extends React.Component {
               {this.getOptionCity(city)}
             </select>
           )}
+          {touched.city && errors.city}
         </p>
         <p>
           Alamat lengkap:
           <br />
           <textarea name="address" value={address} onChange={handleChange} />
+          <br />
+          {touched.address && errors.address}
         </p>
         <p>
           Brand Favorit 1:
@@ -156,6 +159,8 @@ class EditProfileView extends React.Component {
           <br />
           {this.selectBrand(favBrand2, 2)}
         </p>
+        <br />
+        {touched.favBrand1 && touched.favBrand2 && errors.favBrand}
         <p>
           <label htmlFor="emailPromo">
             <input
@@ -172,6 +177,8 @@ class EditProfileView extends React.Component {
           Menarik:
           <br />
           {this.interestCheckView()}
+          <br />
+          {touched.interest && errors.interest}
         </p>
         {this.getAction()}
         <br />

@@ -3,10 +3,10 @@
 import { withFormik } from "formik";
 import formAction from "../formAction";
 import messageDeleteAccount from "./messageDeleteAccount";
+import validateInput from "../validateInput";
 
 const DeleteAccountForm = withFormik({
   mapPropsToValues: () => ({
-    loading: false,
     email: "",
     password: "",
     unsubscribe: true,
@@ -19,7 +19,10 @@ const DeleteAccountForm = withFormik({
     const { email, password } = values;
     const err = { ...messageDeleteAccount, ...message };
 
+    const formatEmail = validateInput("email", email);
+
     if (!email) errors.email = err.emailEmpty;
+    else if (!formatEmail) errors.email = err.emailWrongFormat;
 
     if (!password) errors.password = err.passwordEmpty;
 

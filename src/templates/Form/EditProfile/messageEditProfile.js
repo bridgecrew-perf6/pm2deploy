@@ -8,6 +8,7 @@ const messageEditProfile = {
   securityQuestionEmpty: "Please choose your security question",
   securityAnswerEmpty: "Please fill your security answer",
   favBrandEmpty: "Please choose your favorite brand",
+  favBrandSame: "Cannot same favorite brand",
   interestEmpty: "Please choose your interest"
 };
 

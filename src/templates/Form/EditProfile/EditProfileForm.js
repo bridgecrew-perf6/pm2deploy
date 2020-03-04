@@ -3,6 +3,7 @@
 import { withFormik } from "formik";
 import formAction from "../formAction";
 import messageEditProfile from "./messageEditProfile";
+import validateInput from "../validateInput";
 
 const EditProfileForm = withFormik({
   enableReinitialize: true,
@@ -28,17 +29,27 @@ const EditProfileForm = withFormik({
     const errors = {};
 
     const { phone, city, address, favBrand1, favBrand2 } = values;
-    const { securityQuestion, securityAnswer, interest, emailPromo } = values;
+    const { securityQuestion, securityAnswer, interest } = values;
 
     const err = { ...messageEditProfile, ...message };
 
+    const formatPhone = validateInput("phone", phone);
+
     if (!phone) errors.phone = err.phoneEmpty;
+    else if (!formatPhone) errors.phone = err.phoneWrongFormat;
 
     if (err.cityEmpty && !city) errors.city = err.cityEmpty;
 
-    if (err.address && !address) errors.address = err.addressEmpty;
+    if (err.addressEmpty && !address) errors.address = err.addressEmpty;
 
-    if (!interest || interest.length) errors.interest = err.interest;
+    if (!interest || interest.length) errors.interest = err.interestEmpty;
+
+    if (!favBrand1 && !favBrand2) errors.favBrand = err.favBrandEmpty;
+    else if (favBrand1 === favBrand2) errors.favBrand = err.favBrandSame;
+
+    if (!securityQuestion) errors.securityQuestion = err.securityQuestionEmpty;
+
+    if (!securityAnswer) errors.securityAnswer = err.securityAnswerEmpty;
 
     return errors;
   },

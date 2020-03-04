@@ -69,6 +69,8 @@ class ForgotEmailStep2View extends React.Component {
           {touched.answer && errors.answer}
         </p>
         <br />
+        {errors.uniqueKey}
+        <br />
         {this.getAction()}
         <br />
       </form>

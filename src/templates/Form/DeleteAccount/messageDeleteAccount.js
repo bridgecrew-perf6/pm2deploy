@@ -2,6 +2,7 @@
 
 const messageDeleteAccount = {
   emailEmpty: "Please fill email",
+  emailWrongFormat: "Wrong format email",
   passwordEmpty: "Please fill password"
 };
 
