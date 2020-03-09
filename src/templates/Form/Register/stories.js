@@ -7,8 +7,8 @@ import notes from "./notesRegister.md";
 
 const act = values => console.log("submitted", values);
 
-storiesOf("Form", module).add(
-  "Register",
+storiesOf("Form/Register", module).add(
+  "View",
   () => <RegisterView onSubmit={action("eventSubmit", act)} />,
   { notes }
 );

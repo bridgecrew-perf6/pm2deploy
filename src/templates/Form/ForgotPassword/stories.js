@@ -6,8 +6,8 @@ import notes from "./notesForgotPassword.md";
 
 const act = values => console.log("Submitted Value", values);
 
-storiesOf("Form", module).add(
-  "Forgot Password",
+storiesOf("Form/Forgot Password", module).add(
+  "View",
   () => <ForgotPasswordView onSubmit={action("eventSubmit", act)} />,
   { notes }
 );

@@ -6,8 +6,8 @@ import notes from "./notesTncForm.md";
 
 const act = values => console.log("Submitted", values);
 
-storiesOf("Form", module).add(
-  "TNC",
+storiesOf("Form/TNC", module).add(
+  "View",
   () => <TncFormView onSubmit={action("eventSubmit", act)} />,
   { notes }
 );

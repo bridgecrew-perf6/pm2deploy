@@ -1,8 +1,8 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
 import React from "react";
-import Loading from "../../../components/Loading/Loading";
 import LoginForm from "./LoginForm";
+import Loading from "../../../components/Loading/Loading";
 
 class LoginView extends React.Component {
   state = {};

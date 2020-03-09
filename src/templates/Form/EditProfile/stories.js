@@ -7,8 +7,8 @@ import notes from "./notesEditProfile.md";
 
 const act = values => console.log("submitted", values);
 
-storiesOf("Form", module).add(
-  "Edit Profile",
+storiesOf("Form/Edit Profile", module).add(
+  "View",
   () => <EditProfileView onSubmit={action("eventSubmit", act)} />,
   { notes }
 );
