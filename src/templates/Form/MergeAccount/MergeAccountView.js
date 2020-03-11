@@ -1,8 +1,27 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
 import React from "react";
+import PropTypes from "prop-types";
 import MergeAccountForm from "./MergeAccountForm";
 import Loading from "../../../components/Loading/Loading";
+import messageMergeAccount from "./messageMergeAccount";
+
+const { emailEmpty, passwordEmpty } = messageMergeAccount;
+
+const defaultOnSubmit = values => {
+  console.log("eventSubmitted", values);
+  return { data: { status: 200, message: "success" }, error: {} };
+};
+
+const defaultOnSuccess = res => {
+  console.log("Success", res);
+  return res;
+};
+
+const defaultOnError = err => {
+  console.log("Error", err);
+  return err;
+};
 
 class MergeAccountView extends React.Component {
   state = {};
@@ -64,5 +83,22 @@ class MergeAccountView extends React.Component {
     );
   }
 }
+
+MergeAccountView.defaultProps = {
+  onSubmit: defaultOnSubmit,
+  onSuccess: defaultOnSuccess,
+  onError: defaultOnError,
+  errorMessage: {
+    emailEmpty,
+    passwordEmpty
+  }
+};
+
+MergeAccountView.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func,
+  onError: PropTypes.func,
+  errorMessage: PropTypes.object
+};
 
 export default MergeAccountForm(MergeAccountView);
