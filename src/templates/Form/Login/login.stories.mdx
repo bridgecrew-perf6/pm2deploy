@@ -11,7 +11,7 @@ import LoginView from "./LoginView";
 <Preview>
   <Story name="Login">
     <LoginView
-      onSubmit="function"
+      onSubmit={action("eventSubmitted")}
       onSucces="function"
       onError="function"
       errorMessage="object"
@@ -25,9 +25,10 @@ import LoginView from "./LoginView";
 _LoginView is just view element, logical form is created as LoginForm. So, please read this before use._
 
 
-1. import `LoginForm`
-2. export as LoginForm(`ViewComponent`)
-
+```js
+1. import LoginForm
+2. export LoginForm(ViewComponent)
+```
 
 <br />
 

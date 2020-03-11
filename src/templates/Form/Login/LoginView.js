@@ -6,6 +6,8 @@ import LoginForm from "./LoginForm";
 import Loading from "../../../components/Loading/Loading";
 import messageLogin from "./messageLogin";
 
+const { usernameEmpty, usernameTooShort, usernameWrongFormat, passwordEmpty } = messageLogin;
+
 const onSubmit = values => {
   console.log("eventSubmitted", values);
   return { data: { status: 200, message: "success" }, error: {} };
@@ -66,7 +68,12 @@ LoginView.defaultProps = {
   onSubmit,
   onSuccess,
   onError,
-  errorMessage: messageLogin
+  errorMessage: {
+    usernameEmpty,
+    usernameTooShort,
+    usernameWrongFormat,
+    passwordEmpty
+  }
 };
 
 LoginView.propTypes = {
