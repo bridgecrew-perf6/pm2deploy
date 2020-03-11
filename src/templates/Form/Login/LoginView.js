@@ -1,7 +1,6 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
-// import React from "react";
-import * as React from "react";
+import React from "react";
 import Proptypes from "prop-types";
 import LoginForm from "./LoginForm";
 import Loading from "../../../components/Loading/Loading";
