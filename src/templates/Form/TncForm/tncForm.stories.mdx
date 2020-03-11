@@ -1,0 +1,35 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {action} from "@storybook/addon-actions"
+import TncFormView from "./TncFormView";
+
+<Meta title="Form/TNC Form" component={TncFormView} />
+
+# Merge Account
+
+This view of TncFormView under `TncForm`
+<Preview>
+  <Story name="TNC Form">
+    <TncFormView
+      onSubmit="function"
+      onSucces="function"
+      onError="function"
+      errorMessage="object"
+    />
+  </Story>
+</Preview>
+
+<br />
+
+### How to Use
+_MergeAccountView is just view element, logical form is created as `TncForm`. So, please read this before use._
+
+
+```js
+1. import TncForm
+2. export TncForm(ViewComponent)
+```
+
+<br />
+
+### Props
+<Props of={TncFormView} />
