@@ -8,15 +8,17 @@ import messageLogin from "./messageLogin";
 
 const { usernameEmpty, usernameTooShort, usernameWrongFormat, passwordEmpty } = messageLogin;
 
-const onSubmit = values => {
+const defaultOnSubmit = values => {
   console.log("eventSubmitted", values);
   return { data: { status: 200, message: "success" }, error: {} };
 };
-const onSuccess = res => {
+
+const defaultOnSuccess = res => {
   console.log("Success", res);
   return res;
 };
-const onError = err => {
+
+const defaultOnError = err => {
   console.log("Error", err);
   return err;
 };
@@ -65,9 +67,9 @@ class LoginView extends React.Component {
 }
 
 LoginView.defaultProps = {
-  onSubmit,
-  onSuccess,
-  onError,
+  onSubmit: defaultOnSubmit,
+  onSuccess: defaultOnSuccess,
+  onError: defaultOnError,
   errorMessage: {
     usernameEmpty,
     usernameTooShort,
