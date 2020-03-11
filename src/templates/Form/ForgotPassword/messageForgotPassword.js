@@ -1,8 +1,8 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
-const forgotPasswordValidate = {
+const messageForgotPassword = {
   emailEmpty: "Please fill the email",
   emailwrongFormat: "Wrong email format"
 };
 
-export default forgotPasswordValidate;
+export default messageForgotPassword;

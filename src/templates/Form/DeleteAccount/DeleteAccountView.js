@@ -116,5 +116,4 @@ DeleteAccountView.propTypes = {
   errorMessage: PropTypes.object
 };
 
-
 export default DeleteAccountForm(DeleteAccountView);

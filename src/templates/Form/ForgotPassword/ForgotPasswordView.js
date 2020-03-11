@@ -1,8 +1,27 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
 import React from "react";
+import PropTypes from "prop-types";
 import Loading from "../../../components/Loading/Loading";
 import ForgotPasswordForm from "./ForgotPasswordForm";
+import messageForgotPassword from "./messageForgotPassword";
+
+const { emailEmpty, emailwrongFormat } = messageForgotPassword;
+
+const defaultOnSubmit = values => {
+  console.log("eventSubmitted", values);
+  return { data: { status: 200, message: "success" }, error: {} };
+};
+
+const defaultOnSuccess = res => {
+  console.log("Success", res);
+  return res;
+};
+
+const defaultOnError = err => {
+  console.log("Error", err);
+  return err;
+};
 
 class ForgotPasswordView extends React.Component {
   state = {};
@@ -32,5 +51,22 @@ class ForgotPasswordView extends React.Component {
     );
   }
 }
+
+ForgotPasswordView.defaultProps = {
+  onSubmit: defaultOnSubmit,
+  onSuccess: defaultOnSuccess,
+  onError: defaultOnError,
+  errorMessage: {
+    emailEmpty,
+    emailwrongFormat
+  }
+};
+
+ForgotPasswordView.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func,
+  onError: PropTypes.func,
+  errorMessage: PropTypes.object
+};
 
 export default ForgotPasswordForm(ForgotPasswordView);
