@@ -5,17 +5,21 @@ import LoginForm from "./LoginForm";
 <Meta title="Form/Login" component={LoginView} />
 
 # Login
+### This view of LoginView under LoginForm
 <Preview>
   <Story name="Login">
-    <LoginView onSubmit={values => console.log(values)} onSucces={res => console.log(res)} onError={err => console.log(err)} />
+    <LoginView
+      onSubmit="function"
+      onSucces="function"
+      onError="function"
+      errorMessage="object"
+    />
   </Story>
 </Preview>
 
-# Props
-<Preview>
-  <Props of={LoginView} />
-</Preview>
+## Props
+<Props of={LoginView} />
 
-# How to Use
+## How to Use
 - import LoginForm
 - export as LoginForm(ViewComponent)

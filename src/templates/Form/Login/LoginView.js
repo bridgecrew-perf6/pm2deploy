@@ -7,9 +7,18 @@ import LoginForm from "./LoginForm";
 import Loading from "../../../components/Loading/Loading";
 import messageLogin from "./messageLogin";
 
-const onSubmit = values => console.log("eventSubmitted", values);
-const onSuccess = e => console.log("Success", e);
-const onError = e => console.log("Error", e);
+const onSubmit = values => {
+  console.log("eventSubmitted", values);
+  return { data: { status: 200, message: "success" }, error: {} };
+};
+const onSuccess = res => {
+  console.log("Success", res);
+  return res;
+};
+const onError = err => {
+  console.log("Error", err);
+  return err;
+};
 
 class LoginView extends React.Component {
   state = {};
@@ -54,17 +63,18 @@ class LoginView extends React.Component {
   }
 }
 
-LoginForm.defaultProps = {
+LoginView.defaultProps = {
   onSubmit,
   onSuccess,
   onError,
   errorMessage: messageLogin
 };
 
-LoginForm.propTypes = {
+LoginView.propTypes = {
   onSubmit: Proptypes.func.isRequired,
   onSuccess: Proptypes.func,
-  onError: Proptypes.func
+  onError: Proptypes.func,
+  errorMessage: Proptypes.object
 };
 
 export default LoginForm(LoginView);
