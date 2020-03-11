@@ -1,7 +1,6 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
 import { withFormik } from "formik";
-import Proptypes from "prop-types";
 import formAction from "../formAction";
 import messageLogin from "./messageLogin";
 import validateInput from "../validateInput";
@@ -34,24 +33,5 @@ const LoginForm = withFormik({
     setSubmitting(false);
   }
 });
-
-const onSubmit = values => console.log("eventSubmitted", values);
-
-const onSuccess = e => console.log("Success", e);
-
-const onError = e => console.log("Error", e);
-
-LoginForm.propTypes = {
-  onSubmit: Proptypes.func.isRequired,
-  onSuccess: Proptypes.func,
-  onError: Proptypes.func
-};
-
-LoginForm.defaultProps = {
-  onSubmit,
-  onSuccess,
-  onError,
-  errorMessage: messageLogin
-};
 
 export default LoginForm;

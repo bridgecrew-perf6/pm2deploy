@@ -1,0 +1,21 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import LoginView from "./LoginView";
+import LoginForm from "./LoginForm";
+
+<Meta title="Form/Login" component={LoginView} />
+
+# Login
+<Preview>
+  <Story name="Login">
+    <LoginView onSubmit={values => console.log(values)} onSucces={res => console.log(res)} onError={err => console.log(err)} />
+  </Story>
+</Preview>
+
+# Props
+<Preview>
+  <Props of={LoginView} />
+</Preview>
+
+# How to Use
+- import LoginForm
+- export as LoginForm(ViewComponent)

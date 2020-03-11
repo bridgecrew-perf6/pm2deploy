@@ -1,8 +1,15 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
-import React from "react";
+// import React from "react";
+import * as React from "react";
+import Proptypes from "prop-types";
 import LoginForm from "./LoginForm";
 import Loading from "../../../components/Loading/Loading";
+import messageLogin from "./messageLogin";
+
+const onSubmit = values => console.log("eventSubmitted", values);
+const onSuccess = e => console.log("Success", e);
+const onError = e => console.log("Error", e);
 
 class LoginView extends React.Component {
   state = {};
@@ -46,5 +53,18 @@ class LoginView extends React.Component {
     );
   }
 }
+
+LoginForm.defaultProps = {
+  onSubmit,
+  onSuccess,
+  onError,
+  errorMessage: messageLogin
+};
+
+LoginForm.propTypes = {
+  onSubmit: Proptypes.func.isRequired,
+  onSuccess: Proptypes.func,
+  onError: Proptypes.func
+};
 
 export default LoginForm(LoginView);
