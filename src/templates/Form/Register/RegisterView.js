@@ -1,8 +1,27 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
 import React from "react";
+import PropTypes from "prop-types";
 import RegisterForm from "./RegisterForm";
 import Loading from "../../../components/Loading/Loading";
+import messageRegister from "./messageRegister";
+
+const { nameEmpty, nameWrongFormat, ktpEmpty, emailEmpty, passwordEmpty, tncUncheck } = messageRegister;
+
+const defaultOnSubmit = values => {
+  console.log("eventSubmitted", values);
+  return { data: { status: 200, message: "success" }, error: {} };
+};
+
+const defaultOnSuccess = res => {
+  console.log("Success", res);
+  return res;
+};
+
+const defaultOnError = err => {
+  console.log("Error", err);
+  return err;
+};
 
 class RegisterView extends React.Component {
   state = {};
@@ -76,5 +95,26 @@ class RegisterView extends React.Component {
     );
   }
 }
+
+RegisterView.defaultProps = {
+  onSubmit: defaultOnSubmit,
+  onSuccess: defaultOnSuccess,
+  onError: defaultOnError,
+  errorMessage: {
+    nameEmpty,
+    nameWrongFormat,
+    ktpEmpty,
+    emailEmpty,
+    passwordEmpty,
+    tncUncheck
+  }
+};
+
+RegisterView.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func,
+  onError: PropTypes.func,
+  errorMessage: PropTypes.object
+};
 
 export default RegisterForm(RegisterView);
