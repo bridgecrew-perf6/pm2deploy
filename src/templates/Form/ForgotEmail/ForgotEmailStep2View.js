@@ -1,9 +1,28 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
 import React from "react";
+import PropTypes from "prop-types";
 import { getSecurityQuestion } from "../../../api";
 import ForgotEmailStep2Form from "./ForgotEmailStep2Form";
 import Loading from "../../../components/Loading/Loading";
+import messageForgotEmailStep2 from "./messageForgotEmailStep2";
+
+const { questionEmpty, answerEmpty, uniqueKeyEmpty, } = messageForgotEmailStep2;
+
+const defaultOnSubmit = values => {
+  console.log("eventSubmitted", values);
+  return { data: { status: 200, message: "success" }, error: {} };
+};
+
+const defaultOnSuccess = res => {
+  console.log("Success", res);
+  return res;
+};
+
+const defaultOnError = err => {
+  console.log("Error", err);
+  return err;
+};
 
 class ForgotEmailStep2View extends React.Component {
   state = {
@@ -77,5 +96,24 @@ class ForgotEmailStep2View extends React.Component {
     );
   }
 }
+
+ForgotEmailStep2View.defaultProps = {
+  onSubmit: defaultOnSubmit,
+  onSuccess: defaultOnSuccess,
+  onError: defaultOnError,
+  errorMessage: {
+    questionEmpty,
+    answerEmpty,
+    uniqueKeyEmpty
+  }
+};
+
+ForgotEmailStep2View.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func,
+  onError: PropTypes.func,
+  errorMessage: PropTypes.object
+};
+
 
 export default ForgotEmailStep2Form(ForgotEmailStep2View);
