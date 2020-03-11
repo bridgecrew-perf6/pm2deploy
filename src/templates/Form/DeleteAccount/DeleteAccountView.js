@@ -1,8 +1,27 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
 import React from "react";
+import PropTypes from "prop-types";
 import DeleteAccountForm from "./DeleteAccountForm";
 import Loading from "../../../components/Loading/Loading";
+import messageDeleteAccount from "./messageDeleteAccount";
+
+const { emailEmpty, emailWrongFormat, passwordEmpty } = messageDeleteAccount;
+
+const defaultOnSubmit = values => {
+  console.log("eventSubmitted", values);
+  return { data: { status: 200, message: "success" }, error: {} };
+};
+
+const defaultOnSuccess = res => {
+  console.log("Success", res);
+  return res;
+};
+
+const defaultOnError = err => {
+  console.log("Error", err);
+  return err;
+};
 
 class DeleteAccountView extends React.Component {
   state = {};
@@ -10,7 +29,7 @@ class DeleteAccountView extends React.Component {
   getAction = () => {
     const { submitText, isSubmitting } = this.props;
     if (isSubmitting) return <Loading align="left" />;
-    return <button type="submit">{submitText}</button>;
+    return <button type="submit">HAPUS AH!</button>;
   };
 
   render() {
@@ -53,7 +72,7 @@ class DeleteAccountView extends React.Component {
               checked={unsubscribe}
               onChange={handleChange}
             />
-            <span>{unsubscribeText}</span>
+            <span>Berhenti dari segala email fufufu yang tidak huhuhu</span>
           </label>
           <br />
           {touched.unsubscribe && errors.unsubscribe}
@@ -67,7 +86,7 @@ class DeleteAccountView extends React.Component {
               checked={permanentdelete}
               onChange={handleChange}
             />
-            <span>{permanentDeleteText}</span>
+            <span>HAPUS AKUN SAYAAAA!</span>
           </label>
           <br />
           {touched.permanentdelete && errors.permanentdelete}
@@ -80,9 +99,22 @@ class DeleteAccountView extends React.Component {
 }
 
 DeleteAccountView.defaultProps = {
-  unsubscribeText: "Berhenti berlangganan",
-  permanentDeleteText: "Hapus akun gue secara permanen",
-  submitText: "Hapus Akun Gue"
+  onSubmit: defaultOnSubmit,
+  onSuccess: defaultOnSuccess,
+  onError: defaultOnError,
+  errorMessage: {
+    emailEmpty,
+    emailWrongFormat,
+    passwordEmpty
+  }
 };
+
+DeleteAccountView.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func,
+  onError: PropTypes.func,
+  errorMessage: PropTypes.object
+};
+
 
 export default DeleteAccountForm(DeleteAccountView);
