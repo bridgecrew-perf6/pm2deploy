@@ -84,7 +84,7 @@
     "start-secure": "HTTPS=true npm run start-js",
     "build": "npm run build-js && npm run copy-to-deploy && npm run compress-image",
     "deploy": "node server.js",
-    "storybook": "start-storybook -p 9009 -s public",
+    "storybook": "start-storybook --docs -p 9009 -s public",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "compile-js-unused": "react-scripts build",

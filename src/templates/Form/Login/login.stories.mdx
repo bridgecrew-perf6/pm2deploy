@@ -1,4 +1,5 @@
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {action} from "@storybook/addon-actions"
 import LoginView from "./LoginView";
 
 <Meta title="Form/Login" component={LoginView} />
@@ -18,11 +19,17 @@ import LoginView from "./LoginView";
   </Story>
 </Preview>
 
+<br />
+
 ## How to Use
 _LoginView is just view element, logical form is created as LoginForm. So, please read this before use._
 
+
 1. import `LoginForm`
 2. export as LoginForm(`ViewComponent`)
+
+
+<br />
 
 ## Props
 <Props of={LoginView} />
