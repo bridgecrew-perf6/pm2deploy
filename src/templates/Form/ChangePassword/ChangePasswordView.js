@@ -6,7 +6,16 @@ import ChangePasswordForm from "./ChangePasswordForm";
 import Loading from "../../../components/Loading/Loading";
 import messageChangePassword from "./messageChangePassword";
 
-const { loginNameEmpty, loginNameWrongFormat, passwordEmpty, passwordMinChar, passwordNoNumber, passwordNoSpecial, passwordNoUppercase, passwordNotSame } = messageChangePassword;
+const {
+  loginNameEmpty,
+  loginNameWrongFormat,
+  passwordEmpty,
+  passwordMinChar,
+  passwordNoNumber,
+  passwordNoSpecial,
+  passwordNoUppercase,
+  passwordNotSame
+} = messageChangePassword;
 
 const defaultOnSubmit = values => {
   console.log("eventSubmitted", values);

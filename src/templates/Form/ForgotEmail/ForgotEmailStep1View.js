@@ -5,7 +5,14 @@ import PropTypes from "prop-types";
 import ForgotEmailStep1Form from "./ForgotEmailStep1Form";
 import messageForgotEmailStep1 from "./messageForgotEmailStep1";
 
-const { nameEmpty, nameWrongFormat, dobEmpty, dobWrongFormat, ktpEmpty, ktpWrongFormat } = messageForgotEmailStep1;
+const {
+  nameEmpty,
+  nameWrongFormat,
+  dobEmpty,
+  dobWrongFormat,
+  ktpEmpty,
+  ktpWrongFormat
+} = messageForgotEmailStep1;
 
 const defaultOnSubmit = values => {
   console.log("eventSubmitted", values);

@@ -6,7 +6,17 @@ import EditProfileForm from "./EditProfileForm";
 import Loading from "../../../components/Loading/Loading";
 import messageEditProfile from "./messageEditProfile";
 
-const { addressEmpty, cityEmpty, favBrandEmpty, favBrandSame, interestEmpty, phoneEmpty, phoneWrongFormat, securityAnswerEmpty, securityQuestionEmpty } = messageEditProfile
+const {
+  addressEmpty,
+  cityEmpty,
+  favBrandEmpty,
+  favBrandSame,
+  interestEmpty,
+  phoneEmpty,
+  phoneWrongFormat,
+  securityAnswerEmpty,
+  securityQuestionEmpty
+} = messageEditProfile;
 
 const defaultOnSubmit = values => {
   console.log("eventSubmitted", values);

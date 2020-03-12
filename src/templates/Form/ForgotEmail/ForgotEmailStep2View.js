@@ -7,7 +7,7 @@ import ForgotEmailStep2Form from "./ForgotEmailStep2Form";
 import Loading from "../../../components/Loading/Loading";
 import messageForgotEmailStep2 from "./messageForgotEmailStep2";
 
-const { questionEmpty, answerEmpty, uniqueKeyEmpty, } = messageForgotEmailStep2;
+const { questionEmpty, answerEmpty, uniqueKeyEmpty } = messageForgotEmailStep2;
 
 const defaultOnSubmit = values => {
   console.log("eventSubmitted", values);
@@ -25,9 +25,12 @@ const defaultOnError = err => {
 };
 
 class ForgotEmailStep2View extends React.Component {
-  state = {
-    questionList: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      questionList: []
+    };
+  }
 
   componentDidMount() {
     this.getSecurityQuestion();
@@ -114,6 +117,5 @@ ForgotEmailStep2View.propTypes = {
   onError: PropTypes.func,
   errorMessage: PropTypes.object
 };
-
 
 export default ForgotEmailStep2Form(ForgotEmailStep2View);

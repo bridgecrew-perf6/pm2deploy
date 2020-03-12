@@ -6,7 +6,12 @@ import LoginForm from "./LoginForm";
 import Loading from "../../../components/Loading/Loading";
 import messageLogin from "./messageLogin";
 
-const { usernameEmpty, usernameTooShort, usernameWrongFormat, passwordEmpty } = messageLogin;
+const {
+  usernameEmpty,
+  usernameTooShort,
+  usernameWrongFormat,
+  passwordEmpty
+} = messageLogin;
 
 const defaultOnSubmit = values => {
   console.log("eventSubmitted", values);

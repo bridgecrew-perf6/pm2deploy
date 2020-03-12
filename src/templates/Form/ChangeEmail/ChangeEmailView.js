@@ -5,7 +5,12 @@ import PropTypes from "prop-types";
 import ChangeEmailForm from "./ChangeEmailForm";
 import messageChangeEmail from "./messageChangeEmail";
 
-const { loginNameEmpty, emailEmpty, emailWrongFormat, passwordEmpty } = messageChangeEmail;
+const {
+  loginNameEmpty,
+  emailEmpty,
+  emailWrongFormat,
+  passwordEmpty
+} = messageChangeEmail;
 
 const defaultOnSubmit = values => {
   console.log("eventSubmitted", values);

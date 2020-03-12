@@ -6,7 +6,14 @@ import RegisterForm from "./RegisterForm";
 import Loading from "../../../components/Loading/Loading";
 import messageRegister from "./messageRegister";
 
-const { nameEmpty, nameWrongFormat, ktpEmpty, emailEmpty, passwordEmpty, tncUncheck } = messageRegister;
+const {
+  nameEmpty,
+  nameWrongFormat,
+  ktpEmpty,
+  emailEmpty,
+  passwordEmpty,
+  tncUncheck
+} = messageRegister;
 
 const defaultOnSubmit = values => {
   console.log("eventSubmitted", values);
