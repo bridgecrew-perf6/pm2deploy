@@ -10,10 +10,12 @@ const app = express();
 const targetFolder = "build_deploy";
 
 app.use(
-  helmet.hsts({
-    maxAge: 3153600,
-    includeSubDomains: true,
-    preload: true
+  helmet({
+    hsts: {
+      maxAge: 3153600,
+      includeSubDomains: true,
+      preload: true
+    }
   })
 );
 
