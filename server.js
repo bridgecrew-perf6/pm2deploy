@@ -12,7 +12,7 @@ const targetFolder = "build_deploy";
 app.use(
   helmet({
     hsts: {
-      maxAge: 3153600,
+      maxAge: 31536000,
       includeSubDomains: true,
       preload: true
     }
