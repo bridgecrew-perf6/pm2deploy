@@ -2,29 +2,29 @@
 /* eslint-disable guard-for-in */
 import MainService from "./base";
 
-const handleGeneralError = error => console.log("General Error", error);
+const handleGeneralError = (error) => console.log("General Error", error);
 
 const handleGETRequest = async (api, { ...body }) => {
   const {
     result: {
-      body: { data, error }
-    }
+      body: { data, error },
+    },
   } = await MainService(api)
     .doRequest({ query: { ...body } })
-    .then(result => result)
-    .catch(errorGeneral => {
+    .then((result) => result)
+    .catch((errorGeneral) => {
       handleGeneralError(errorGeneral);
       return {
         result: {
-          body: { data: null, error: null }
+          body: { data: null, error: null },
         },
-        errorJS: errorGeneral
+        errorJS: errorGeneral,
       };
     });
 
   return {
     data,
-    error
+    error,
   };
 };
 
@@ -41,8 +41,8 @@ const handlePOSTRequest = async (api, body, asFormData = false) => {
 
   const {
     result: {
-      body: { data, error }
-    }
+      body: { data, error },
+    },
   } = await MainService(api)
     .doRequest({
       body: actualBody,
@@ -51,23 +51,23 @@ const handlePOSTRequest = async (api, body, asFormData = false) => {
           const newPayload = { ...payload };
           if (asFormData) delete newPayload.headers["Content-Type"];
           next(newPayload);
-        }
-      }
+        },
+      },
     })
-    .then(result => result)
-    .catch(errorGeneral => {
+    .then((result) => result)
+    .catch((errorGeneral) => {
       handleGeneralError(errorGeneral);
       return {
         result: {
-          body: { data: null, error: null }
+          body: { data: null, error: null },
         },
-        errorJS: errorGeneral
+        errorJS: errorGeneral,
       };
     });
 
   return {
     data,
-    error
+    error,
   };
 };
 
@@ -79,15 +79,15 @@ export const getListing = ({ start = 0, length = 10 }) =>
 
 export const loginStatus = () => handlePOSTRequest("loginStatus");
 
-export const authLogin = dataUser => handlePOSTRequest("login", dataUser);
+export const authLogin = (dataUser) => handlePOSTRequest("login", dataUser);
 
-export const deleteAccount = data => handlePOSTRequest("deleteAccount", data);
+export const deleteAccount = (data) => handlePOSTRequest("deleteAccount", data);
 
 export const getSecurityQuestion = () => handlePOSTRequest("securityQuestion");
 
-export const forgotEmail = data => handlePOSTRequest("forgotEmail", data);
+export const forgotEmail = (data) => handlePOSTRequest("forgotEmail", data);
 
-export const forgotEmailSecurity = data =>
+export const forgotEmailSecurity = (data) =>
   handlePOSTRequest("forgotEmailSecurity", data);
 
 export default getMasterCity;
