@@ -34,6 +34,8 @@
     "redux-thunk": "^2.3.0",
     "source-map-explorer": "^2.2.2",
     "tippy.js": "^5.2.0",
+    "video.js": "^7.7.5",
+    "videojs-event-tracking": "^1.0.1",
     "xstate": "^4.7.8"
   },
   "devDependencies": {
