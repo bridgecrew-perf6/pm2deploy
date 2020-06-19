@@ -1,0 +1,16 @@
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import LoginView from './LoginView';
+
+<Meta title="MDX/LoginView" component={LoginView} />
+
+# LoginView
+With `MDX` we can define a story for `LoginView` right in the middle of our
+markdown documentation. aaasfd
+
+<Preview>
+  <Story name="all LoginViewes">
+    <LoginView id="Unchecked" label="Unchecked" />
+    <LoginView id="Checked" label="Checked" checked />
+    <LoginView appearance="secondary" id="second" label="Secondary" checked />
+  </Story>
+</Preview>
