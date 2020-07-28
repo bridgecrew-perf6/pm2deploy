@@ -10,6 +10,9 @@ const port = process.env.PORT || 8000;
 const app = express();
 const targetFolder = "build_deploy";
 
+// Handle Helmet
+app.use(helmet());
+
 // Handle Security HSTS, Force SSL
 app.use(
   helmet({
