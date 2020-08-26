@@ -48,6 +48,12 @@ app.get("/", async (req, res, next) => {
 // Send files such as html, css, and js
 app.use(express.static(path.join(__dirname, targetFolder)));
 
+// Route to handle sitemap.xml
+// app.get("/sitemap.xml", (req, res) => {
+//   const url = `${process.env.REACT_APP_META_URL}/xml/sitemap.xml`;
+//   request.get(url).pipe(res);
+// });
+
 // Route to handle every routing
 app.get("/*", (req, res) => {
   if (shouldShowPrerenderedPage(req)) return prerenderPage(req, res);
