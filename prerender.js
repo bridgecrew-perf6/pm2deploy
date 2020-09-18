@@ -165,8 +165,7 @@ module.exports = {
   },
   // Function to render the content using puppeteer to mimic the user
   prerenderPage: async (req, res) => {
-    try {
-      const browser = await puppeteer.launch({
+    const browser = await puppeteer.launch({
         ignoreDefaultArgs: ["--disable-extensions"],
         args: [
           "--no-sandbox",
@@ -174,7 +173,8 @@ module.exports = {
           "--disable-web-security",
         ],
       });
-
+      
+    try {
       const page = await browser.newPage();
 
       // Error Log if failed
@@ -214,6 +214,9 @@ module.exports = {
     } catch (e) {
       console.log(e);
       res.send("ERROR");
+      await browser.close();
+    } finally {
+      await browser.close();
     }
   },
 };
