@@ -38,7 +38,8 @@ const getDeviceId = new Promise((resolve) => {
 });
 
 const serviceLogger = (event, result) => {
-  if (appEnv === "local") console.log("serviceLogger: ", { event }, { result });
+  if (appEnv === "watch-development")
+    console.log("serviceLogger: ", { event }, { result });
   return null;
 };
 // END OF FUNCTION GROUP

@@ -1,13 +1,15 @@
+<!-- "current change" selected by jojo -->
+
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import {action} from "@storybook/addon-actions"
+import { action } from "@storybook/addon-actions";
 import LoginView from "./LoginView";
 
 <Meta title="Form/Login" component={LoginView} />
 
 # Login
 
-
 This view of LoginView under `LoginForm`
+
 <Preview>
   <Story name="Login">
     <LoginView
@@ -18,12 +20,11 @@ This view of LoginView under `LoginForm`
     />
   </Story>
 </Preview>
-
 <br />
 
 ## How to Use
-_LoginView is just view element, logical form is created as `LoginForm`. So, please read this before use._
 
+_LoginView is just view element, logical form is created as `LoginForm`. So, please read this before use._
 
 ```js
 1. import LoginForm
@@ -33,4 +34,5 @@ _LoginView is just view element, logical form is created as `LoginForm`. So, ple
 <br />
 
 ## Props
+
 <Props of={LoginView} />

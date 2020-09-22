@@ -3,21 +3,28 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const helmet = require("helmet");
+const { shouldShowPrerenderedPage } = require("./prerender");
+const { prerenderPage } = require("./prerender");
 
 const port = process.env.PORT || 8000;
 const app = express();
-
 const targetFolder = "build_deploy";
 
+// Handle Helmet
+app.use(helmet());
+
+// Handle Security HSTS, Force SSL
 app.use(
-  helmet.hsts({
-    maxAge: 3153600,
-    includeSubDomains: true,
-    preload: true
+  helmet({
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true,
+    },
   })
 );
 
-app.use(express.static(path.join(__dirname, targetFolder)));
+// Handle Security to decoded URL
 app.use((req, res, next) => {
   let err = null;
   try {
@@ -28,10 +35,29 @@ app.use((req, res, next) => {
   if (err) return res.redirect("/404");
 
   next();
+
   return true;
 });
+
+// Route to handle "/"
+app.get("/", async (req, res, next) => {
+  if (shouldShowPrerenderedPage(req)) return prerenderPage(req, res);
+  return next();
+});
+
+// Send files such as html, css, and js
+app.use(express.static(path.join(__dirname, targetFolder)));
+
+// Route to handle sitemap.xml
+// app.get("/sitemap.xml", (req, res) => {
+//   const url = `${process.env.REACT_APP_META_URL}/xml/sitemap.xml`;
+//   request.get(url).pipe(res);
+// });
+
+// Route to handle every routing
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, targetFolder, "index.html"));
+  if (shouldShowPrerenderedPage(req)) return prerenderPage(req, res);
+  return res.sendFile(path.join(__dirname, targetFolder, "index.html"));
 });
 
 app.listen(port);
