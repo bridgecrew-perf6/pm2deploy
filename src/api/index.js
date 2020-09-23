@@ -1,6 +1,6 @@
 import MainService from "./base";
 
-const handleGeneralError = (error) => console.log("General Error", error);
+const handleErrorResponse = (error) => console.log(error);
 
 const handleGETRequest = async (api, { ...body }) => {
   const {
@@ -11,7 +11,7 @@ const handleGETRequest = async (api, { ...body }) => {
     .doRequest({ query: { ...body } })
     .then((result) => result)
     .catch((errorGeneral) => {
-      handleGeneralError(errorGeneral);
+      handleErrorResponse(errorGeneral);
       return {
         result: {
           body: { data: null, error: null },
@@ -41,6 +41,7 @@ const handlePOSTRequest = async (api, body, asFormData = false) => {
     result: {
       body: { data, error },
     },
+    errorJS,
   } = await MainService(api)
     .doRequest({
       body: actualBody,
@@ -53,27 +54,27 @@ const handlePOSTRequest = async (api, body, asFormData = false) => {
       },
     })
     .then((result) => result)
-    .catch((errorGeneral) => {
-      handleGeneralError(errorGeneral);
+    .catch((errorResponse) => {
+      handleErrorResponse(errorResponse);
       return {
         result: {
           body: { data: null, error: null },
         },
-        errorJS: errorGeneral,
+        errorJS: errorResponse,
       };
     });
+
+  if (error) console.log(error);
 
   return {
     data,
     error,
+    errorJS,
   };
 };
 
 /** Edit this part */
-export const GetArticleList = () => handlePOSTRequest("getArticleList");
+export const getArticleList = () => handlePOSTRequest("getArticleList");
 
-export const GetArticleDetail = (id = null) =>
+export const getArticleDetail = (id) =>
   handlePOSTRequest("getArticleDetail", { id });
-
-export const CreateArticle = (id = null) =>
-  handlePOSTRequest("createArticle", { id });

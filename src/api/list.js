@@ -1,7 +1,13 @@
 const apiList = [
   {
     url: "token",
-    children: [{ name: "getToken", url: "get", method: "GET" }],
+    children: [
+      {
+        name: "getToken",
+        url: "get",
+        method: "GET",
+      },
+    ],
   },
   {
     url: "article",
