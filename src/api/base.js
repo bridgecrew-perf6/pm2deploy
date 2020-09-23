@@ -1,8 +1,27 @@
 import { ApiService, ApiTree } from "@apicase/services";
 import fetch from "@apicase/adapter-fetch";
-// import Fingerprint2 from "fingerprintjs2";
 import Cookies from "js-cookie";
 import apiList from "./list";
+
+// VARIABLE LIST
+// make sure match for your APP
+const appBaseUrl = process.env.REACT_APP_BASE_URL;
+const appEnv = process.env.REACT_APP_ENVIRONMENT;
+const appName = process.env.REACT_APP_NAME;
+const appSecretKey = process.env.REACT_APP_SECRET_KEY;
+const appDeviceType = process.env.REACT_APP_DEVICE_TYPE;
+const appTokenHeader = process.env.REACT_APP_TOKEN_HEADER;
+
+const urlGetToken = "api/token/get";
+const urlRefreshToken = "api/token/get";
+// END OF VARIABLE LIST
+
+// FUNCTION GROUP
+const setCookie = (name, value) => {
+  // let secure = false;
+  // if(appEnv==="production" || appEnv === "development") secure = true;
+  Cookies.set(name, value, { expires: 1, path: "/" });
+};
 
 const generateRandomString = (length) => {
   let text = "";
@@ -17,27 +36,19 @@ const generateRandomString = (length) => {
 
 const getDeviceId = new Promise((resolve) => {
   const deviceId = generateRandomString(36);
-  if (window.requestIdleCallback) {
-    requestIdleCallback(() => {
-      resolve(deviceId);
-      // new Fingerprint2().get(result => resolve(result));
-    });
-  } else {
-    resolve(deviceId);
-    // setTimeout(() => {
-    // new Fingerprint2().get(result => resolve(result));
-    // }, 500);
-  }
+  if (window.requestIdleCallback) requestIdleCallback(() => resolve(deviceId));
+  else resolve(deviceId);
 });
 
 const serviceLogger = (event, result) => {
-  if (process.env.REACT_APP_ENVIRONMENT === "development")
-    console.log(event, result);
+  if (appEnv === "local") console.log("serviceLogger: ", { event }, { result });
+  return null;
 };
+// END OF FUNCTION GROUP
 
 const RootService = new ApiService({
   adapter: fetch,
-  url: process.env.REACT_APP_BASE_URL,
+  url: appBaseUrl,
   mode: "cors",
   headers: {
     "Content-Type": "application/json; charset=utf-8",
@@ -45,99 +56,92 @@ const RootService = new ApiService({
   options: { timeout: 1000 },
 });
 
-// On request success
-RootService.on("done", (result) => {
-  serviceLogger(`done`, result);
-});
+// SERVICE LOGGER FOR API ACTIVITY & RESPONSE
+RootService.on("done", (result) => serviceLogger("done", result));
 
-// On request fail
-RootService.on("fail", (result) => {
-  serviceLogger(`fail`, result);
-});
+RootService.on("fail", (result) => serviceLogger("fail", result));
 
-// On request finish (success doesn't matter)
-RootService.on("finish", (result) => {
-  serviceLogger(`finish`, result);
-});
+RootService.on("finish", (result) => serviceLogger("finish", result));
 
-// On request start
-RootService.on("start", (state) => {
-  serviceLogger("start", state);
-});
+RootService.on("start", (result) => serviceLogger("start", result));
 
-// On request cancel
-RootService.on("cancel", (state) => {
-  serviceLogger("cancel", state);
-});
+RootService.on("cancel", (result) => serviceLogger("cancel", result));
 
-// On JavaScript error happened
-RootService.on("error", (error) => {
-  serviceLogger("error", error);
-});
+RootService.on("error", (result) => serviceLogger("error", result));
+// END of SERVICE LOGGER FOR API ACTIVITY & RESPONSE
 
-const GetTokenService = RootService.extend({
-  url: `api/token/get`,
-  method: "POST",
-  body: {
-    name: process.env.REACT_APP_NAME,
-    secret_key: process.env.REACT_APP_SECRET_KEY,
-    device_type: process.env.REACT_APP_DEVICE_TYPE,
-  },
-  hooks: {
-    before({ payload, next }) {
-      getDeviceId.then((result) => {
-        const newPayload = Object.assign({}, payload);
-        newPayload.body = {
-          ...payload.body,
-          device_id: result,
-        };
-        next(newPayload);
-      });
+// GET  TOKEN API & SERVICE
+const TokenService = (url = urlGetToken) =>
+  RootService.extend({
+    url,
+    method: "POST",
+    body: {
+      name: appName,
+      secret_key: appSecretKey,
+      device_type: appDeviceType,
+      token: Cookies.get("token"),
+      refresh_token: Cookies.get("refresh-token"),
     },
-  },
-});
-
-GetTokenService.on("done", (result) => {
-  const {
-    token: { token_code: tokenCode, refresh_token: refreshToken },
-  } = result.body.data;
-
-  Cookies.set("token", tokenCode, { expires: 1, path: "/" });
-  Cookies.set("refresh-token", refreshToken, { expires: 1, path: "/" });
-});
-
-const RefreshTokenService = RootService.extend({
-  url: `api/token/get`,
-  method: "POST",
-  body: {
-    name: process.env.REACT_APP_NAME,
-    device_type: process.env.REACT_APP_DEVICE_TYPE,
-    secret_key: process.env.REACT_APP_SECRET_KEY,
-    token: Cookies.get("token"),
-    refresh_token: Cookies.get("refresh-token"),
-  },
-  hooks: {
-    before({ payload, next }) {
-      getDeviceId.then((result) => {
-        const newPayload = Object.assign({}, payload);
-        newPayload.body = {
-          ...payload.body,
-          device_id: result,
-        };
-        next(newPayload);
-      });
+    hooks: {
+      before({ payload, next }) {
+        getDeviceId.then((result) => {
+          const newPayload = { ...payload };
+          newPayload.body = {
+            ...payload.body,
+            device_id: result,
+          };
+          next(newPayload);
+        });
+      },
     },
-  },
-});
+  }).on("done", (result) => {
+    const {
+      token: { token_code: tokenCode, refresh_token: refreshToken },
+    } = result.body.data;
+    setCookie("token", tokenCode);
+    setCookie("refresh-token", refreshToken);
+  });
+// END OF GET TOKEN API & SERVICE
 
-RefreshTokenService.on("done", (result) => {
-  const { token } = result.body.data;
-  const tokenCode = token.token_code;
-  const refreshToken = token.refresh_token;
+const GetToken = TokenService();
+const RefreshToken = TokenService(urlRefreshToken);
 
-  Cookies.set("token", tokenCode, { expires: 1, path: "/" });
-  Cookies.set("refresh-token", refreshToken, { expires: 1, path: "/" });
-});
+//  HIT TOKEN ACTIVITY
+const hitToken = async (payload, retry, next, urlToken = urlGetToken) => {
+  let fn = GetToken;
+  if (urlToken === urlRefreshToken) fn = RefreshToken;
+  const { success, result } = await fn.doSingleRequest();
+  if (success) {
+    const {
+      token: { token_code: tokenCode },
+    } = result.body.data;
+    const newPayload = { ...payload };
+    newPayload.headers = { ...payload.headers, [appTokenHeader]: tokenCode };
+    retry(newPayload);
+    // next(result);
+  }
+};
+// END OF HIT TOKEN ACTIVITY
+
+// 401 states
+// additional activity
+const do401 = () => {
+  Cookies.remove("is-login");
+  if (window.fcWidget) window.fcWidget.user.clear();
+};
+// END OF 401 states
+
+// FAIL API ACTIVITY
+const failActivity = async (errorCode, payload, retry, result, next) => {
+  if (errorCode === 402) await hitToken(payload, retry, next);
+  else if (errorCode === 406)
+    await hitToken(payload, retry, next, urlRefreshToken);
+  else if (errorCode === 401) {
+    do401();
+    await hitToken(payload, retry, next, urlRefreshToken);
+  }
+};
+// END OF FAIL API ACTIVITY
 
 const MainService = new ApiTree(RootService, [
   {
@@ -146,39 +150,20 @@ const MainService = new ApiTree(RootService, [
     hooks: {
       before({ payload, next }) {
         const token = Cookies.get("token");
-        const newPayload = Object.assign({}, payload);
+        const newPayload = { ...payload };
         newPayload.headers = {
           ...payload.headers,
-          [process.env.REACT_APP_TOKEN_HEADER]: token,
+          [appTokenHeader]: token,
         };
         next(newPayload);
       },
-      async fail({ payload, retry }) {
-        const token = Cookies.get("token");
-        const newPayload = Object.assign({}, payload);
-        newPayload.headers = {
-          ...payload.headers,
-          [process.env.REACT_APP_TOKEN_HEADER]: token,
-        };
-        retry(newPayload);
+      async fail({ payload, retry, result, next }) {
+        const errorCode = result.status;
+        // console.log(`FAIL on: ${errorCode}`);
+        await failActivity(errorCode, payload, retry, result, next);
+        next(result);
       },
       async done({ result, fail, next }) {
-        if (result.body.error.code !== 402 && result.body.error.code !== 406)
-          return next(result);
-        const errorMessage = result.body.error.message;
-        if (errorMessage === "Please provide correct token!") {
-          const {
-            success,
-            result: tokenResult,
-          } = await GetTokenService.doSingleRequest();
-          if (success) fail(tokenResult);
-        } else if (errorMessage === "Token already expired!") {
-          const {
-            success,
-            result: tokenResult,
-          } = await RefreshTokenService.doSingleRequest();
-          if (success) fail(tokenResult);
-        }
         next(result);
         return true;
       },

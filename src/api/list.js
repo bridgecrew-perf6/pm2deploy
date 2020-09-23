@@ -5,7 +5,7 @@ const apiList = [
       {
         name: "getToken",
         url: "get",
-        method: "GET",
+        method: "POST",
       },
     ],
   },
@@ -15,16 +15,11 @@ const apiList = [
       {
         name: "getArticleList",
         url: "list",
-        method: "POST",
+        method: "GET",
       },
       {
         name: "getArticleDetail",
         url: "detail",
-        method: "POST",
-      },
-      {
-        name: "createArticle",
-        url: "create",
         method: "POST",
       },
     ],
