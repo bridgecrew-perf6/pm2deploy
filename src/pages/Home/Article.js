@@ -42,19 +42,34 @@ class Article extends React.Component {
     this.callAPI(match.params.id);
   };
 
+  articleList = () => {
+    const { list } = this.state;
+    if (!list || !list.length) return "Loading. . .";
+    return list.map((item) => (
+      <div className="article-content">
+        <h4>{item.title}</h4>
+        <div>{`Article ID: - ${item.id}`}</div>
+        <div>{item.preview_content}</div>
+      </div>
+    ));
+  };
+
   render() {
-    const { view } = this.state;
+    const { view, list } = this.state;
     return (
       <div>
         <section>
           <h1>Article Page</h1>
           <h2>{view}</h2>
+          {this.articleList()}
         </section>
         <section>
           <h2>Create Article</h2>
           <input placeholder="Article ID" type="number" />
-          <br />
           <textarea placeholder="Article Body" />
+          <button type="button" disabled={!list || !list.length}>
+            CREATE
+          </button>
         </section>
       </div>
     );

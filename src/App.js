@@ -21,7 +21,7 @@ const App = () => (
       />
       <br />
       <hr />
-      <h2>Link:</h2>
+      <h2>Navigation:</h2>
       <ul>
         <li>
           <Link to="/article">Aricle List</Link>
