@@ -46,7 +46,7 @@ class Article extends React.Component {
     const { list } = this.state;
     if (!list || !list.length) return "Loading. . .";
     return list.map((item) => (
-      <div className="article-content">
+      <div className="article-content" key={`element-${item.id}`}>
         <h4>{item.title}</h4>
         <div>{`Article ID: - ${item.id}`}</div>
         <div>{item.preview_content}</div>
