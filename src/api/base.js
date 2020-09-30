@@ -108,6 +108,7 @@ const RefreshToken = TokenService(urlRefreshToken);
 
 //  HIT TOKEN ACTIVITY
 const hitToken = async (payload, retry, next, urlToken = urlGetToken) => {
+  console.log("HIT TOKEN PUNCHED");
   let fn = GetToken;
   if (urlToken === urlRefreshToken) fn = RefreshToken;
   const { success, result } = await fn.doSingleRequest();
@@ -128,7 +129,7 @@ const do400 = () => {
   console.log("Code 400. Re-validate form / parameter");
 };
 
-const do401 = () => {
+const do401 = (passed) => {
   console.log("Code 401. Remove login status or something");
 };
 
@@ -156,14 +157,14 @@ const failActivity = (errorCode, payload, retry, result, next) => {
     reloadToken = refresh();
   } else if (errorCode === 401) {
     do401({ errorCode, payload, retry, result });
-    reloadToken = refresh();
+    if (result.body.code === 100) reloadToken = refresh();
   } else if (errorCode === 403) {
     do403();
     reloadToken = refresh();
   } else if (errorCode === 404) do404();
   else if (errorCode === 500) do500();
 
-  return reloadToken;
+  return reloadToken();
 };
 // END OF FAIL API ACTIVITY
 
