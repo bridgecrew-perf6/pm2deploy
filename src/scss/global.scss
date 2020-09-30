@@ -76,16 +76,31 @@ button {
   }
 }
 
-.article-content {
+.article-content,
+.ViewersAPI {
   background: #eee;
   padding: 20px;
   border-radius: 10px;
   margin: 10px auto;
+  word-wrap: break-word;
+  line-height: 1.25;
 
   h4 {
     padding-top: 0;
     margin-top: 0;
     text-transform: capitalize;
+  }
+}
+
+.ViewersAPI {
+  font-family: "Lucida Console" !important;
+
+  &.success {
+    background: rgb(31, 187, 31);
+  }
+
+  &.error {
+    background: rgb(202, 51, 51);
   }
 }
 

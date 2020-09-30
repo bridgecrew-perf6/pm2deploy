@@ -7,18 +7,21 @@ import apiList from "./list";
 // make sure match for your APP
 const appBaseUrl = process.env.REACT_APP_BASE_URL;
 const appEnv = process.env.REACT_APP_ENVIRONMENT;
-const appName = process.env.REACT_APP_NAME;
-const appSecretKey = process.env.REACT_APP_SECRET_KEY;
+const appName = "user";
+const appSecretKey = "user123";
 const appDeviceType = process.env.REACT_APP_DEVICE_TYPE;
-const appTokenHeader = process.env.REACT_APP_TOKEN_HEADER;
+const appTokenHeader = "colonies-token";
 
 const urlGetToken = "api/token/get";
 const urlRefreshToken = "api/token/get";
 // END OF VARIABLE LIST
 
 // FUNCTION GROUP
-const setCookie = (name, value) =>
+const setCookie = (name, value) => {
+  // let secure = false;
+  // if(appEnv==="production" || appEnv === "development") secure = true;
   Cookies.set(name, value, { expires: 1, path: "/" });
+};
 
 const generateRandomString = (length) => {
   let text = "";
@@ -100,9 +103,14 @@ const TokenService = (url = urlGetToken) =>
   });
 // END OF GET TOKEN API & SERVICE
 
+const GetToken = TokenService();
+const RefreshToken = TokenService(urlRefreshToken);
+
 //  HIT TOKEN ACTIVITY
 const hitToken = async (payload, retry, next, urlToken = urlGetToken) => {
-  const { success, result } = await TokenService(urlToken).doSingleRequest();
+  let fn = GetToken;
+  if (urlToken === urlRefreshToken) fn = RefreshToken;
+  const { success, result } = await fn.doSingleRequest();
   if (success) {
     const {
       token: { token_code: tokenCode },
@@ -110,28 +118,52 @@ const hitToken = async (payload, retry, next, urlToken = urlGetToken) => {
     const newPayload = { ...payload };
     newPayload.headers = { ...payload.headers, [appTokenHeader]: tokenCode };
     retry(newPayload);
-    next(result);
+    // next(result);
   }
 };
 // END OF HIT TOKEN ACTIVITY
 
-// 401 states
-// additional activity
-const do401 = () => {
-  Cookies.remove("is-login");
-  if (window.fcWidget) window.fcWidget.user.clear();
+// ADDITIONAL ERROR STATES
+const do400 = () => {
+  console.log("Code 400. Re-validate form / parameter");
 };
-// END OF 401 states
+
+const do401 = () => {
+  console.log("Code 401. Remove login status or something");
+};
+
+const do403 = () => {
+  console.log("Code 403. Check user previlleges");
+};
+
+const do404 = () => {
+  console.log("Code 404. Access Not found");
+  window.location = "/404";
+};
+
+const do500 = () => {
+  console.log("Code 500. Internal server error");
+};
+// END OF ADDITIONAL ERROR STATES
 
 // FAIL API ACTIVITY
-const failActivity = async (errorCode, payload, retry, result, next) => {
-  if (errorCode === 402) await hitToken(payload, retry, next);
-  else if (errorCode === 406)
-    await hitToken(payload, retry, next, urlRefreshToken);
-  else if (errorCode === 401) {
+const failActivity = (errorCode, payload, retry, result, next) => {
+  let reloadToken = () => hitToken(payload, retry, next);
+  const refresh = () => hitToken(payload, retry, next, urlRefreshToken);
+
+  if (errorCode === 400) {
+    do400();
+    reloadToken = refresh();
+  } else if (errorCode === 401) {
     do401();
-    await hitToken(payload, retry, next, urlRefreshToken);
-  }
+    reloadToken = refresh();
+  } else if (errorCode === 403) {
+    do403();
+    reloadToken = refresh();
+  } else if (errorCode === 404) do404();
+  else if (errorCode === 500) do500();
+
+  return reloadToken;
 };
 // END OF FAIL API ACTIVITY
 
@@ -151,6 +183,7 @@ const MainService = new ApiTree(RootService, [
       },
       async fail({ payload, retry, result, next }) {
         const errorCode = result.status;
+        // console.log(`FAIL on: ${errorCode}`);
         await failActivity(errorCode, payload, retry, result, next);
         next(result);
       },

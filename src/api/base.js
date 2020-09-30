@@ -5,11 +5,11 @@ import apiList from "./list";
 
 // VARIABLE LIST
 // make sure match for your APP
-const appBaseUrl = process.env.REACT_APP_BASE_URL;
-const appEnv = process.env.REACT_APP_ENVIRONMENT;
+const appBaseUrl = "http://167.71.207.58:3000";
+const appEnv = "development";
 const appName = "user";
 const appSecretKey = "user123";
-const appDeviceType = process.env.REACT_APP_DEVICE_TYPE;
+const appDeviceType = "website";
 const appTokenHeader = "colonies-token";
 
 const urlGetToken = "api/token/get";
@@ -155,7 +155,7 @@ const failActivity = (errorCode, payload, retry, result, next) => {
     do400();
     reloadToken = refresh();
   } else if (errorCode === 401) {
-    do401();
+    do401({ errorCode, payload, retry, result });
     reloadToken = refresh();
   } else if (errorCode === 403) {
     do403();

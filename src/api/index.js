@@ -5,7 +5,7 @@ const handleGeneralError = (error) => console.log("General Error", error);
 const handleGETRequest = async (api, { ...body }) => {
   const {
     result: {
-      body: { data, error },
+      body: { data, error, code },
     },
   } = await MainService(api)
     .doRequest({ query: { ...body } })
@@ -21,6 +21,7 @@ const handleGETRequest = async (api, { ...body }) => {
     });
 
   return {
+    code,
     data,
     error,
   };
@@ -39,7 +40,7 @@ const handlePOSTRequest = async (api, body, asFormData = false) => {
 
   const {
     result: {
-      body: { data, error },
+      body: { data, error, code },
     },
   } = await MainService(api)
     .doRequest({
@@ -66,6 +67,7 @@ const handlePOSTRequest = async (api, body, asFormData = false) => {
   if (error) console.log(error);
 
   return {
+    code,
     data,
     error,
   };
