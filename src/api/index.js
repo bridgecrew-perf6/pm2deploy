@@ -8,7 +8,7 @@ const handleGETRequest = async (api, { ...body }) => {
       body: { data, error, code },
     },
   } = await MainService(api)
-    .doRequest({ query: { ...body } })
+    .doRequest({ body: { ...body } })
     .then((result) => result)
     .catch((errorGeneral) => {
       handleGeneralError(errorGeneral);
@@ -74,7 +74,8 @@ const handlePOSTRequest = async (api, body, asFormData = false) => {
 };
 
 /** Edit this part */
-export const getArticleList = () => handleGETRequest("getArticleList");
+export const getArticleList = (data) =>
+  handlePOSTRequest("getArticleList", data);
 
 export const getArticleDetail = (id) =>
   handlePOSTRequest("getArticleDetail", { id });

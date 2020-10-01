@@ -13,7 +13,7 @@ class Simulating extends React.Component {
 
   doArticleList = async () => {
     this.setState({ retArticleList: "loading" });
-    const res = await getArticleList();
+    const res = await getArticleList({ limit: 0, offset: 99 });
     this.setState({ retArticleList: res });
   };
 

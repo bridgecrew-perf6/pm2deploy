@@ -149,22 +149,24 @@ const do500 = () => {
 
 // FAIL API ACTIVITY
 const failActivity = (errorCode, payload, retry, result, next) => {
-  let reloadToken = () => hitToken(payload, retry, next);
+  const reloadToken = () => hitToken(payload, retry, next);
   const refresh = () => hitToken(payload, retry, next, urlRefreshToken);
+  let handleToken = reloadToken();
 
   if (errorCode === 400) {
     do400();
-    reloadToken = refresh();
+    handleToken = refresh();
   } else if (errorCode === 401) {
     do401({ errorCode, payload, retry, result });
-    if (result.body.code === 100) reloadToken = refresh();
+    if (result.body.code === 100) handleToken = refresh();
   } else if (errorCode === 403) {
     do403();
-    reloadToken = refresh();
+    return false;
+    // reloadToken = refresh();
   } else if (errorCode === 404) do404();
   else if (errorCode === 500) do500();
 
-  return reloadToken();
+  return handleToken;
 };
 // END OF FAIL API ACTIVITY
 

@@ -15,7 +15,7 @@ const apiList = [
       {
         name: "getArticleList",
         url: "list",
-        method: "GET",
+        method: "POST",
       },
       {
         name: "getArticleDetail",
