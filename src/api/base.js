@@ -139,7 +139,7 @@ const do403 = () => {
 
 const do404 = () => {
   console.log("Code 404. Access Not found");
-  window.location = "/404";
+  // window.location = "/404";
 };
 
 const do500 = () => {
@@ -151,18 +151,17 @@ const do500 = () => {
 const failActivity = (errorCode, payload, retry, result, next) => {
   const reloadToken = () => hitToken(payload, retry, next);
   const refresh = () => hitToken(payload, retry, next, urlRefreshToken);
-  let handleToken = reloadToken();
+  let handleToken = "";
 
   if (errorCode === 400) {
     do400();
     handleToken = refresh();
   } else if (errorCode === 401) {
-    do401({ errorCode, payload, retry, result });
+    do401();
     if (result.body.code === 100) handleToken = refresh();
+    else handleToken = reloadToken();
   } else if (errorCode === 403) {
     do403();
-    return false;
-    // reloadToken = refresh();
   } else if (errorCode === 404) do404();
   else if (errorCode === 500) do500();
 

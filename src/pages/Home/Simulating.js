@@ -1,5 +1,5 @@
 import React from "react";
-import { getArticleList } from "../../api";
+import { createArticle, getArticleList } from "../../api";
 import ViewersAPI from "./ViewersAPI";
 
 class Simulating extends React.Component {
@@ -17,10 +17,22 @@ class Simulating extends React.Component {
     this.setState({ retArticleList: res });
   };
 
+  doCreateArticle = async () => {
+    this.setState({ retCreateArticle: "loading" });
+    const res = await createArticle({
+      title: "created by API",
+      content: "CONTENT!",
+      preview_content: "PREVIEW!",
+      is_highlight: "Yes",
+    });
+    this.setState({ retCreateArticle: res });
+  };
+
   render() {
     const { retArticleList, retCreateArticle } = this.state;
 
     const loadList = retArticleList === "loading";
+    const loadCreate = retCreateArticle === "loading";
 
     return (
       <div>
@@ -37,7 +49,13 @@ class Simulating extends React.Component {
         </section>
         <br />
         <section>
-          <button type="button">API CREATE ARTICLE</button>
+          <button
+            type="button"
+            onClick={this.doCreateArticle}
+            disabled={loadCreate}
+          >
+            {loadCreate ? "Loading..." : "API CREATE ARTICLE"}
+          </button>
           <ViewersAPI {...retCreateArticle} />
         </section>
       </div>

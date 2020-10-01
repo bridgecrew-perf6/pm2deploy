@@ -11,6 +11,8 @@ const apiList = [
   },
   {
     url: "article",
+    name: "createArticle",
+    method: "POST",
     children: [
       {
         name: "getArticleList",

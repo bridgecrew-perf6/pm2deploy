@@ -80,4 +80,6 @@ export const getArticleList = (data) =>
 export const getArticleDetail = (id) =>
   handlePOSTRequest("getArticleDetail", { id });
 
+export const createArticle = (data) => handlePOSTRequest("createArticle", data);
+
 export const getToken = (data) => handlePOSTRequest("getToken", data);
