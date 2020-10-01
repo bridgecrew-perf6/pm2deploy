@@ -108,7 +108,6 @@ const RefreshToken = TokenService(urlRefreshToken);
 
 //  HIT TOKEN ACTIVITY
 const hitToken = async (payload, retry, next, urlToken = urlGetToken) => {
-  console.log("HIT TOKEN PUNCHED");
   let fn = GetToken;
   if (urlToken === urlRefreshToken) fn = RefreshToken;
   const { success, result } = await fn.doSingleRequest();
