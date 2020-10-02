@@ -7,8 +7,8 @@ import apiList from "./list";
 // make sure match for your APP
 const appBaseUrl = "http://167.71.207.58:3000";
 const appEnv = "development";
-const appName = "user";
-const appSecretKey = "user123";
+const appName = "admin";
+const appSecretKey = "admin123";
 const appDeviceType = "website";
 const appTokenHeader = "colonies-token";
 
