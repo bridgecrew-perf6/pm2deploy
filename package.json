@@ -94,11 +94,6 @@
     "compile-js-unused": "react-scripts build",
     "build-storybook": "build-storybook -s public"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "src/**/*.{js,jsx,json,md}": [
       "eslint --fix src",

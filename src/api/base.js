@@ -6,7 +6,7 @@ import apiList from "./list";
 // VARIABLE LIST
 // make sure match for your APP
 const appBaseUrl = "http://167.71.207.58:3000";
-const appEnv = "development";
+const appEnvironment = "development";
 const appName = "admin";
 const appSecretKey = "admin123";
 const appDeviceType = "website";
@@ -19,7 +19,7 @@ const urlRefreshToken = "api/token/get";
 // FUNCTION GROUP
 const setCookie = (name, value) => {
   // let secure = false;
-  // if(appEnv==="production" || appEnv === "development") secure = true;
+  // if(appEnvironment==="production" || appEnvironment === "development") secure = true;
   Cookies.set(name, value, { expires: 1, path: "/" });
 };
 
