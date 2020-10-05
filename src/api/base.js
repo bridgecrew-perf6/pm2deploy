@@ -147,17 +147,17 @@ const do500 = () => {
 // END OF ADDITIONAL ERROR STATES
 
 // FAIL API ACTIVITY
-const failActivity = (errorCode, payload, retry, result, next) => {
+const handleFailed = (errorCode, payload, retry, result, next) => {
   const reloadToken = () => hitToken(payload, retry, next);
-  const refresh = () => hitToken(payload, retry, next, urlRefreshToken);
+  const refreshToken = () => hitToken(payload, retry, next, urlRefreshToken);
   let handleToken = "";
 
   if (errorCode === 400) {
     do400();
-    handleToken = refresh();
+    handleToken = refreshToken();
   } else if (errorCode === 401) {
     do401();
-    if (result.body.code === 100) handleToken = refresh();
+    if (result.body.code === 100) handleToken = refreshToken();
     else handleToken = reloadToken();
   } else if (errorCode === 403) {
     do403();
@@ -185,7 +185,7 @@ const MainService = new ApiTree(RootService, [
       async fail({ payload, retry, result, next }) {
         const errorCode = result.status;
         // console.log(`FAIL on: ${errorCode}`);
-        await failActivity(errorCode, payload, retry, result, next);
+        await handleFailed(errorCode, payload, retry, result, next);
         next(result);
       },
       async done({ result, fail, next }) {
