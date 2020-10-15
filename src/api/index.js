@@ -1,7 +1,27 @@
 import MainService from "./base";
 
-const handleGeneralError = (error) => console.log("General Error", error);
+const convertToFormData = (formData, data, previousKey) => {
+  if (data instanceof Object) {
+    Object.keys(data).forEach(key => {
+      const value = data[key];
+      if (value instanceof Object && !Array.isArray(value)) {
+        return this.convertToFormData(formData, value, key);
+      }
+      if (previousKey) {
+        key = `${previousKey}[${key}]`;
+      }
+      if (Array.isArray(value)) {
+        value.forEach(val => {
+          formData.append(`${key}[]`, val);
+        });
+      } else {
+        formData.append(key, value);
+      }
+    });
+  }
+}
 
+const handleGeneralError = (error) => console.log("General Error", error);
 const handleGETRequest = async (api, { ...body }) => {
   const {
     result: {
@@ -32,9 +52,8 @@ const handlePOSTRequest = async (api, body, asFormData = false) => {
   let actualBody = { ...body };
 
   if (asFormData) {
-    for (const key in body) {
-      formData.append(key, body[key]);
-    }
+    // https://stackoverflow.com/a/43101878
+    convertToFormData(formData, body);
     actualBody = formData;
   }
 
