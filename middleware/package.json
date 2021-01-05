@@ -1,0 +1,52 @@
+{
+  "name": "react-starter",
+  "author": "Aditya Pratama Nur - Weekend",
+  "version": "1.3.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.3.1",
+    "puppeteer": "^5.5.0",
+    "url": "^0.11.0"
+  },
+  "scripts": {
+    "lint:fix": "eslint --fix src",
+    "lint:js": "eslint src",
+    "lint:scss": "stylelint '**/*.scss' --config=.stylelintrc.json",
+    "lint": "npm-run-all lint:*",
+    "build-icon": "svgr --icon --replace-attr-values '#231f20=currentColor' --out-dir src/components/Icon/assets/build/ src/components/Icon/assets/src/",
+    "build-js": "GENERATE_SOURCEMAP=false react-scripts build",
+    "compress-image": "node compress-image.js",
+    "convert-image": "node convert-image.js",
+    "copy-to-deploy": "cpx 'build/**/*' build_deploy -C",
+    "analyze": "react-scripts build && source-map-explorer 'build/static/js/*.js'",
+    "start-js": "react-scripts start",
+    "start": "npm run start-js",
+    "start-secure": "HTTPS=true npm run start-js",
+    "build": "npm run build-js && npm run copy-to-deploy && npm run compress-image",
+    "deploy": "node server.js",
+    "storybook": "start-storybook --docs -p 9009 -s public",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "compile-js-unused": "react-scripts build",
+    "build-storybook": "build-storybook -s public"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,md}": [
+      "eslint --fix src",
+      "git add"
+    ],
+    "src/**/*.scss": [
+      "stylelint '**/*.scss' --config=.stylelintrc.json --fix",
+      "git add"
+    ]
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
