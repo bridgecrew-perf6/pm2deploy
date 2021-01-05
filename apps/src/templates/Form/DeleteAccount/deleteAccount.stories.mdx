@@ -1,0 +1,35 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {action} from "@storybook/addon-actions"
+import DeleteAccountView from "./DeleteAccountView";
+
+<Meta title="Form/Delete Account" component={DeleteAccountView} />
+
+# Delete Account
+
+This view of ChangePasswordView under `ChangePasswordForm`
+<Preview>
+  <Story name="Delete Account">
+    <DeleteAccountView
+      onSubmit="function"
+      onSucces="function"
+      onError="function"
+      errorMessage="object"
+    />
+  </Story>
+</Preview>
+
+<br />
+
+### How to Use
+_DeleteAccountView is just view element, logical form is created as `ChangePasswordForm`. So, please read this before use._
+
+
+```js
+1. import DeleteAccountForm
+2. export DeleteAccountForm(ViewComponent)
+```
+
+<br />
+
+### Props
+<Props of={DeleteAccountView} />

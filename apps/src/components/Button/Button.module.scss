@@ -1,0 +1,88 @@
+@import "../../scss/variables/_index.scss";
+
+$button-distance: 20px;
+
+.button-group {
+  display: flex;
+  align-items: center;
+
+  &--left {
+    justify-content: flex-start;
+  }
+
+  &--center {
+    justify-content: center;
+  }
+
+  &--right {
+    justify-content: flex-end;
+  }
+}
+
+//component-type-prop-state
+//Style for default
+$button-default-color: #000;
+$button-default-bgColor: #fff;
+$button-default-font: $font-size-m;
+$button-default-height: 32px;
+$button-default-border: 1px solid #f5f5f5;
+$button-default-borderWidth: 1px;
+$button-default-boxShadow: 0 1px 2px 0 transparentize(#d5d5d5, 0.81);
+$button-default-transition: 0.15s;
+
+$button-default-color-hover: #d5d5d5;
+
+$button-default-color-active: #000;
+$button-default-bgColor-active: #fff;
+
+$button-default-outline-focus: 1px dashed blue;
+
+//Style for disabled
+$button-default-color-disabled: #d5d5d5;
+$button-default-bgColor-disabled: #fff;
+$button-default-borderColor-disabled: #f5f5f5;
+
+.button {
+  box-sizing: border-box;
+  display: inline-block;
+  height: $button-default-height;
+  padding: 0 8px;
+  line-height: $button-default-height - 2 * $button-default-borderWidth;
+  // line-height: 0;
+  border-radius: 3px;
+  color: $button-default-color;
+  background-color: $button-default-bgColor;
+  box-shadow: $button-default-boxShadow;
+  border: $button-default-border;
+  appearance: none;
+  text-decoration: none;
+  transition: all $button-default-transition;
+
+  &:hover {
+    cursor: pointer;
+    color: $button-default-color-hover;
+  }
+
+  &:active {
+    color: $button-default-color-active;
+    background-color: $button-default-bgColor-active;
+  }
+
+  &:focus {
+    outline: $button-default-outline-focus;
+    outline-offset: 1px;
+  }
+
+  &:disabled,
+  &:disabled:focus,
+  &:disabled:hover,
+  &:disabled:active {
+    cursor: not-allowed;
+    color: $button-default-color-disabled !important;
+    background-color: $button-default-bgColor-disabled !important;
+    box-shadow: none !important;
+    border-color: $button-default-borderColor-disabled;
+    outline: none;
+    transform: none;
+  }
+}

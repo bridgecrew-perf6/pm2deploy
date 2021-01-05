@@ -1,0 +1,80 @@
+.VideoJS {
+  position: relative;
+}
+
+.VideoJS * {
+  outline: none;
+}
+
+.VideoJS video {
+  max-width: 100%;
+}
+
+.VideoJS > div:nth-child(1) {
+  width: 100%;
+}
+
+.VideoJS .btnPlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background: #d7182a;
+  color: transparent;
+  font-size: 0;
+  border: none;
+  z-index: 3;
+  cursor: pointer;
+  box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+}
+
+.VideoJS .btnPlay .action {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 20px 0 20px 34.6px;
+  border-color: transparent transparent transparent #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+}
+
+.VideoJS .btnPlay.played .action {
+  border: none;
+  height: calc(100% - 40px);
+  width: 10px;
+  background: #fff;
+  margin: 0 auto;
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: translate(-100%, 0);
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    transform: translate(150%, 0);
+  }
+}
+
+.VideoJS.played .btnPlay {
+  display: none;
+}
+
+.VideoJS.played:hover .btnPlay {
+  // display: block;
+}
+
+@media (max-width: 768px) {
+  .VideoJS .btnPlay {
+    width: 60px;
+    height: 60px;
+  }
+}
