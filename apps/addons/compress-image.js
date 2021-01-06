@@ -1,36 +1,28 @@
 /* eslint-disable */
-const input = "build_deploy/assets/**/*.{jpg,JPG,jpeg,JPEG,png,svg,gif}";
-const output = "build_deploy/assets/**/*";
-
 const imagemin = require("imagemin");
 const mozJpeg = require("imagemin-mozjpeg");
 const optiPNG = require("imagemin-optipng");
 const gifSicle = require("imagemin-gifsicle");
 const svgo = require("imagemin-svgo");
 
-imagemin([input], output, {
-  use: [
-    mozJpeg({
-      quality: 82
-    }),
-    optiPNG({ optimizationLevel: 4 }),
-    svgo(),
-    gifSicle()
-  ]
-}).then(function(a) {
-  console.log("Public images have been compressed!");
-});
+// const input = "build_deploy/**/*.{jpg,JPG,jpeg,JPEG,png,svg,gif}";
+const input = "build_deploy/assets/meta.png";
+const output = "build_deploy/";
 
-const inputStatic = "build_deploy/static/media/**/*.{jpg,JPG,jpeg,JPEG,png}";
-const outputStatic = "build_deploy/static/media/**/*";
+(async () => {
+  const files = await imagemin([input], {
+    destination: output,
+    plugins: [
+      mozJpeg({
+        quality: 82,
+      }),
+      optiPNG({ optimizationLevel: 4 }),
+      svgo(),
+      gifSicle(),
+    ],
+  });
 
-imagemin([inputStatic], outputStatic, {
-  use: [
-    mozJpeg({
-      quality: 82
-    }),
-    optiPNG({ optimizationLevel: 4 })
-  ]
-}).then(function(a) {
-  console.log("Static images have been compressed!");
-});
+  files.map((file) => {
+    console.log(`✅ ${file.sourcePath} -> ${file.destinationPath}`);
+  });
+})();
