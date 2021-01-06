@@ -1,15 +1,14 @@
 /* eslint-disable */
+const glob = require("glob");
 const imagemin = require("imagemin");
 const mozJpeg = require("imagemin-mozjpeg");
 const optiPNG = require("imagemin-optipng");
 const gifSicle = require("imagemin-gifsicle");
 const svgo = require("imagemin-svgo");
 
-// const input = "build_deploy/**/*.{jpg,JPG,jpeg,JPEG,png,svg,gif}";
-const input = "build_deploy/assets/meta.png";
-const output = "build_deploy/";
+const blob = "build_deploy/**/*.{jpg,JPG,jpeg,JPEG,png,svg,gif}";
 
-(async () => {
+const compressImage = async (input, output) => {
   const files = await imagemin([input], {
     destination: output,
     plugins: [
@@ -23,6 +22,19 @@ const output = "build_deploy/";
   });
 
   files.map((file) => {
-    console.log(`✅ ${file.sourcePath} -> ${file.destinationPath}`);
+    console.log(`✅ ${file.sourcePath} `);
   });
-})();
+};
+
+const compressAllImages = () => {
+  console.log(`Compressing all images...`);
+  glob(blob, function(er, files) {
+    files.map((file) => {
+      const input = file;
+      const output = file.substring(0, file.lastIndexOf("/")) + "/";
+      compressImage(input, output);
+    });
+  });
+};
+
+compressAllImages();
