@@ -1,0 +1,176 @@
+@import "../../scss/variables/index";
+
+.bmContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.top {
+    width: 100%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.topBtn {
+    padding: 16px 0 0 22px;
+}
+
+.topHeading {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+    position: relative;
+    padding: 22px 22px 0;
+}
+
+.topHeading__title {
+    @include font($font-montserrat, 48px, #2F2F2F, 800, normal, 0.03em);
+    margin: 0;
+    width: 60%;
+
+    span {
+        @include font($font-montserrat, 14px, #CD161C, 800, normal, 0.03em);
+        position: relative;
+        bottom: 30px;
+    }
+}
+
+.topHeading__subtitle {
+    @include font($font-montserrat, 13px, #2F2F2F, 500, normal, 0.03em);
+    width: 169px;
+}
+
+.topHeading__people {
+    position: absolute;
+    right: 0;
+    max-height: 700px;
+}
+
+.topContent {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    // justify-content: flex-start;
+    position: relative;
+    padding: 0 0 56px;
+}
+
+.topContent__title {
+    display: flex;
+    flex-direction: column;
+    // align-items: flex-end;
+    // justify-content: flex-end;
+    transform: rotate(-90deg);
+    // width: 400px;
+    transform-origin: top left;
+    position: absolute;
+    left: 22px;
+
+    .one {
+        width: 212px;
+        @include font($font-montserrat, 18px, #2F2F2F, 800, normal, 0.03em);
+    }
+    
+    .two {
+        // width: 212px;
+        @include font($font-montserrat, 18px, #fff, 800, normal, 0.03em);
+        color: fff;
+        -webkit-text-fill-color: #fff; /* Will override color (regardless of order) */
+        -webkit-text-stroke-width: 0.8px;
+        -webkit-text-stroke-color: #2F2F2F;
+    }
+}
+
+.bmSlider {
+    display: flex;
+    flex-direction: row;
+    margin-left: 78px;
+}
+
+.bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(179.89deg, rgba(16, 21, 24, 0) 1.83%, #101518 87.62%);
+    position: relative;
+    padding-bottom: 40px
+}
+
+.bottom__heading {
+    @include font($font-montserrat, 32px, #fff, 800, normal, 0.03em);
+    padding: 41px 0 40px 24px;
+    display: block;
+
+    span {
+        @include font($font-montserrat, 16px, #fff, 800, normal, 0.03em);
+        position: relative;
+        bottom: 14px;
+    }
+}
+
+.bottom__title {
+    // width: 100%;
+    margin: 0 24px;
+    border: 1px solid #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleLeft {
+    width: 79px;
+    @include font($font-montserrat, 12px, #fff, 800, 15px, 0.03em);
+    border-right: 1px solid #fff;
+    padding: 8px;
+}
+
+.titleRight {
+    @include font($font-montserrat, 13px, #fff, 800, 15.85px, 0.03em);
+    padding: 12px;
+}
+
+.bottom__unbranded {
+    position: absolute;
+    width: 90%;
+    height: 92px;
+    bottom: 30px;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #A60F0F;
+    border-radius: 0px 200px 200px 0px;
+}
+
+.unbrandedText {
+    width: 240px;
+    @include font($font-montserrat, 13px, #fff, 500, 17px, 0.03em);
+    padding: 0 16px 0 24px;
+}
+
+.unbrandedLink {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 4px 4px 0px #000000;
+    background: #fff;
+    text-align: center;
+    margin-right: 16px;
+
+    span {
+        @include font($font-montserrat, 10px, #2F2F2F, 600, 14px, 0.03em);
+    }
+}

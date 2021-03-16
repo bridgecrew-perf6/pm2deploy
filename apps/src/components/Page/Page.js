@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
 import Style from "./Page.module.scss";
+import Header from "../Header/Header";
 
 class Page extends React.PureComponent {
   getCls = (def, mod) => {
@@ -33,8 +34,6 @@ class Page extends React.PureComponent {
           <div className={this.getCls("content__outer")}>
             {this.getHeader()}
             {this.getContent()}
-            <Link to="/inspirasi">Inspirasi</Link>
-            <Link to="/">HOME</Link>
           </div>
         </div>
       </section>
