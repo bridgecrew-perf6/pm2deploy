@@ -5,6 +5,7 @@ import Style from "./BmHome.module.scss";
 import Button from "../../components/Button/Button";
 import { CardOne } from "../../components/Card/Card"
 import { CardSliderOne } from "../../components/CardSlider/CardSlider";
+import "../../scss/vendor.scss";
 
 class BmHome extends React.Component {
   constructor(props) {
@@ -14,7 +15,155 @@ class BmHome extends React.Component {
 
   componentDidMount() {}
 
+  unbranded = () => {
+
+    return (
+        <div className={Style.bottom}>
+            <span className={Style.bottom__heading}>
+                Galeri Gimana<span>2</span>
+            </span>
+
+            <div className={Style.bottom__title}>
+                <span className={Style.titleLeft}>
+                    KIRIMAN BUKAN MAIN
+                </span>
+                <span className={Style.titleRight}>
+                    Dosis konten-konten <i> absurd </i> mingguan lo
+                </span>
+            </div>
+
+            <div className={Style.bottom__unbranded}>
+                <span className={Style.unbrandedText}>
+                    <strong>Tonton dan Bercerita </strong> buat dapetin sesuatu yang waw!
+                </span>
+                <Link
+                    to="#"
+                    className={Style.unbrandedLink}
+                >
+                    <span>LOGIN DISINI</span>
+                </Link>
+            </div>
+        </div>
+    )
+  }
+
+  branded = () => {
+
+    return (
+        <div className={Style.bottom}>
+            <span className={Style.bottom__heading}>
+                Galeri Gimana<span>2</span>
+            </span>
+
+            <div className={Style.bottom__title}>
+                <span className={Style.titleLeft}>
+                    KIRIMAN BUKAN MAIN
+                </span>
+                <span className={Style.titleRight}>
+                    Dosis konten-konten <i> absurd </i> mingguan lo
+                </span>
+            </div>
+
+            <div className={Style.bottom__article}>
+                <div className={`${Style.article} ${Style.podcast}`}>
+                    <div className={Style.podcast__top}>
+                        <div className={Style.topImage}>
+                            <img src="" alt="Avatar"/>
+                        </div>
+                        <span className={Style.topAuthor}>
+                            Weekly Podcast by Soleh Solihun
+                        </span>
+                    </div>
+                    <div className={Style.podcast__middle}>
+
+                    </div>
+                    <div className={Style.podcast__bottom}>
+                        <span>
+                            Janjian jam 9 tapi dateng jam 10? Bilang otw tapi masih di kasur?? 
+                            Tonton Soleh Solihun bacain cerita lengkapnya di sini
+                        </span>
+                    </div>
+                    <img src="" alt="Sticker" className={Style.sticker}/>
+                </div>
+
+                <div className={`${Style.article} ${Style.story}`}>
+                    <div className={Style.story__top}>
+                        <div className={Style.topImage}>
+                            <img src="" alt="Avatar"/>
+                        </div>
+                        <span className={Style.title}>
+                            Anak Baru Jakarta
+                        </span>
+                        <span className={Style.by}>
+                            by Mamet, Bekasi
+                        </span>
+                    </div>
+                    <div className={Style.story__bottom}>
+                        <span className={Style.category}>
+                            CERITA BUKAN MAIN
+                        </span>
+                        <span className={Style.content}>
+                            Jadi kemarin temen gue ngajak meet up. Karena udah lama gak ketemu, gue pun setuju untuk nyamperin dia.
+                            <br/>
+                            Temen: “Ayo meet up, gue lagi di Jakarta nih. Daerah Rahmawati, Jaksel.”
+                            <br/>
+                            Gue: “ Fatmawati kali maksud lo?”
+                            <br/>
+                            Temen: “ Nah iya itu, maklum baru sehari gue di Jakarta.”
+                        </span>
+                    </div>
+                    <img src="" alt="Sticker" className={Style.sticker}/>
+                </div>
+            </div>
+        </div>
+    )
+  }
+
   render() {
+    const dummyData = [
+        {
+            link:"#",
+            type:"video",
+            img:"/assets/image/BaseElement/sample-card.png",
+            subtitle:"CERITA #1",
+            title:"Kesana Kemari Bikin Hepi Jadi Keki",
+        },
+        {
+            link:"#",
+            type:"video",
+            img:"/assets/image/BaseElement/sample-card.png",
+            subtitle:"CERITA #1",
+            title:"Kesana Kemari Bikin Hepi Jadi Keki",
+        },
+        {
+            link:"#",
+            type:"video",
+            img:"/assets/image/BaseElement/sample-card.png",
+            subtitle:"CERITA #1",
+            title:"Kesana Kemari Bikin Hepi Jadi Keki",
+        },
+        {
+            link:"#",
+            type:"video",
+            img:"/assets/image/BaseElement/sample-card.png",
+            subtitle:"CERITA #1",
+            title:"Kesana Kemari Bikin Hepi Jadi Keki",
+        },
+        {
+            link:"#",
+            type:"video",
+            img:"/assets/image/BaseElement/sample-card.png",
+            subtitle:"CERITA #1",
+            title:"Kesana Kemari Bikin Hepi Jadi Keki",
+        },
+        {
+            link:"#",
+            type:"video",
+            img:"/assets/image/BaseElement/sample-card.png",
+            subtitle:"CERITA #1",
+            title:"Kesana Kemari Bikin Hepi Jadi Keki",
+        },
+    ]
     return (
       <Page
       
@@ -51,51 +200,23 @@ class BmHome extends React.Component {
                         <span className={Style.two}>BUKAN MAIN</span>
                     </span>
                     <div id="bmSlider" className={Style.bmSlider}>
-                        <CardOne
+                        {/* <CardOne
                             link="#"
                             type="video"
                             img="/assets/image/BaseElement/sample-card.png"
                             subtitle="CERITA #1"
                             title="Kesana Kemari Bikin Hepi Jadi Keki"
-                        />
+                        /> */}
                         <CardSliderOne 
-                            link="#"
-                            type="video"
-                            img="/assets/image/BaseElement/sample-card.png"
-                            subtitle="CERITA #1"
-                            title="Kesana Kemari Bikin Hepi Jadi Keki"
+                            data={dummyData}
+                            isMobile={true}
                         />
                     </div>
                 </div>
 
             </div>
-            <div className={Style.bottom}>
-                <span className={Style.bottom__heading}>
-                    Galeri Gimana<span>2</span>
-                </span>
 
-                <div className={Style.bottom__title}>
-                    <span className={Style.titleLeft}>
-                        KIRIMAN BUKAN MAIN
-                    </span>
-                    <span className={Style.titleRight}>
-                        Dosis konten-konten <i> absurd </i> mingguan lo
-                    </span>
-                </div>
-
-                {/* FOR UNBRANDED */}
-                <div className={Style.bottom__unbranded}>
-                    <span className={Style.unbrandedText}>
-                        <strong>Tonton dan Bercerita </strong> buat dapetin sesuatu yang waw!
-                    </span>
-                    <Link
-                        to="#"
-                        className={Style.unbrandedLink}
-                    >
-                        <span>LOGIN DISINI</span>
-                    </Link>
-                </div>
-            </div>
+            {this.unbranded()}
           </section>
       </Page>
   )

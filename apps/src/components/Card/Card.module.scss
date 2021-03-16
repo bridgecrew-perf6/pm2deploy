@@ -1,22 +1,20 @@
 @import "../../scss/variables/index";
 
-.cardOneLink {
+.cardOne {
     width: 254px;
     height: 346px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-.cardOne {
+.cardOneLink {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    display: flex;
-    flex-direction: column;
     border-radius: 12px;
+    display: flex;
+    flex-direction: column;
 
     .cardOne__figure {
         position: relative;

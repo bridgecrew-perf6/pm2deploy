@@ -12,8 +12,8 @@ const CardOne = ({
     const classType = type === "video" ? `${Style.cardOne__figure} ${Style.video}` : Style.cardOne__figure;
 
     return (
-        <Link to={link} className={Style.cardOneLink}>
-            <div className={Style.cardOne}>
+        <div className={Style.cardOne}>
+            <Link to={link} className={Style.cardOneLink}>
                 <div className={classType}>
                     <img src={img} className={Style.figureImg} alt={title} />
                 </div>
@@ -21,8 +21,8 @@ const CardOne = ({
                     <span className={Style.itemSub}>{subtitle}</span>
                     <span className={Style.itemTitle}>{title}</span>
                 </div>
-            </div>
-        </Link>
+            </Link>
+        </div>
     )
 }
 

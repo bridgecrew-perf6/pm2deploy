@@ -1,13 +1,6 @@
 // @import "~normalize.css/normalize";
 @import '~modern-normalize/modern-normalize.css';
-@import "./variables/animation";
-@import "./variables/colors";
-@import "./variables/fonts";
 @import "./variables/index";
-@import "./variables/mixin";
-@import "./variables/transition";
-@import "./variables/vendor";
-@import "./variables/zindex";
 
 * {
   box-sizing: border-box;
