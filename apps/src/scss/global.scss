@@ -1,5 +1,5 @@
 // @import "~normalize.css/normalize";
-@import '~modern-normalize/modern-normalize.css';
+@import "~modern-normalize/modern-normalize.css";
 @import "./variables/colors";
 @import "./variables/fonts";
 @import "./variables/index";
@@ -107,4 +107,8 @@ button {
 
 section {
   margin: 40px 0;
+}
+
+.testing {
+  background-image: url("/images/elements/loading-roll-red.svg");
 }

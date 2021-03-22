@@ -52,6 +52,11 @@ app.use(express.static(path.join(__dirname, targetFolder)));
 //   request.get(url).pipe(res);
 // });
 
+// Route to handle 404 error
+app.get("/not-found", (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, targetFolder, "index.html"));
+});
+
 // Route to handle every routing
 app.get("/*", (req, res) => {
   if (shouldShowPrerenderedPage(req)) return prerenderPage(req, res);
