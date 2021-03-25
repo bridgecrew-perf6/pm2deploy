@@ -1,43 +1,45 @@
 /* eslint-disable */
 const puppeteer = require("puppeteer");
 const url = require("url");
+const isbot = require("isbot");
 
-const crawlerUserAgents = [
-  "googlebot",
-  "Yahoo! Slurp",
-  "bingbot",
-  "yandex",
-  "baiduspider",
-  "facebookexternalhit",
-  "twitterbot",
-  "rogerbot",
-  "linkedinbot",
-  "embedly",
-  "quora link preview",
-  "showyoubot",
-  "outbrain",
-  "pinterest/0.",
-  "developers.google.com/+/web/snippet",
-  "slackbot",
-  "vkShare",
-  "W3C_Validator",
-  "redditbot",
-  "Applebot",
-  "WhatsApp",
-  "flipboard",
-  "tumblr",
-  "bitlybot",
-  "SkypeUriPreview",
-  "nuzzel",
-  "Discordbot",
-  "Google Page Speed",
-  "Qwantify",
-  "pinterestbot",
-  "Bitrix link preview",
-  "XING-contenttabreceiver",
-  "Chrome-Lighthouse",
-  "Screaming Frog SEO Spider",
-];
+// Switch logic using isbot package
+// const crawlerUserAgents = [
+//   "googlebot",
+//   "Yahoo! Slurp",
+//   "bingbot",
+//   "yandex",
+//   "baiduspider",
+//   "facebookexternalhit",
+//   "twitterbot",
+//   "rogerbot",
+//   "linkedinbot",
+//   "embedly",
+//   "quora link preview",
+//   "showyoubot",
+//   "outbrain",
+//   "pinterest/0.",
+//   "developers.google.com/+/web/snippet",
+//   "slackbot",
+//   "vkShare",
+//   "W3C_Validator",
+//   "redditbot",
+//   "Applebot",
+//   "WhatsApp",
+//   "flipboard",
+//   "tumblr",
+//   "bitlybot",
+//   "SkypeUriPreview",
+//   "nuzzel",
+//   "Discordbot",
+//   "Google Page Speed",
+//   "Qwantify",
+//   "pinterestbot",
+//   "Bitrix link preview",
+//   "XING-contenttabreceiver",
+//   "Chrome-Lighthouse",
+//   "Screaming Frog SEO Spider",
+// ];
 
 const extensionsToIgnore = [
   ".js",
@@ -115,12 +117,15 @@ module.exports = {
       isRequestingPrerenderedPage = true;
 
     //if it is a bot...show prerendered page
-    if (
-      crawlerUserAgents.some(
-        (crawlerUserAgent) =>
-          userAgent.toLowerCase().indexOf(crawlerUserAgent.toLowerCase()) !== -1
-      )
-    )
+    // if (
+    //   crawlerUserAgents.some(
+    //     (crawlerUserAgent) =>
+    //       userAgent.toLowerCase().indexOf(crawlerUserAgent.toLowerCase()) !== -1
+    //   )
+    // )
+    //   isRequestingPrerenderedPage = true;
+
+    if (userAgent.toLowerCase().indexOf("headless") === -1 && isbot(userAgent))
       isRequestingPrerenderedPage = true;
 
     //if it is BufferBot...show prerendered page
@@ -199,6 +204,21 @@ module.exports = {
       });
 
       const html = await page.evaluate(() => {
+        function removeDOM(removeSelector) {
+          const thingToRemove = document.querySelectorAll(removeSelector);
+          for (let i = 0; i < thingToRemove.length; i++) {
+            thingToRemove[i].parentNode.removeChild(thingToRemove[i]);
+          }
+        }
+
+        //Delete Cookies Notice
+        const optanonAlert = ".optanon-alert-box-wrapper";
+        removeDOM(optanonAlert);
+
+        const optanonID = "#optanon";
+        removeDOM(optanonID);
+        //Delete Cookies Notice END
+
         return document.documentElement.innerHTML;
       });
 

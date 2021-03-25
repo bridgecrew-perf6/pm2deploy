@@ -370,6 +370,11 @@ ipaddr.js@1.9.1:
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz#bff38543eeb8984825079ff3a2a8e6cbd46781b3"
   integrity sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==
 
+isbot@^3.0.25:
+  version "3.0.25"
+  resolved "https://registry.yarnpkg.com/isbot/-/isbot-3.0.25.tgz#56c9fe4134016ae84204738b59c0364e7a801f7c"
+  integrity sha512-8mLxO0arSU+JYfcJBbwROCzVhqAdqJSMmsyMDVj4dd7enEevjrNCXjoG0oSkIfZ4icPHuxocO1z3k1oDoI/rbw==
+
 locate-path@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/locate-path/-/locate-path-5.0.0.tgz#1afba396afd676a6d42504d0a67a3a7eb9f62aa0"
