@@ -3,6 +3,9 @@ const puppeteer = require("puppeteer");
 const url = require("url");
 const isbot = require("isbot");
 
+const RENDER_CACHE = new Map();
+let browserWSEndpoint = null;
+
 // Switch logic using isbot package
 // const crawlerUserAgents = [
 //   "googlebot",
@@ -101,6 +104,8 @@ const blacklist = "";
 // };
 
 module.exports = {
+  RENDER_CACHE: RENDER_CACHE,
+  browserWSEndpoint: browserWSEndpoint,
   shouldShowPrerenderedPage: function (req) {
     let userAgent = req.headers["user-agent"],
       bufferAgent = req.headers["x-bufferbot"],
@@ -117,14 +122,6 @@ module.exports = {
       isRequestingPrerenderedPage = true;
 
     //if it is a bot...show prerendered page
-    // if (
-    //   crawlerUserAgents.some(
-    //     (crawlerUserAgent) =>
-    //       userAgent.toLowerCase().indexOf(crawlerUserAgent.toLowerCase()) !== -1
-    //   )
-    // )
-    //   isRequestingPrerenderedPage = true;
-
     if (userAgent.toLowerCase().indexOf("headless") === -1 && isbot(userAgent))
       isRequestingPrerenderedPage = true;
 
@@ -169,37 +166,61 @@ module.exports = {
   },
   // Function to render the content using puppeteer to mimic the user
   prerenderPage: async (req, res) => {
-    const browser = await puppeteer.launch({
-      ignoreDefaultArgs: ["--disable-extensions"],
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-web-security",
-      ],
-    });
+    const localURL = "http://localhost:" + port + req.originalUrl;
+    if (RENDER_CACHE.has(localURL)) {
+      const { html, lastRenderAt } = RENDER_CACHE.get(localURL);
+      const now = Date.now();
+
+      //If this page has been cached for more than one day
+      if (now - lastRenderAt < 60 * 1000) {
+        res.send(html);
+        return;
+      }
+    }
+
+    if (!browserWSEndpoint) {
+      const browser = await puppeteer.launch({
+        ignoreDefaultArgs: ["--disable-extensions"],
+        args: [
+          "--no-sandbox",
+          "--disable-setuid-sandbox",
+          "--disable-web-security",
+        ],
+      });
+      browserWSEndpoint = await browser.wsEndpoint();
+    }
+    const browserCurrent = await puppeteer.connect({ browserWSEndpoint });
+    const page = await browserCurrent.newPage();
 
     try {
-      const page = await browser.newPage();
+      // Block unimportant Request, such as Image, Media, Stylesheet
+      await page.setRequestInterception(true);
+      page.on("request", (req) => {
+        const allowlist = ["document", "script", "xhr", "fetch"];
+        if (!allowlist.includes(req.resourceType())) {
+          return req.abort();
+        }
+        req.continue();
+      });
 
       // Error Log if failed
       page.on("error", (err) => {
         console.log("error happen at the page: ", err);
       });
 
-      page.on("pageerror", (pageerr) => {
-        console.log("pageerror occurred: ", pageerr);
-      });
+      // page.on("pageerror", (pageerr) => {
+      //   console.log("pageerror occurred: ", pageerr);
+      // });
 
-      page.on("requestfailed", (request) =>
-        console.log(
-          `url: ${request.url()}, errText: ${JSON.stringify(
-            request.failure()
-          )}, method: ${request.method()}`
-        )
-      );
+      // page.on("requestfailed", (request) =>
+      //   console.log(
+      //     `url: ${request.url()}, errText: ${JSON.stringify(
+      //       request.failure()
+      //     )}, method: ${request.method()}`
+      //   )
+      // );
 
-      const local_url = "http://localhost:" + port + req.originalUrl;
-      await page.goto(local_url, {
+      await page.goto(localURL, {
         waitUntil: "networkidle0",
       });
 
@@ -217,19 +238,18 @@ module.exports = {
 
         const optanonID = "#optanon";
         removeDOM(optanonID);
-        //Delete Cookies Notice END
 
         return document.documentElement.innerHTML;
       });
 
-      browser.close();
+      const lastRenderAt = Date.now();
+      RENDER_CACHE.set(localURL, { html, lastRenderAt }); // cache rendered page.
       res.send(html);
     } catch (e) {
       console.log(e);
       res.send("ERROR");
-      await browser.close();
     } finally {
-      await browser.close();
+      await page.close();
     }
   },
 };
