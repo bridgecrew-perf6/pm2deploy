@@ -172,7 +172,7 @@ module.exports = {
       const now = Date.now();
 
       //If this page has been cached for more than one day
-      if (now - lastRenderAt < 60 * 1000) {
+      if (now - lastRenderAt < 24 * 60 * 60 * 1000) {
         res.send(html);
         return;
       }
@@ -185,18 +185,21 @@ module.exports = {
           "--no-sandbox",
           "--disable-setuid-sandbox",
           "--disable-web-security",
+          "--single-process",
+          "--no-zygote",
         ],
       });
       browserWSEndpoint = await browser.wsEndpoint();
     }
-    const browserCurrent = await puppeteer.connect({ browserWSEndpoint });
-    const page = await browserCurrent.newPage();
+
+    const currentBrowser = await puppeteer.connect({ browserWSEndpoint });
+    const page = await currentBrowser.newPage();
 
     try {
       // Block unimportant Request, such as Image, Media, Stylesheet
       await page.setRequestInterception(true);
       page.on("request", (req) => {
-        const allowlist = ["document", "script", "xhr", "fetch"];
+        const allowlist = ["document", "script", "xhr", "fetch", "stylesheet"];
         if (!allowlist.includes(req.resourceType())) {
           return req.abort();
         }
@@ -209,16 +212,16 @@ module.exports = {
       });
 
       // page.on("pageerror", (pageerr) => {
-      //   console.log("pageerror occurred: ", pageerr);
+      // console.log("pageerror occurred: ", pageerr);
       // });
 
-      // page.on("requestfailed", (request) =>
-      //   console.log(
-      //     `url: ${request.url()}, errText: ${JSON.stringify(
-      //       request.failure()
-      //     )}, method: ${request.method()}`
-      //   )
-      // );
+      // page.on("requestfailed", (request) => {
+      // console.log(
+      //   `url: ${request.url()}, errText: ${JSON.stringify(
+      //     request.failure()
+      //   )}, method: ${request.method()}`
+      // )
+      // });
 
       await page.goto(localURL, {
         waitUntil: "networkidle0",
@@ -245,11 +248,13 @@ module.exports = {
       const lastRenderAt = Date.now();
       RENDER_CACHE.set(localURL, { html, lastRenderAt }); // cache rendered page.
       res.send(html);
+      // await page.close();
     } catch (e) {
       console.log(e);
-      res.send("ERROR");
+      // await page.close();
     } finally {
       await page.close();
+      await currentBrowser.disconnect();
     }
   },
 };

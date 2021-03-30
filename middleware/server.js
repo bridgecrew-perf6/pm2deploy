@@ -57,6 +57,11 @@ app.get("/not-found", (req, res) => {
   res.status(404).sendFile(path.join(__dirname, targetFolder, "index.html"));
 });
 
+// Route to handle 301 redirect
+// app.get("/", (req, res) => {
+//   res.status(301).sendFile(path.join(__dirname, targetFolder, "index.html"));
+// });
+
 // Route to handle every routing
 app.get("/*", (req, res) => {
   if (shouldShowPrerenderedPage(req)) return prerenderPage(req, res);
