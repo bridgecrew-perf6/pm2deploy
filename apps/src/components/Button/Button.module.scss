@@ -1,0 +1,29 @@
+@import "../../scss/variables/index";
+
+.button {
+  position: relative;
+  outline: none;
+  transition: 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.button.btnBack {
+  width: 70px;
+  height: 28px;
+  border: 1px solid #2F2F2F;
+  border-radius: 14px;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 5px;
+  }
+
+  span {
+    display: block;
+    @include font($font-montserrat, 12px, #2F2F2F, 500, normal, 0.03em);
+    padding-left: 7.7px;
+  }
+}

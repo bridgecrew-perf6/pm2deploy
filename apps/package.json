@@ -1,0 +1,113 @@
+{
+  "name": "react-starter",
+  "author": "Aditya Pratama Nur - Weekend",
+  "version": "2.0.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@apicase/adapter-fetch": "^0.15.1",
+    "@apicase/core": "^0.17.0",
+    "@apicase/services": "^0.8.1",
+    "@mdx-js/loader": "^1.5.7",
+    "@storybook/addon-notes": "^5.3.14",
+    "@storybook/preset-create-react-app": "^2.0.0",
+    "@tippy.js/react": "^3.1.1",
+    "@videojs/http-streaming": "^2.6.4",
+    "crypto-js": "^4.0.0",
+    "dotenv": "^8.2.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "fingerprintjs2": "^2.1.2",
+    "formik": "^2.1.4",
+    "glob": "^7.1.6",
+    "helmet": "^4.4.1",
+    "history": "^5.0.0",
+    "js-cookie": "^2.2.0",
+    "mdx.macro": "^0.2.9",
+    "modern-normalize": "^1.0.0",
+    "node-sass": "4.14.1",
+    "normalize.css": "^8.0.1",
+    "prettier": "^2.2.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-google-recaptcha": "^1.0.5",
+    "react-helmet": "^6.1.0",
+    "react-id-swiper": "^4.0.0",
+    "react-lazyload": "^2.6.1",
+    "react-modal": "^3.12.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "4.0.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "source-map-explorer": "^2.2.2",
+    "swiper": "^6.5.0",
+    "tippy.js": "^6.2.7",
+    "video.js": "^7.7.5",
+    "videojs-contrib-quality-levels": "^2.0.9",
+    "videojs-event-tracking": "^1.0.1",
+    "videojs-hls-quality-selector": "^1.1.4",
+    "xstate": "^4.7.8"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.3.14",
+    "@storybook/addon-docs": "^5.3.14",
+    "@storybook/addon-info": "^5.3.14",
+    "@storybook/addon-links": "^5.3.14",
+    "@storybook/addon-viewport": "^5.3.14",
+    "@storybook/addons": "^5.3.14",
+    "@storybook/react": "^5.3.14",
+    "@svgr/cli": "^5.1.0",
+    "cpx": "^1.5.0",
+    "imagemin": "^7.0.1",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^8.0.0",
+    "imagemin-webp": "^6.0.0"
+  },
+  "scripts": {
+    "build-icon": "svgr --icon --replace-attr-values '#231f20=currentColor' --out-dir src/components/Icon/assets/build/ src/components/Icon/assets/src/",
+    "build-js": "GENERATE_SOURCEMAP=false react-scripts build",
+    "compress-image": "node addons/compress-image.js",
+    "convert-image": "node addons/convert-image.js",
+    "copy-to-deploy": "cpx 'build/**/*' build_deploy -C",
+    "analyze": "react-scripts build && source-map-explorer 'build/static/js/*.js'",
+    "start-js": "react-scripts start",
+    "start": "npm run start-js",
+    "start-secure": "HTTPS=true npm run start-js",
+    "build": "npm run build-js && npm run copy-to-deploy && npm run compress-image",
+    "deploy": "node server.js",
+    "storybook": "start-storybook --docs -p 9009 -s public",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "compile-js-unused": "react-scripts build",
+    "build-storybook": "build-storybook -s public"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,md}": [
+      "eslint --fix src",
+      "git add"
+    ],
+    "src/**/*.scss": [
+      "stylelint '**/*.scss' --config=.stylelintrc.json --fix",
+      "git add"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

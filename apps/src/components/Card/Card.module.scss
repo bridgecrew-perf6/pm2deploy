@@ -1,0 +1,64 @@
+@import "../../scss/variables/index";
+
+.cardOne {
+    width: 254px;
+    height: 346px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cardOneLink {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+
+    .cardOne__figure {
+        position: relative;
+        width: 100%;
+        height: 254px;
+        background: #fff;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+
+        .figureImg {
+            width: 100%;
+            height: 100%;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        &.video::after {
+            content: url("/assets/image/BaseElement/play-icon.png");
+            width: 56px;
+            height: 56px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .cardOne__item {
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+
+        .itemSub {
+            @include font($font-montserrat, 10px, #999999, 600, normal, 0.03em);
+            padding: 12px 0 8px 12px;
+        }
+
+        .itemTitle {
+            @include font($font-montserrat, 14px, #2F2F2F, 600, 18px, 0.03em);
+            padding: 0 24px 0 12px;
+        }
+    }
+}
