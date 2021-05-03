@@ -3,16 +3,14 @@ import fetch from "@apicase/adapter-fetch";
 import Cookies from "js-cookie";
 import apiList from "./list";
 
-const { env } = process;
-
 // VARIABLE LIST
 // make sure match for your APP
-const appBaseUrl = env.REACT_APP_BASE_URL;
-const appEnvironment = env.REACT_APP_ENVIRONMENT;
-const appName = env.REACT_APP_NAME;
-const appSecretKey = env.REACT_APP_SECRET_KEY;
-const appDeviceType = env.REACT_APP_DEVICE_TYPE;
-const appTokenHeader = env.REACT_APP_TOKEN_HEADER;
+const appBaseUrl = process.env.REACT_APP_BASE_URL;
+const appEnvironment = process.env.REACT_APP_ENVIRONMENT;
+const appName = process.env.REACT_APP_NAME;
+const appSecretKey = process.env.REACT_APP_SECRET_KEY;
+const appDeviceType = process.env.REACT_APP_DEVICE_TYPE;
+const appTokenHeader = process.env.REACT_APP_TOKEN_HEADER;
 
 const urlGetToken = "api/token/get";
 const urlRefreshToken = "api/token/get";

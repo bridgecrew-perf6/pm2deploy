@@ -1,29 +1,34 @@
 /* eslint-disable */
-const input = "build_deploy/assets/**/*.{jpg,JPG,jpeg,JPEG,png}";
-const output = "build_deploy/assets/";
-
+const glob = require("glob");
 const imagemin = require("imagemin");
 const webp = require("imagemin-webp");
 
-imagemin([input], output, {
-  use: [
-    webp({
-      quality: 75
-    })
-  ]
-}).then(function() {
-  console.log("Public images has been converted to WebP!");
-});
+const blob = "build_deploy/**/*.{jpg,JPG,jpeg,JPEG,png}";
 
-const inputStatic = "build_deploy/static/media/**/*.{jpg,JPG,jpeg,JPEG,png}";
-const outputStatic = "build_deploy/static/media/";
+const convertImage = async (input, output) => {
+  const files = await imagemin([input], {
+    destination: output,
+    plugins: [
+      webp({
+        quality: 80,
+      }),
+    ],
+  });
 
-imagemin([inputStatic], outputStatic, {
-  use: [
-    webp({
-      quality: 75
-    })
-  ]
-}).then(function() {
-  console.log("Static images has been converted to WebP!");
-});
+  files.map((file) => {
+    console.log(`✅ ${file.destinationPath} `);
+  });
+};
+
+const convertAllImages = () => {
+  console.log(`Converting all images...`);
+  glob(blob, function(er, files) {
+    files.map((file) => {
+      const input = file;
+      const output = file.substring(0, file.lastIndexOf("/")) + "/";
+      convertImage(input, output);
+    });
+  });
+};
+
+convertAllImages();
