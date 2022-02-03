@@ -16,7 +16,7 @@ module.exports = {
       path: "/var/app/research/test-pm2-deploy",
       "pre-deploy-local": "",
       "post-deploy":
-        "cd apps && npm install  && cp .env.staging.example .env && npm run build && cd ../middleware && npm install && cp .env.staging.example .env &&  pm2 startOrRestart ecosytem.config.js && pm2 startup && pm2 save",
+        "cd apps && npm install  && cp .env.staging.example .env && npm run build && cd ../middleware && npm install && cp .env.staging.example .env &&  pm2 startOrRestart ../ecosytem.config.js && pm2 startup && pm2 save",
       "pre-setup": "",
     },
   },
