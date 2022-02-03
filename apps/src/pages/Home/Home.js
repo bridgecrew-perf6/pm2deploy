@@ -15,7 +15,7 @@ class Home extends React.Component {
       <Page
 
       >
-        <h1> Home Works </h1>
+        <h1> Home Works Test Upate Deploy</h1>
       </Page>
     );
   }
