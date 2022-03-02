@@ -4,13 +4,11 @@ module.exports = {
       name : "research-pm2deploy",
       script: "./middleware/server.js",
       watch: ".",
-    },
-    {
       env_production : {
         NODE_ENV: "production",
         PORT: 4001,
       }
-    }
+    },
   ],
 
   deploy: {
