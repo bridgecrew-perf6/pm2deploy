@@ -80,7 +80,7 @@
     "start-js": "react-scripts start",
     "start": "npm run start-js",
     "start-secure": "HTTPS=true npm run start-js",
-    "build": "react-scripts build",
+    "build": "react-scripts build && copy-to-deploy",
     "deploy": "node server.js",
     "storybook": "start-storybook --docs -p 9009 -s public",
     "test": "react-scripts test",
