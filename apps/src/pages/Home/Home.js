@@ -10,12 +10,10 @@ class Home extends React.Component {
   componentDidMount() {}
 
   render() {
-    
     return (
-      <Page
-
-      >
-        <h1> Home Works</h1>
+      <Page>
+        <h1>Home Works</h1>
+        <p>lorem ipsum dolor sit amet</p>
       </Page>
     );
   }
