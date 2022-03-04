@@ -14,6 +14,7 @@ class Home extends React.Component {
       <Page>
         <h1>Home Works</h1>
         <p>lorem ipsum dolor sit amet</p>
+        <p>lorem ipsum dolor sit amet</p>
       </Page>
     );
   }
