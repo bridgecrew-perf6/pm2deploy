@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name : "research-pm2deploy",
+      name : "research-pm2deploy2",
       script: "./middleware/server.js",
       watch: ".",
       env_production : {
